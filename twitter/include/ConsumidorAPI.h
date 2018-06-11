@@ -9,9 +9,7 @@
 
 namespace medios::twitter {
 
-
-class ConsumidorAPI
-{
+class ConsumidorAPI {
 public:
     ConsumidorAPI(std::string clave_publica, std::string clave_privada);
     virtual ~ConsumidorAPI();
@@ -38,6 +36,3 @@ private:
 };
 
 };
-};
-
-

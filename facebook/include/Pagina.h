@@ -3,18 +3,12 @@
 // stl
 #include <string>
 
-// extraccion
-#include <extraccion/include/Medio.h>
+// herramientas
+#include <utiles/include/Fecha.h>
 
-namespace scraping
-{
-namespace facebook
-{
-namespace modelo
-{
+namespace medios::facebook {
 
-class Pagina : public scraping::extraccion::Medio
-{
+class Pagina {
 public:
     Pagina(std::string nombre = "");
     virtual ~Pagina();
@@ -25,10 +19,6 @@ public:
 
     herramientas::utiles::Fecha getFechaUltimaPublicacionAnalizada();
 
-    // getters de Medio
-
-    virtual std::string getGrupoMedio();
-
     // SETTERS
 
     void setNombre(std::string nombre);
@@ -36,20 +26,6 @@ public:
     void setFechaUltimaPublicacionAnalizada(herramientas::utiles::Fecha fecha_ultima_publicacion_analizada);
 
     // METODOS
-
-    // metodos de Medio
-
-    virtual Medio * clonar();
-
-    // metodos de IContieneJson
-
-    virtual bool armarJson();
-
-    virtual bool parsearJson();
-    
-    // metodos de IHashable
-
-    virtual unsigned long long int hashcode();
 
     // CONSULTAS
 
@@ -62,8 +38,6 @@ private:
     herramientas::utiles::Fecha fecha_ultima_publicacion_analizada;
 };
 
-};
-};
 };
 
 

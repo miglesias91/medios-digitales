@@ -1,9 +1,8 @@
 #include <facebook/include/SolicitudPublicaciones.h>
 
-using namespace scraping::facebook::comunicacion;
+namespace medios::facebook::comunicacion {
 
-SolicitudPublicaciones::SolicitudPublicaciones(scraping::facebook::modelo::Pagina * pagina, herramientas::utiles::Fecha desde, herramientas::utiles::Fecha hasta, std::string id_app, std::string clave_secreta_app, unsigned int cantidad_de_tweets)
-{
+SolicitudPublicaciones::SolicitudPublicaciones(medios::facebook::Pagina * pagina, herramientas::utiles::Fecha desde, herramientas::utiles::Fecha hasta, std::string id_app, std::string clave_secreta_app, unsigned int cantidad_de_tweets) {
     // creo y armo la solicitud para el token de acceso
     this->setSolicitud(new web::http::http_request());
 
@@ -27,6 +26,6 @@ SolicitudPublicaciones::SolicitudPublicaciones(scraping::facebook::modelo::Pagin
     this->setGET();
 }
 
-SolicitudPublicaciones::~SolicitudPublicaciones()
-{
+SolicitudPublicaciones::~SolicitudPublicaciones() {}
+
 }

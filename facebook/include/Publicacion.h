@@ -4,21 +4,12 @@
 #include <utiles/include/IContieneJson.h>
 #include <utiles/include/Fecha.h>
 
-// extraccion
-#include <extraccion/include/Contenido.h>
+namespace medios::facebook {
 
-namespace scraping
-{
-namespace facebook
-{
-namespace modelo
-{
-
-class Publicacion : public scraping::extraccion::Contenido
-{
+class Publicacion {
 public:
 
-    Publicacion(herramientas::utiles::Json * tweet_json = NULL);
+    Publicacion();
 	virtual ~Publicacion();
 
     // GETTERS
@@ -42,12 +33,6 @@ public:
     void setTextoPublicacion(std::string texto_tweet);
 
     // METODOS
-
-    // metodos de IContieneJson
-    
-    virtual bool armarJson();
-
-    virtual bool parsearJson();
 
     // CONSULTAS
 
@@ -73,7 +58,3 @@ private:
 };
 
 };
-};
-};
-
-

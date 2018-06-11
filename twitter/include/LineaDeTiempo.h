@@ -2,17 +2,10 @@
 
 namespace medios::twitter {
 
-
-class LineaDeTiempo
-{
+class LineaDeTiempo {
 public:
     LineaDeTiempo();
     virtual ~LineaDeTiempo();
 };
 
 };
-};
-};
-
-
-

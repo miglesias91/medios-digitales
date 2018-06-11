@@ -1,13 +1,9 @@
 #include <twitter/include/ConsumidorAPI.h>
 
-// scraping
-#include <scraping/include/Logger.h>
-
 // protocolos
 #include <protocolos/include/OAuth2.h>
 
 namespace medios::twitter {
-
 
 ConsumidorAPI::ConsumidorAPI(std::string clave_publica, std::string clave_privada) :
     cliente_twitter("https://api.twitter.com"), consumidor_oauth2(clave_publica, clave_privada)

@@ -3,25 +3,20 @@
 // cpprest wrapper
 #include <casablanca_wrapper/include/HTTPSolicitud.h>
 
+// herramientas
+#include <utiles/include/Fecha.h>
+
 // twitter
 #include <facebook/include/Pagina.h>
 
-namespace scraping
-{
-namespace facebook
-{
-namespace comunicacion
-{
+namespace medios::facebook::comunicacion {
 
-class SolicitudUltimasPublicaciones : public herramientas::cpprest::HTTPSolicitud
-{
+class SolicitudUltimasPublicaciones : public herramientas::cpprest::HTTPSolicitud {
 public:
-    SolicitudUltimasPublicaciones(scraping::facebook::modelo::Pagina * cuenta, std::string id_app, std::string clave_secreta_app, unsigned int cantidad_de_publicaciones_max = 100);
+    SolicitudUltimasPublicaciones(medios::facebook::Pagina * cuenta, std::string id_app, std::string clave_secreta_app, unsigned int cantidad_de_publicaciones_max = 100);
     virtual ~SolicitudUltimasPublicaciones();
 };
 
-};
-};
 };
 
 

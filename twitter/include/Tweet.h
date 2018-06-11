@@ -5,9 +5,7 @@
 
 namespace medios::twitter {
 
-
-class Tweet
-{
+class Tweet {
 public:
 
     Tweet();
@@ -79,5 +77,3 @@ private:
 };
 
 };
-
-

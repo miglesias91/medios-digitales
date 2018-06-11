@@ -1,8 +1,5 @@
 #include <twitter/include/Aplicacion.h>
 
-// scraping
-#include <scraping/include/Logger.h>
-
 // twitter
 #include <twitter/include/SolicitudUltimosTweets.h>
 
@@ -27,8 +24,7 @@ std::vector<Tweet*> Aplicacion::leerUltimosTweets(Cuenta * cuenta, unsigned int 
     std::vector<herramientas::utiles::Json*> tweets_json = respuetas_con_tweets->getJson()->getAtributoArrayJson();
 
     std::vector<Tweet*> tweets;
-    for (std::vector<herramientas::utiles::Json*>::iterator it = tweets_json.begin(); it != tweets_json.end(); it++)
-    {
+    for (std::vector<herramientas::utiles::Json*>::iterator it = tweets_json.begin(); it != tweets_json.end(); it++) {
         //Tweet * nuevo_tweet = this->parsear_json(*it);
         Tweet * nuevo_tweet = new Tweet();
         tweets.push_back(nuevo_tweet);

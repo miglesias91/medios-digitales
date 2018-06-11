@@ -1,49 +1,25 @@
 #include <facebook/include/ConsumidorAPI.h>
 
-// scraping
-#include <scraping/include/Logger.h>
-
 // protocolos
 #include <protocolos/include/OAuth2.h>
 
-using namespace scraping::facebook;
-using namespace herramientas;
+namespace medios::facebook {
 
 ConsumidorAPI::ConsumidorAPI(std::string clave_publica, std::string clave_privada) :
-    cliente_facebook("https://graph.facebook.com"), consumidor_oauth2(clave_publica, clave_privada)
-{
-}
+    cliente_facebook("https://graph.facebook.com"), consumidor_oauth2(clave_publica, clave_privada) {}
 
-ConsumidorAPI::~ConsumidorAPI()
-{
-}
+ConsumidorAPI::~ConsumidorAPI() {}
 
-herramientas::protocolos::OAuth2Consumidor ConsumidorAPI::getConsumidorOAuth2()
-{
+herramientas::protocolos::OAuth2Consumidor ConsumidorAPI::getConsumidorOAuth2() {
     return this->consumidor_oauth2;
 }
 
-bool ConsumidorAPI::obtenerTokenDeAcceso()
-{
-    scraping::Logger::debug("obtenerTokenDeAcceso: { clave publica: " + this->consumidor_oauth2.getClavePublica() +
-        " - clave privada: " + this->consumidor_oauth2.getClavePublica() + " - uri cliente facebook:" + this->cliente_facebook.getURI() + "}");
+bool ConsumidorAPI::obtenerTokenDeAcceso() {
 
-    bool exito = protocolos::OAuth2::solicitarTokenAcceso(&this->consumidor_oauth2, this->cliente_facebook.getURI());
-
-    if (exito)
-    {
-        scraping::Logger::info("obtenerTokenAcceso: exitoso!");
-    }
-    else
-    {
-        scraping::Logger::error("obtenerTokenAcceso: NO SE OBTUVO");
-    }
-
-    return exito;
+    return herramientas::protocolos::OAuth2::solicitarTokenAcceso(&this->consumidor_oauth2, this->cliente_facebook.getURI());
 }
 
-herramientas::cpprest::HTTPRespuesta * ConsumidorAPI::realizarSolicitud(cpprest::HTTPSolicitud * solicitud)
-{
+herramientas::cpprest::HTTPRespuesta * ConsumidorAPI::realizarSolicitud(herramientas::cpprest::HTTPSolicitud * solicitud) {
     //std::string header_token_acceso = "Bearer " + this->consumidor_oauth2.getTokenAcceso();
 
     //solicitud->agregarEncabezado("Authorization", header_token_acceso);
@@ -58,19 +34,16 @@ herramientas::cpprest::HTTPRespuesta * ConsumidorAPI::realizarSolicitud(cpprest:
 
     std::string log_solicitud = solicitud->getURI() + " - " + string_encabezados + " - " + solicitud->getMetodo() + " - " + solicitud->getCuerpo();
 
-#ifdef DEBUG || _DEBUG
+#if defined(DEBUG) || defined(_DEBUG)
     log_solicitud = utility::conversions::to_utf8string(solicitud->getSolicitud()->to_string());
 #endif // DEBUG || _DEBUG
 
-    scraping::Logger::debug("realizarSolicitud: { " + log_solicitud + "}");
-
     herramientas::cpprest::HTTPRespuesta * rta = this->cliente_facebook.solicitar(solicitud);
-
-    scraping::Logger::debug("realizarSolicitud: { razon respuesta: " + rta->getRazon() + "}");
 
     return rta;
 }
 
+}
 // GETTERS
 
 // SETTERS

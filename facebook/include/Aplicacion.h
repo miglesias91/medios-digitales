@@ -8,17 +8,11 @@
 #include <facebook/include/Pagina.h>
 #include <facebook/include/Publicacion.h>
 
-namespace scraping
-{
-namespace facebook
-{
-namespace modelo
-{
+namespace medios::facebook {
 
-class Aplicacion
-{
+class Aplicacion {
 public:
-    Aplicacion(scraping::facebook::ConsumidorAPI * consumidor_api = NULL);
+    Aplicacion(medios::facebook::ConsumidorAPI * consumidor_api = NULL);
     virtual ~Aplicacion();
 
     // GETTERS
@@ -41,11 +35,7 @@ public:
 
 private:
 
-    scraping::facebook::ConsumidorAPI * consumidor_api;
+    medios::facebook::ConsumidorAPI * consumidor_api;
 };
 
 };
-};
-};
-
-

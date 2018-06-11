@@ -7,13 +7,9 @@
 // protocolos
 #include <protocolos/include/OAuth2Consumidor.h>
 
-namespace scraping
-{
-namespace facebook
-{
+namespace medios::facebook {
 
-class ConsumidorAPI
-{
+class ConsumidorAPI {
 public:
     ConsumidorAPI(std::string clave_publica, std::string clave_privada);
     virtual ~ConsumidorAPI();
@@ -42,6 +38,3 @@ private:
 };
 
 };
-};
-
-

@@ -7,8 +7,7 @@
 
 namespace medios::twitter {
 
-class Aplicacion
-{
+class Aplicacion {
 public:
     Aplicacion(medios::twitter::ConsumidorAPI * consumidor_api = NULL);
     virtual ~Aplicacion();
@@ -27,5 +26,4 @@ private:
     medios::twitter::ConsumidorAPI * consumidor_api;
 };
 
-};
 };

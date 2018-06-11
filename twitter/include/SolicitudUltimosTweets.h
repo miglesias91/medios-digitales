@@ -8,16 +8,10 @@
 
 namespace medios::twitter::comunicacion {
 
-
-class SolicitudUltimosTweets : public herramientas::cpprest::HTTPSolicitud
-{
+class SolicitudUltimosTweets : public herramientas::cpprest::HTTPSolicitud {
 public:
     SolicitudUltimosTweets(medios::twitter::Cuenta * cuenta, unsigned int cantidad_de_tweets);
     virtual ~SolicitudUltimosTweets();
 };
 
 };
-};
-};
-
-

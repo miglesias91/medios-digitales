@@ -2,12 +2,8 @@
 
 namespace medios::twitter {
 
-LineaDeTiempo::LineaDeTiempo()
-{
-}
+LineaDeTiempo::LineaDeTiempo() {}
 
-LineaDeTiempo::~LineaDeTiempo()
-{
-}
+LineaDeTiempo::~LineaDeTiempo() {}
 
 }

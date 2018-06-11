@@ -2,8 +2,7 @@
 
 namespace medios::twitter::comunicacion {
 
-SolicitudUltimosTweets::SolicitudUltimosTweets(medios::twitter::Cuenta * cuenta, unsigned int cantidad_de_tweets)
-{
+SolicitudUltimosTweets::SolicitudUltimosTweets(medios::twitter::Cuenta * cuenta, unsigned int cantidad_de_tweets) {
     // creo y armo la solicitud para el token de acceso
     this->setSolicitud(new web::http::http_request());
 
@@ -23,8 +22,6 @@ SolicitudUltimosTweets::SolicitudUltimosTweets(medios::twitter::Cuenta * cuenta,
     this->setGET();
 }
 
-SolicitudUltimosTweets::~SolicitudUltimosTweets()
-{
-}
+SolicitudUltimosTweets::~SolicitudUltimosTweets() {}
 
 }

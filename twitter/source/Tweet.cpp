@@ -11,8 +11,7 @@
 
 namespace medios::twitter {
 
-Tweet::Tweet() : tweet_retweeteado(NULL), es_retweet(false)
-{
+Tweet::Tweet() : tweet_retweeteado(NULL), es_retweet(false) {
     //unsigned long long int id_tweet = this->getJson()->getAtributoValorUint("id");
     //std::string fecha_creacion_formato_twitter = this->getJson()->getAtributoValorString("created_at");
     //std::string texto = this->getJson()->getAtributoValorString("full_text");
@@ -51,8 +50,7 @@ Tweet::Tweet() : tweet_retweeteado(NULL), es_retweet(false)
     //this->setHashtags(hashtags);
 }
 
-Tweet::~Tweet()
-{
+Tweet::~Tweet() {
     if (NULL != this->tweet_retweeteado)
     {
         delete this->tweet_retweeteado;
@@ -62,65 +60,53 @@ Tweet::~Tweet()
 
 // GETTERS
 
-unsigned long long int Tweet::getIdTweet()
-{
+unsigned long long int Tweet::getIdTweet() {
     return this->id_tweet;
 }
 
-herramientas::utiles::Fecha Tweet::getFechaCreacion()
-{
+herramientas::utiles::Fecha Tweet::getFechaCreacion() {
     return this->fecha_creacion;
 }
 
-std::string Tweet::getTextoTweet()
-{
+std::string Tweet::getTextoTweet() {
     return this->texto_tweet;
 }
 
-unsigned long long int Tweet::getIdUsuario()
-{
+unsigned long long int Tweet::getIdUsuario() {
     return this->id_usuario;
 }
 
-std::vector<std::string> Tweet::getHashtags()
-{
+std::vector<std::string> Tweet::getHashtags() {
     return this->hashtags;
 }
 
-Tweet * Tweet::getTweetRetweeteado()
-{
+Tweet * Tweet::getTweetRetweeteado() {
     return this->tweet_retweeteado;
 }
 
 // SETTERS
 
-void Tweet::setIdTweet(unsigned long long int id_tweet)
-{
+void Tweet::setIdTweet(unsigned long long int id_tweet) {
     this->id_tweet = id_tweet;
 }
 
-void Tweet::setFechaCreacion(herramientas::utiles::Fecha fecha_creacion)
-{
+void Tweet::setFechaCreacion(herramientas::utiles::Fecha fecha_creacion) {
     this->fecha_creacion = fecha_creacion;
 }
 
-void Tweet::setTextoTweet(std::string texto_tweet)
-{
+void Tweet::setTextoTweet(std::string texto_tweet) {
     this->texto_tweet = texto_tweet;
 }
 
-void Tweet::setIdUsuario(unsigned long long int id_usuario)
-{
+void Tweet::setIdUsuario(unsigned long long int id_usuario) {
     this->id_usuario = id_usuario;
 }
 
-void Tweet::setHashtags(std::vector<std::string> hashtags)
-{
+void Tweet::setHashtags(std::vector<std::string> hashtags) {
     this->hashtags = hashtags;
 }
 
-void Tweet::setTweetRetweeteado(Tweet * tweet_retweeteado)
-{
+void Tweet::setTweetRetweeteado(Tweet * tweet_retweeteado) {
     if (NULL != this->tweet_retweeteado)
     {
         delete this->tweet_retweeteado;
@@ -132,24 +118,21 @@ void Tweet::setTweetRetweeteado(Tweet * tweet_retweeteado)
 
 // METODOS
 
-void Tweet::agregarHashtags(std::string hashtag)
-{
+void Tweet::agregarHashtags(std::string hashtag) {
     this->hashtags.push_back(hashtag);
 }
 
 // CONSULTAS
 
-bool Tweet::contieneHashtag(std::string hashtag)
-{
-    if (this->hashtags.end() == std::find(this->hashtags.begin(), this->hashtags.end(), hashtag))
-    {
+bool Tweet::contieneHashtag(std::string hashtag) {
+
+    if (this->hashtags.end() == std::find(this->hashtags.begin(), this->hashtags.end(), hashtag)) {
         return false;
     }
     return true;
 }
 
-bool Tweet::esRetweet()
-{
+bool Tweet::esRetweet() {
     return this->es_retweet;
 }
 
@@ -157,8 +140,8 @@ bool Tweet::esRetweet()
 
 // METODOS PRIVADOS
 
-herramientas::utiles::Fecha Tweet::parsearFechaEnFormatoTwitter(std::string fecha_formato_twitter)
-{
+herramientas::utiles::Fecha Tweet::parsearFechaEnFormatoTwitter(std::string fecha_formato_twitter) {
+
     herramientas::utiles::Fecha fecha;
     // la fecha viene en formato "Fri Dec 08 20:33:39 +0000 2017" --> le borro los "+0000 "
     // para que me quede "Fri Dec 08 20:33:39 2017" y la pueda parsear bien.
@@ -171,12 +154,10 @@ herramientas::utiles::Fecha Tweet::parsearFechaEnFormatoTwitter(std::string fech
     std::tm t = {};
     stream_fecha >> std::get_time(&t, "%a %b %d %H:%M:%S %Y");
 
-    if (stream_fecha.fail())
-    {
+    if (stream_fecha.fail()) {
         std::cout << "Fecha formato error.\n";
     }
-    else
-    {
+    else {
         fecha.setAnio(t.tm_year + 1900);
         fecha.setMes(t.tm_mon + 1);
         fecha.setDia(t.tm_mday);
