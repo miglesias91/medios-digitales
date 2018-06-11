@@ -7,7 +7,7 @@
 #include <cpprest/http_client.h>
 
 // rss
-#include <rss/include/feed.h>
+#include <rss/include/historia.h>
 
 namespace medios::rss {
 
@@ -17,18 +17,18 @@ public:
     virtual ~canal();
 
     // se conecta SINCRONICAMENTE al canal y devuelve los feeds disponibles.
-    bool feeds_ya(std::vector<feed> & feeds);
+    bool historias_ya(std::vector<historia> & historias);
 
     // se conecta ASINCRONICAMENTE al canal y recupera los feeds disponibles. Si ya hay una conexion en espera, entonces no se realiza la conexion.
-    bool pedir_feeds();
+    bool pedir_historias();
 
     // devuelve los feeds que se recuperaron de la llamada ASINCRONICA 'pedir_feeds'.
     // si no hubo una llamada previa, entonces se devuelve 'false'.
-    bool feeds(std::vector<feed> & feeds);
+    bool historias(std::vector<historia> & historias);
 
 private:
 
-    bool parsear(const std::string & contenido_xml, std::vector<feed> & feeds);
+    bool parsear(const std::string & contenido_xml, std::vector<historia> & historias);
 
     web::uri uri;
     web::http::client::http_client * cliente_canal;

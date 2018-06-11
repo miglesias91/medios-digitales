@@ -126,11 +126,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\canal.h" />
-    <ClInclude Include="include\feed.h" />
+    <ClInclude Include="include\historia.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\canal.cpp" />
-    <ClCompile Include="source\feed.cpp" />
+    <ClCompile Include="source\historia.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
