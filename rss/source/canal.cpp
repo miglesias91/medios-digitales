@@ -2,36 +2,53 @@
 
 namespace medios::rss {
 
-canal::canal(const std::string & string_uri) : uri(utility::conversions::to_string_t(string_uri)), cliente_canal(nullptr) {
+canal::canal(const std::string & string_uri) :
+    respuesta(""),
+    peticion_activa(false),
+    uri(utility::conversions::to_string_t(string_uri)),
+    cliente_canal(uri.scheme() + utility::conversions::to_string_t("://") + uri.host()) {}
 
-    this->cliente_canal = new web::http::client::http_client(uri.scheme() + utility::conversions::to_string_t("://") + uri.host());
-}
-
-canal::~canal() {
-    delete cliente_canal;
-}
+canal::~canal() {}
 
 bool canal::historias_ya(std::vector<historia> & historias) {
-    web::http::http_request http_solicitud(web::http::methods::GET);
-    http_solicitud.set_request_uri(this->uri.path());
-    http_solicitud.headers().add(utility::conversions::to_string_t("Accept"), utility::conversions::to_string_t("text/html,application/xhtml+xml,application/xml;charset=utf-8"));
 
+    std::string rta = "";
+    if (this->peticion_activa) {
+        return false;
+    }
+    else {
+        rta = this->cliente_canal.request(web::http::methods::GET, this->uri.path()).get().extract_utf8string().get();
+    }
 
-    web::http::http_response http_respuesta = this->cliente_canal->request(http_solicitud).get();
-
-    return this->parsear(http_respuesta.extract_utf8string().get(), historias);
+    return this->parsear(rta, historias);
 }
 
 bool canal::pedir_historias() {
-    return false;
+
+    if (this->peticion_activa) {
+        return false;
+    }
+
+    this->peticion_activa = true;
+
+    this->tarea_peticion = this->cliente_canal.request(web::http::methods::GET, this->uri.path());
+    this->tarea_peticion.then([this](pplx::task<web::http::http_response> tarea) {
+        this->respuesta = tarea.get().extract_utf8string().get();
+        this->peticion_activa = false;
+    });
 }
 
-bool canal::historias(std::vector<historia>& historias) {
-    return false;
+bool canal::historias(std::vector<historia> & historias) {
+
+    if (false == this->tarea_peticion.is_done()) {
+        return false;
+    }
+
+    return this->parsear(this->respuesta, historias);
 }
 
 bool canal::parsear(const std::string & contenido_xml, std::vector<historia> & historias) {
-    return false;
+    return true;
 }
 
 }
