@@ -6,14 +6,14 @@
 // casablanca
 #include <cpprest/http_client.h>
 
-// rss
-#include <rss/include/historia.h>
+// feed
+#include <feed/include/historia.h>
 
-namespace medios::rss {
+namespace medios::feed {
 
 class canal {
 public:
-    canal(const std::string & uri = "");
+    canal(const std::string & uri);
     virtual ~canal();
 
     // Si HAY una peticion en curso, entonces espera hasta que termine y devuelve la historias.
@@ -27,16 +27,16 @@ public:
     // si hay una llamada en curso, se devuelve 'false'.
     bool historias(std::vector<historia> & historias);
 
-private:
+protected:
 
-    bool parsear(const std::string & contenido_xml, std::vector<historia> & historias);
+    virtual bool parsear(const std::string & contenido_xml, std::vector<historia> & historias) = 0;
 
     web::uri uri;
     web::http::client::http_client cliente_canal;
 
     bool peticion_activa;
     pplx::task<web::http::http_response> tarea_peticion;
-    std::string respuesta;
+    web::http::http_response respuesta;
 
 };
 

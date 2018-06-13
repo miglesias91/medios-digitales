@@ -23,6 +23,7 @@
     <ProjectGuid>{3328A667-E319-441A-ADD9-5F093E154315}</ProjectGuid>
     <RootNamespace>rss</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectName>feed</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -76,7 +77,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(repos-git)herramientas_desarrollo;$(repos)cpprestsdk\Release\include;$(repos)rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(repos-git)herramientas_desarrollo;$(repos)cpprestsdk\Release\include;$(repos)rapidjson\include;$(repos)pugixml\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -126,10 +127,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\canal.h" />
+    <ClInclude Include="include\atom.h" />
+    <ClInclude Include="include\rss.h" />
     <ClInclude Include="include\historia.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\canal.cpp" />
+    <ClCompile Include="source\atom.cpp" />
+    <ClCompile Include="source\rss.cpp" />
     <ClCompile Include="source\historia.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de encabezado\canales">
+      <UniqueIdentifier>{692c0a1e-297f-4c1a-b243-238d3889b00a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\canales">
+      <UniqueIdentifier>{43852864-16c4-47ec-8e94-713d7b6da04f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\canal.h">
@@ -21,6 +27,12 @@
     <ClInclude Include="include\historia.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="include\rss.h">
+      <Filter>Archivos de encabezado\canales</Filter>
+    </ClInclude>
+    <ClInclude Include="include\atom.h">
+      <Filter>Archivos de encabezado\canales</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\canal.cpp">
@@ -28,6 +40,12 @@
     </ClCompile>
     <ClCompile Include="source\historia.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="source\atom.cpp">
+      <Filter>Archivos de origen\canales</Filter>
+    </ClCompile>
+    <ClCompile Include="source\rss.cpp">
+      <Filter>Archivos de origen\canales</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
