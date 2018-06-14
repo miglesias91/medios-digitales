@@ -2,8 +2,13 @@
 
 namespace medios::feed {
 
-historia::historia(const std::string & titulo, const std::string & link, const herramientas::utiles::Fecha & fecha, const pugi::xml_document & html) {}
+historia::historia(const std::string & titulo, const std::string & link, const herramientas::utiles::Fecha & fecha, const std::string & contenido_html) :
+titulo(titulo), link(link), fecha(fecha) {
+    this->html.load_string(contenido_html.c_str());
+}
 
-historia::~historia() {}
+historia::~historia() {
+    delete this->html;
+}
 
 }
