@@ -14,9 +14,9 @@ public:
     virtual ~atom();
 
 protected:
+    virtual pugi::xml_object_range<pugi::xml_named_node_iterator> historias_xml(const pugi::xml_document & xml_feed);
 
-    virtual bool parsear(const std::string & contenido_xml, std::vector<historia> & historias);
-
+    virtual bool parsear_historia(const pugi::xml_node & xml_historia, historia * histo);
 
 };
 

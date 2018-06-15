@@ -9,7 +9,7 @@ canal::canal(const std::string & string_uri) :
 
 canal::~canal() {}
 
-bool canal::historias_ya(std::vector<historia> & historias) {
+bool canal::historias_ya(std::vector<historia*> & historias) {
 
     web::http::http_response rta;
     if (this->peticion_activa) {
@@ -38,13 +38,65 @@ bool canal::pedir_historias() {
     return true;
 }
 
-bool canal::historias(std::vector<historia> & historias) {
+bool canal::historias(std::vector<historia*> & historias) {
 
     if (this->peticion_activa) {
         return false;
     }
 
     return this->parsear(this->respuesta.extract_utf8string().get(), historias);
+}
+
+bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & historias) {
+    pugi::xml_document xml_feed;
+    pugi::xml_parse_result resultado = xml_feed.load_string(contenido_xml.c_str());
+
+    uint32_t cantidad_total_de_historias = 0;
+    uint32_t cantidad_de_historias_descargadas = 0;
+    for (pugi::xml_node item : this->historias_xml(xml_feed)) {
+
+        historia * nueva = new historia();
+        this->parsear_historia(item, nueva);
+
+        this->descargar_y_guardar_historia(nueva, historias, cantidad_de_historias_descargadas);
+
+        cantidad_total_de_historias++;
+    }
+
+    while (cantidad_de_historias_descargadas != cantidad_total_de_historias) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    }
+
+    return true;
+}
+
+void canal::descargar_y_guardar_historia(historia * nueva, std::vector<historia*> & historias, uint32_t & cantidad_de_historias_descargadas) {
+
+    web::uri uri_historia(utility::conversions::to_string_t(nueva->link()));
+    web::http::client::http_client cliente_historia(uri_historia.scheme() + utility::conversions::to_string_t("://") + uri_historia.host());
+
+    //std::string titulo = nueva->titulo();
+    //std::string link = nueva->link();
+    //herramientas::utiles::Fecha fecha = nueva->fecha();
+
+    cliente_historia.request(web::http::methods::GET, uri_historia.path()).then([nueva,/*titulo, link, fecha,*/ &historias, &cantidad_de_historias_descargadas](pplx::task<web::http::http_response> tarea) {
+        try {
+            std::cout << "extrayendo html" << std::endl;
+
+            std::string string_html = tarea.get().extract_utf8string().get();
+
+            std::cout << "cargando historia" << std::endl;
+            //historia nueva(titulo, link, fecha, string_html);
+            nueva->html(string_html);
+            historias.push_back(nueva);
+
+            std::cout << "historias descargadas: " << cantidad_de_historias_descargadas << std::endl;
+        }
+        catch (const std::exception & e) {
+            std::cout << "error: " << e.what() << std::endl;
+        }
+        cantidad_de_historias_descargadas++;
+    });
 }
 
 }
