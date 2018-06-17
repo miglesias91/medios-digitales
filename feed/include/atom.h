@@ -10,7 +10,7 @@ namespace medios::feed {
 
 class atom : public canal {
 public:
-    atom(const std::string & uri);
+    atom(const std::string & uri, const std::string & seccion);
     virtual ~atom();
 
 protected:

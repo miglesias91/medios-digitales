@@ -2,9 +2,10 @@
 
 namespace medios::feed {
 
-canal::canal(const std::string & string_uri) :
+canal::canal(const std::string & string_uri, const std::string & seccion_canal) :
     peticion_activa(false),
     uri(utility::conversions::to_string_t(string_uri)),
+    seccion_canal(seccion_canal),
     cliente_canal(uri.scheme() + utility::conversions::to_string_t("://") + uri.host()) {}
 
 canal::~canal() {}
@@ -47,6 +48,10 @@ bool canal::historias(std::vector<historia*> & historias) {
     return this->parsear(this->respuesta.extract_utf8string().get(), historias);
 }
 
+std::string canal::seccion() const {
+    return this->seccion_canal;
+}
+
 bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & historias) {
     pugi::xml_document xml_feed;
     pugi::xml_parse_result resultado = xml_feed.load_string(contenido_xml.c_str());
@@ -75,24 +80,20 @@ void canal::descargar_y_guardar_historia(historia * nueva, std::vector<historia*
     web::uri uri_historia(utility::conversions::to_string_t(nueva->link()));
     web::http::client::http_client cliente_historia(uri_historia.scheme() + utility::conversions::to_string_t("://") + uri_historia.host());
 
-    //std::string titulo = nueva->titulo();
-    //std::string link = nueva->link();
-    //herramientas::utiles::Fecha fecha = nueva->fecha();
-
-    cliente_historia.request(web::http::methods::GET, uri_historia.path()).then([nueva,/*titulo, link, fecha,*/ &historias, &cantidad_de_historias_descargadas](pplx::task<web::http::http_response> tarea) {
+    cliente_historia.request(web::http::methods::GET, uri_historia.path()).then([nueva, &historias, &cantidad_de_historias_descargadas](pplx::task<web::http::http_response> tarea) {
         try {
             std::cout << "extrayendo html" << std::endl;
 
             std::string string_html = tarea.get().extract_utf8string().get();
 
             std::cout << "cargando historia" << std::endl;
-            //historia nueva(titulo, link, fecha, string_html);
             nueva->html(string_html);
             historias.push_back(nueva);
 
             std::cout << "historias descargadas: " << cantidad_de_historias_descargadas << std::endl;
         }
         catch (const std::exception & e) {
+            delete nueva;
             std::cout << "error: " << e.what() << std::endl;
         }
         cantidad_de_historias_descargadas++;

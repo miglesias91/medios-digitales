@@ -10,7 +10,7 @@ namespace medios::feed {
 
 class rss : public canal {
 public:
-    rss(const std::string & uri);
+    rss(const std::string & uri, const std::string & seccion);
     virtual ~rss();
 
 protected:

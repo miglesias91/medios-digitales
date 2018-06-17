@@ -11,20 +11,20 @@ namespace medios::feed {
 class historia {
 public:
     historia();
-    historia(std::string titulo, std::string link, herramientas::utiles::Fecha fecha, std::string contenido_html);
+    historia(const std::string & titulo, const std::string & link, herramientas::utiles::Fecha fecha, const std::string & contenido_html);
     virtual ~historia();
 
-    void titulo(std::string titulo);
-    std::string titulo();
+    void titulo(const std::string & titulo);
+    std::string titulo() const;
 
-    void link(std::string link);
-    std::string link();
+    void link(const std::string &  link);
+    std::string link() const;
 
     void fecha(herramientas::utiles::Fecha fecha);
-    herramientas::utiles::Fecha fecha();
+    herramientas::utiles::Fecha fecha() const;
 
-    void html(std::string string_html);
-    std::string html();
+    void html(const std::string &  string_html);
+    std::string html() const;
 
 protected:
 

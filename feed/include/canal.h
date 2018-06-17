@@ -13,7 +13,7 @@ namespace medios::feed {
 
 class canal {
 public:
-    canal(const std::string & uri);
+    canal(const std::string & uri, const std::string & seccion);
     virtual ~canal();
 
     // Si HAY una peticion en curso, entonces espera hasta que termine y devuelve la historias.
@@ -26,6 +26,9 @@ public:
     // devuelve las historias que se recuperaron de la llamada ASINCRONICA 'pedir_historias'.
     // si hay una llamada en curso, se devuelve 'false'.
     bool historias(std::vector<historia*> & historias);
+
+    // devuelve el nombre de la seccion a la que pertenece el canal.
+    std::string seccion() const;
 
 protected:
 
@@ -44,6 +47,7 @@ protected:
     pplx::task<web::http::http_response> tarea_peticion;
     web::http::http_response respuesta;
 
+    std::string seccion_canal;
 };
 
 };
