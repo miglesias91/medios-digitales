@@ -9,18 +9,6 @@
 // feed
 #include <feed/include/rss.h>
 
-struct simple_walker : pugi::xml_tree_walker {
-    virtual bool for_each(pugi::xml_node& node) {
-
-        for (int i = 0; i < depth(); ++i) std::cout << "  "; // indentation
-
-        std::cout << node.type() << ": name='" << node.name() << "', value='" << node.value() << "'\n";
-
-        return true; // continue traversal
-    }
-
-};
-
 namespace medios::noticias {
 
 clarin::clarin() : portal() {

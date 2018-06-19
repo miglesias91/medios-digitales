@@ -64,4 +64,58 @@ bool portal::nueva_noticia(const medios::feed::historia & historia, const std::s
     return true;
 }
 
+bool portal::extraer_elemento_xml(const std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial, std::string & elemento_extraido) {
+    size_t primer_comienzo = contenido_html.find(etiqueta_inicial);
+
+    if (primer_comienzo == SIZE_MAX) {
+        return false;
+    }
+
+    size_t tamanio_tag = std::string("</" + nombre_elemento).size();
+
+    size_t pos_ultimo_comienzo_elemento = contenido_html.find("<" + nombre_elemento, primer_comienzo + tamanio_tag);
+    size_t pos_ultimo_fin_elemento = contenido_html.find("</" + nombre_elemento, primer_comienzo);
+
+    while (pos_ultimo_fin_elemento > pos_ultimo_comienzo_elemento) {
+        // si entra al if, entonces quiere decir que se abrio otro elemento "span" en el medio
+        pos_ultimo_comienzo_elemento = contenido_html.find("<" + nombre_elemento, pos_ultimo_comienzo_elemento + tamanio_tag);
+        pos_ultimo_fin_elemento = contenido_html.find("</" + nombre_elemento, pos_ultimo_fin_elemento + tamanio_tag);  // actualizo la posicion del ultimo span encontrado.
+    }
+
+    if (pos_ultimo_fin_elemento == SIZE_MAX) {
+        return false;
+    }
+
+    elemento_extraido = contenido_html.substr(primer_comienzo, pos_ultimo_fin_elemento + tamanio_tag - primer_comienzo);
+
+    return true;
+}
+
+bool portal::eliminar_elemento_xml(std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial) {
+    size_t primer_comienzo = contenido_html.find(etiqueta_inicial);
+
+    if (primer_comienzo == SIZE_MAX) {
+        return false;
+    }
+
+    size_t tamanio_tag = std::string("</" + nombre_elemento).size();
+
+    size_t pos_ultimo_comienzo_elemento = contenido_html.find("<" + nombre_elemento, primer_comienzo + tamanio_tag);
+    size_t pos_ultimo_fin_elemento = contenido_html.find("</" + nombre_elemento, primer_comienzo);
+
+    while (pos_ultimo_fin_elemento > pos_ultimo_comienzo_elemento) {
+        // si entra al if, entonces quiere decir que se abrio otro elemento "span" en el medio
+        pos_ultimo_comienzo_elemento = contenido_html.find("<" + nombre_elemento, pos_ultimo_comienzo_elemento + tamanio_tag);
+        pos_ultimo_fin_elemento = contenido_html.find("</" + nombre_elemento, pos_ultimo_fin_elemento + tamanio_tag);  // actualizo la posicion del ultimo span encontrado.
+    }
+
+    if (pos_ultimo_fin_elemento == SIZE_MAX) {
+        return false;
+    }
+
+    contenido_html.erase(primer_comienzo, pos_ultimo_fin_elemento + tamanio_tag - primer_comienzo);
+
+    return true;
+}
+
 }

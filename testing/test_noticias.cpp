@@ -13,10 +13,10 @@
 #include <noticias/include/clarin.h>
 #include <noticias/include/la_nacion.h>
 
-TEST_CASE("leer_noticia_clarin", "noticias") {
+TEST_CASE("leer_noticia_clarin", "noticias[.]") {
 
     std::string contenido_html = "";
-    herramientas::utiles::FuncionesSistemaArchivos::leer("noticias_clarin.html", contenido_html);
+    herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_clarin.html", contenido_html);
 
     medios::feed::historia historia("titulo", "link", herramientas::utiles::Fecha::getFechaActual(), contenido_html);
 
@@ -25,7 +25,19 @@ TEST_CASE("leer_noticia_clarin", "noticias") {
     el_gran_diario_argentino.nueva_noticia(historia, "politica");
 }
 
-TEST_CASE("leer_clarin", "noticias") {
+TEST_CASE("leer_noticia_la_nacion", "noticias") {
+
+    std::string contenido_html = "";
+    herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_la_nacion.html", contenido_html);
+
+    medios::feed::historia historia("titulo", "link", herramientas::utiles::Fecha::getFechaActual(), contenido_html);
+
+    medios::noticias::la_nacion el_diario_de_mitre;
+
+    el_diario_de_mitre.nueva_noticia(historia, "politica");
+}
+
+TEST_CASE("leer_clarin", "noticias[.]") {
    
     medios::noticias::lector lector_de_noticias;
 
