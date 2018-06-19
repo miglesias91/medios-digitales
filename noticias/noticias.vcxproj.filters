@@ -36,6 +36,9 @@
     <ClInclude Include="include\la_nacion.h">
       <Filter>Archivos de encabezado\portales</Filter>
     </ClInclude>
+    <ClInclude Include="include\infobae.h">
+      <Filter>Archivos de encabezado\portales</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\noticia.cpp">
@@ -51,6 +54,9 @@
       <Filter>Archivos de origen\portales</Filter>
     </ClCompile>
     <ClCompile Include="source\la_nacion.cpp">
+      <Filter>Archivos de origen\portales</Filter>
+    </ClCompile>
+    <ClCompile Include="source\infobae.cpp">
       <Filter>Archivos de origen\portales</Filter>
     </ClCompile>
   </ItemGroup>

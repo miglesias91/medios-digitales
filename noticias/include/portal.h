@@ -31,6 +31,8 @@ protected:
 
     virtual bool eliminar_elemento_xml(std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial);
 
+    virtual bool eliminar_etiqueta_xml(std::string & contenido_html, const std::string & etiqueta);
+
     std::unordered_map<std::string, medios::feed::canal*> canales_portal;
 
     std::unordered_map<std::string, std::vector<noticia*>> noticias_portal;

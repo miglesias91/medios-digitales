@@ -21,12 +21,14 @@ bool rss::parsear_historia(const pugi::xml_node & xml_historia, historia * histo
     std::string titulo = xml_historia.child_value("title");
     std::string string_fecha = xml_historia.child_value("pubDate");
     std::string link = xml_historia.child_value("link");
+    std::string contenido = xml_historia.child_value("content:encoded");
 
     herramientas::utiles::Fecha fecha;
 
     histo->titulo(titulo);
     histo->fecha(fecha);
     histo->link(link);
+    histo->contenido(contenido);
 
     return true;
 }

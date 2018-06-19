@@ -5,10 +5,11 @@
 
 namespace medios::feed {
 
-historia::historia() : titulo_historia(""), link_web("") {}
+historia::historia() : titulo_historia(""), link_web(""), string_html(""), contenido_historia("") {}
 
-historia::historia(const std::string & titulo, const std::string & link, herramientas::utiles::Fecha fecha, const std::string & string_html) :
-titulo_historia(titulo), link_web(link), fecha_creacion(fecha), string_html(string_html) {}
+historia::historia(const std::string & titulo, const std::string & link, herramientas::utiles::Fecha fecha,
+    const std::string & string_html, const std::string & contenido_historia) :
+titulo_historia(titulo), link_web(link), fecha_creacion(fecha), string_html(string_html), contenido_historia(contenido_historia) {}
 
 historia::~historia() {}
 
@@ -42,6 +43,14 @@ void historia::html(const std::string & string_html) {
 
 std::string historia::html() const {
     return string_html;
+}
+
+void historia::contenido(const std::string & contenido_historia) {
+    this->contenido_historia = contenido_historia;
+}
+
+std::string historia::contenido() const {
+    return contenido_historia;
 }
 
 }

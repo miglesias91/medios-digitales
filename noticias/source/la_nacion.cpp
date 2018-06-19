@@ -9,18 +9,6 @@
 // feed
 #include <feed/include/atom.h>
 
-struct simple_walker : pugi::xml_tree_walker
-{
-    virtual bool for_each(pugi::xml_node& node)
-    {
-        for (int i = 0; i < depth(); ++i) std::cout << "  "; // indentation
-
-        std::cout << node.type() << ": name='" << node.name() << "', value='" << node.value() << "'\n";
-
-        return true; // continue traversal
-    }
-};
-
 namespace medios::noticias {
 
 la_nacion::la_nacion() : portal() {
@@ -44,36 +32,19 @@ bool la_nacion::extraer_contenido_de_html(const std::string & contenido_html, st
     this->eliminar_elemento_xml(elemento_section_cuerpo, "div", "<div class=\"barra\">");
     this->eliminar_elemento_xml(elemento_section_cuerpo, "div", "<div class=\"temas\">");
     this->eliminar_elemento_xml(elemento_section_cuerpo, "div", "<div class=\"fin-cuerpo\">");
-
-    // ELIMINAR ETIQUETAS <a
+    this->eliminar_etiqueta_xml(elemento_section_cuerpo, "a");
+    this->eliminar_etiqueta_xml(elemento_section_cuerpo, "!--");
 
     pugi::xml_document xml_nota;
     xml_nota.load_string(elemento_section_cuerpo.c_str());
 
-    simple_walker w;
-    xml_nota.traverse(w);
-
-    for (pugi::xml_node item : xml_nota.child("section").children("p")) {
-        std::string t = item.text().as_string();
+    for (pugi::xml_node parrafo : xml_nota.child("section").children("p")) {
+        std::string texto = parrafo.text().as_string();
+        contenido += texto;
     }
-    //size_t comienzo_parrafo = html_con_texto.find("<p");
-    //size_t fin_parrafo = html_con_texto.find("</p");
-    //size_t tamanio_tag_p = std::string("</p").size();
 
-    //while (pos_fin_span > fin_parrafo) {
-    //    std::string parrafo = html_con_texto.substr(comienzo_parrafo + tamanio_tag_p, fin_parrafo - comienzo_parrafo - tamanio_tag_p);
-
-    //    if (false == parrafo.empty()) {
-    //        contenido += parrafo;
-    //    }
-
-    //    comienzo_parrafo = html_con_texto.find("<p", fin_parrafo + tamanio_tag_p);
-    //    fin_parrafo = html_con_texto.find("</p", fin_parrafo + tamanio_tag_p);
-    //}
-
-    //if (contenido.empty()) {
-    //    return false;
-    //}
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(contenido, "\n");
+    herramientas::utiles::FuncionesString::eliminarEspaciosRedundantes(contenido);
 
     return true;
 }

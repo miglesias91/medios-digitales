@@ -3,6 +3,9 @@
 // stl
 #include <algorithm>
 
+// utiles
+#include <utiles/include/FuncionesString.h>
+
 namespace medios::noticias {
 
 portal::portal() {}
@@ -98,7 +101,7 @@ bool portal::eliminar_elemento_xml(std::string & contenido_html, const std::stri
         return false;
     }
 
-    size_t tamanio_tag = std::string("</" + nombre_elemento).size();
+    size_t tamanio_tag = std::string("</" + nombre_elemento + ">").size();
 
     size_t pos_ultimo_comienzo_elemento = contenido_html.find("<" + nombre_elemento, primer_comienzo + tamanio_tag);
     size_t pos_ultimo_fin_elemento = contenido_html.find("</" + nombre_elemento, primer_comienzo);
@@ -114,6 +117,34 @@ bool portal::eliminar_elemento_xml(std::string & contenido_html, const std::stri
     }
 
     contenido_html.erase(primer_comienzo, pos_ultimo_fin_elemento + tamanio_tag - primer_comienzo);
+
+    return true;
+}
+
+bool portal::eliminar_etiqueta_xml(std::string & contenido_html, const std::string & etiqueta) {
+
+    std::string inicio_etiqueta = "<" + etiqueta + ">";
+    std::string fin_etiqueta = "</" + etiqueta + ">";
+
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(contenido_html, inicio_etiqueta);
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(contenido_html, fin_etiqueta);
+
+    std::string inicio_etiqueta_con_atributos = "<" + etiqueta + " ";
+
+    size_t pos_inicio_llave = 0;
+    size_t pos_fin_llave = 1;
+
+    size_t tamanio_inicio_etiqueta_con_atributos = inicio_etiqueta_con_atributos.size();
+    size_t tamanio_fin_etiqueta = fin_etiqueta.size();
+
+    while (pos_inicio_llave < pos_fin_llave) {
+        pos_inicio_llave = contenido_html.find(inicio_etiqueta_con_atributos, pos_inicio_llave);
+        pos_fin_llave = contenido_html.find(">", pos_inicio_llave);
+
+        if (pos_inicio_llave < pos_fin_llave) {
+            contenido_html.erase(pos_inicio_llave, pos_fin_llave - pos_inicio_llave + 1);
+        }
+    }
 
     return true;
 }
