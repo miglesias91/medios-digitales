@@ -14,7 +14,7 @@
 #include <noticias/include/la_nacion.h>
 #include <noticias/include/infobae.h>
 
-TEST_CASE("leer_noticia_clarin", "noticias[.]") {
+TEST_CASE("leer_noticia_clarin", "noticias") {
 
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_clarin.html", contenido_html);
@@ -38,7 +38,7 @@ TEST_CASE("leer_noticia_la_nacion", "noticias[.]") {
     el_diario_de_mitre.nueva_noticia(historia, "politica");
 }
 
-TEST_CASE("leer_noticia_infobae", "noticias") {
+TEST_CASE("leer_noticia_infobae", "noticias[.]") {
 
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_infobae.html", contenido_html);
@@ -50,7 +50,7 @@ TEST_CASE("leer_noticia_infobae", "noticias") {
     infobae.nueva_noticia(historia, "lo ultimo");
 }
 
-TEST_CASE("leer_clarin", "noticias") {
+TEST_CASE("leer_clarin", "noticias[.]") {
    
     medios::noticias::lector lector_de_noticias;
 
@@ -60,7 +60,7 @@ TEST_CASE("leer_clarin", "noticias") {
 
 }
 
-TEST_CASE("leer_la_nacion", "noticias") {
+TEST_CASE("leer_la_nacion", "noticias[.]") {
 
     medios::noticias::lector lector_de_noticias;
 
@@ -70,7 +70,7 @@ TEST_CASE("leer_la_nacion", "noticias") {
 
 }
 
-TEST_CASE("leer_infobae", "noticias") {
+TEST_CASE("leer_infobae", "noticias[.]") {
 
     medios::noticias::lector lector_de_noticias;
 

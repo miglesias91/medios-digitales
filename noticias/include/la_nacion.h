@@ -11,7 +11,7 @@ public:
     virtual ~la_nacion();
 
 protected:
-    virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string & contenido);
+    virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido);
 };
 
 };

@@ -25,13 +25,15 @@ public:
     virtual bool nueva_noticia(const medios::feed::historia & historia, const std::string & seccion);
 
 protected:
-    virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string & contenido) = 0;
+    virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) = 0;
 
-    virtual bool extraer_elemento_xml(const std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial, std::string & elemento_extraido);
+    virtual bool extraer_elemento_xml(const std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial, std::string * elemento_extraido);
 
-    virtual bool eliminar_elemento_xml(std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial);
+    virtual bool extraer_elementos_xml(const std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial, std::vector<std::string> * elementos_extraidos);
 
-    virtual bool eliminar_etiqueta_xml(std::string & contenido_html, const std::string & etiqueta);
+    virtual bool eliminar_elemento_xml(std::string * contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial);
+
+    virtual bool eliminar_etiqueta_xml(std::string * contenido_html, const std::string & etiqueta);
 
     std::unordered_map<std::string, medios::feed::canal*> canales_portal;
 

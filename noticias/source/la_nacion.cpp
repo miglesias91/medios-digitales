@@ -24,27 +24,27 @@ la_nacion::la_nacion() : portal() {
 
 la_nacion::~la_nacion() {}
 
-bool la_nacion::extraer_contenido_de_html(const std::string & contenido_html, std::string & contenido) {
+bool la_nacion::extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) {
     
     std::string elemento_section_cuerpo = "";
-    this->extraer_elemento_xml(contenido_html, "section", "<section id=\"cuerpo\" data-module=\"nota-cuerpo\">", elemento_section_cuerpo);
-    this->eliminar_elemento_xml(elemento_section_cuerpo, "figure", "<figure");
-    this->eliminar_elemento_xml(elemento_section_cuerpo, "div", "<div class=\"barra\">");
-    this->eliminar_elemento_xml(elemento_section_cuerpo, "div", "<div class=\"temas\">");
-    this->eliminar_elemento_xml(elemento_section_cuerpo, "div", "<div class=\"fin-cuerpo\">");
-    this->eliminar_etiqueta_xml(elemento_section_cuerpo, "a");
-    this->eliminar_etiqueta_xml(elemento_section_cuerpo, "!--");
+    this->extraer_elemento_xml(contenido_html, "section", "<section id=\"cuerpo\" data-module=\"nota-cuerpo\">", &elemento_section_cuerpo);
+    this->eliminar_elemento_xml(&elemento_section_cuerpo, "figure", "<figure");
+    this->eliminar_elemento_xml(&elemento_section_cuerpo, "div", "<div class=\"barra\">");
+    this->eliminar_elemento_xml(&elemento_section_cuerpo, "div", "<div class=\"temas\">");
+    this->eliminar_elemento_xml(&elemento_section_cuerpo, "div", "<div class=\"fin-cuerpo\">");
+    this->eliminar_etiqueta_xml(&elemento_section_cuerpo, "a");
+    this->eliminar_etiqueta_xml(&elemento_section_cuerpo, "!--");
 
     pugi::xml_document xml_nota;
     xml_nota.load_string(elemento_section_cuerpo.c_str());
 
     for (pugi::xml_node parrafo : xml_nota.child("section").children("p")) {
         std::string texto = parrafo.text().as_string();
-        contenido += texto;
+        *contenido += texto;
     }
 
-    herramientas::utiles::FuncionesString::eliminarOcurrencias(contenido, "\n");
-    herramientas::utiles::FuncionesString::eliminarEspaciosRedundantes(contenido);
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(*contenido, "\n");
+    herramientas::utiles::FuncionesString::eliminarEspaciosRedundantes(*contenido);
 
     return true;
 }

@@ -48,7 +48,7 @@ public:
     virtual bool nueva_noticia(const medios::feed::historia & historia, const std::string & seccion);
 
 protected:
-    virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string & contenido);
+    virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido);
 
 private:
     bool reconocer_seccion(const std::string & url, std::string * seccion);

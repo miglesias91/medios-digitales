@@ -28,9 +28,9 @@ bool infobae::nueva_noticia(const medios::feed::historia & historia, const std::
     return this->portal::nueva_noticia(historia, seccion_de_url);
 }
 
-bool infobae::extraer_contenido_de_html(const std::string & contenido_html, std::string & contenido) {
+bool infobae::extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) {
 
-    contenido = contenido_html;
+    *contenido = contenido_html;
     this->eliminar_elemento_xml(contenido, "div", "<div ");
     this->eliminar_elemento_xml(contenido, "span", "<span ");
     this->eliminar_elemento_xml(contenido, "a", "<a ");
@@ -39,7 +39,7 @@ bool infobae::extraer_contenido_de_html(const std::string & contenido_html, std:
     this->eliminar_etiqueta_xml(contenido, "em");
     this->eliminar_etiqueta_xml(contenido, "p");
 
-    herramientas::utiles::FuncionesString::eliminarEspaciosRedundantes(contenido);
+    herramientas::utiles::FuncionesString::eliminarEspaciosRedundantes(*contenido);
 
     return true;
 }

@@ -56,7 +56,7 @@ bool portal::nueva_noticia(const medios::feed::historia & historia, const std::s
     noticia * nueva_noticia = new noticia(historia.titulo(), "", seccion, historia.fecha());
 
     std::string contenido_noticia = "";
-    if (false == this->extraer_contenido_de_html(historia.html(), contenido_noticia)) {
+    if (false == this->extraer_contenido_de_html(historia.html(), &contenido_noticia)) {
         return false;
     }
 
@@ -67,7 +67,7 @@ bool portal::nueva_noticia(const medios::feed::historia & historia, const std::s
     return true;
 }
 
-bool portal::extraer_elemento_xml(const std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial, std::string & elemento_extraido) {
+bool portal::extraer_elemento_xml(const std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial, std::string * elemento_extraido) {
     size_t primer_comienzo = contenido_html.find(etiqueta_inicial);
 
     if (primer_comienzo == SIZE_MAX) {
@@ -89,13 +89,35 @@ bool portal::extraer_elemento_xml(const std::string & contenido_html, const std:
         return false;
     }
 
-    elemento_extraido = contenido_html.substr(primer_comienzo, pos_ultimo_fin_elemento + tamanio_tag - primer_comienzo);
+    *elemento_extraido = contenido_html.substr(primer_comienzo, pos_ultimo_fin_elemento + tamanio_tag - primer_comienzo);
 
     return true;
 }
 
-bool portal::eliminar_elemento_xml(std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial) {
-    size_t primer_comienzo = contenido_html.find(etiqueta_inicial);
+bool portal::extraer_elementos_xml(const std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial, std::vector<std::string> * elementos_extraidos) {
+    std::string tag_abrierto = "<" + nombre_elemento;
+    std::string tag_cerrado = "</" + nombre_elemento;
+
+    size_t comienzo_parrafo = contenido_html.find(tag_abrierto);
+    size_t fin_parrafo = contenido_html.find(tag_cerrado);
+    size_t tamanio_tag_p = tag_cerrado.size();
+
+    while (contenido_html.size() > fin_parrafo) {
+        std::string parrafo = contenido_html.substr(comienzo_parrafo + tamanio_tag_p, fin_parrafo - comienzo_parrafo - tamanio_tag_p);
+
+        if (false == parrafo.empty()) {
+            elementos_extraidos->push_back(parrafo);
+        }
+
+        comienzo_parrafo = contenido_html.find(tag_abrierto, fin_parrafo + tamanio_tag_p);
+        fin_parrafo = contenido_html.find(tag_cerrado, fin_parrafo + tamanio_tag_p);
+    }
+
+    return elementos_extraidos->size();
+}
+
+bool portal::eliminar_elemento_xml(std::string * contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial) {
+    size_t primer_comienzo = contenido_html->find(etiqueta_inicial);
 
     if (primer_comienzo == SIZE_MAX) {
         return false;
@@ -103,33 +125,33 @@ bool portal::eliminar_elemento_xml(std::string & contenido_html, const std::stri
 
     size_t tamanio_tag = std::string("</" + nombre_elemento + ">").size();
 
-    size_t pos_ultimo_comienzo_elemento = contenido_html.find("<" + nombre_elemento, primer_comienzo + tamanio_tag);
-    size_t pos_ultimo_fin_elemento = contenido_html.find("</" + nombre_elemento, primer_comienzo);
+    size_t pos_ultimo_comienzo_elemento = contenido_html->find("<" + nombre_elemento, primer_comienzo + tamanio_tag);
+    size_t pos_ultimo_fin_elemento = contenido_html->find("</" + nombre_elemento, primer_comienzo);
 
     while (pos_ultimo_fin_elemento > pos_ultimo_comienzo_elemento) {
         // si entra al if, entonces quiere decir que se abrio otro elemento "span" en el medio
-        pos_ultimo_comienzo_elemento = contenido_html.find("<" + nombre_elemento, pos_ultimo_comienzo_elemento + tamanio_tag);
-        pos_ultimo_fin_elemento = contenido_html.find("</" + nombre_elemento, pos_ultimo_fin_elemento + tamanio_tag);  // actualizo la posicion del ultimo span encontrado.
+        pos_ultimo_comienzo_elemento = contenido_html->find("<" + nombre_elemento, pos_ultimo_comienzo_elemento + tamanio_tag);
+        pos_ultimo_fin_elemento = contenido_html->find("</" + nombre_elemento, pos_ultimo_fin_elemento + tamanio_tag);  // actualizo la posicion del ultimo span encontrado.
     }
 
     if (pos_ultimo_fin_elemento == SIZE_MAX) {
         return false;
     }
 
-    contenido_html.erase(primer_comienzo, pos_ultimo_fin_elemento + tamanio_tag - primer_comienzo);
+    contenido_html->erase(primer_comienzo, pos_ultimo_fin_elemento + tamanio_tag - primer_comienzo);
 
     this->eliminar_elemento_xml(contenido_html, nombre_elemento, etiqueta_inicial);
 
     return true;
 }
 
-bool portal::eliminar_etiqueta_xml(std::string & contenido_html, const std::string & etiqueta) {
+bool portal::eliminar_etiqueta_xml(std::string * contenido_html, const std::string & etiqueta) {
 
     std::string inicio_etiqueta = "<" + etiqueta + ">";
     std::string fin_etiqueta = "</" + etiqueta + ">";
 
-    herramientas::utiles::FuncionesString::eliminarOcurrencias(contenido_html, inicio_etiqueta);
-    herramientas::utiles::FuncionesString::eliminarOcurrencias(contenido_html, fin_etiqueta);
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(*contenido_html, inicio_etiqueta);
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(*contenido_html, fin_etiqueta);
 
     std::string inicio_etiqueta_con_atributos = "<" + etiqueta + " ";
 
@@ -140,11 +162,11 @@ bool portal::eliminar_etiqueta_xml(std::string & contenido_html, const std::stri
     size_t tamanio_fin_etiqueta = fin_etiqueta.size();
 
     while (pos_inicio_llave < pos_fin_llave) {
-        pos_inicio_llave = contenido_html.find(inicio_etiqueta_con_atributos, pos_inicio_llave);
-        pos_fin_llave = contenido_html.find(">", pos_inicio_llave);
+        pos_inicio_llave = contenido_html->find(inicio_etiqueta_con_atributos, pos_inicio_llave);
+        pos_fin_llave = contenido_html->find(">", pos_inicio_llave);
 
         if (pos_inicio_llave < pos_fin_llave) {
-            contenido_html.erase(pos_inicio_llave, pos_fin_llave - pos_inicio_llave + 1);
+            contenido_html->erase(pos_inicio_llave, pos_fin_llave - pos_inicio_llave + 1);
         }
     }
 
