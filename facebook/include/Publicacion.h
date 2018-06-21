@@ -10,6 +10,7 @@ class Publicacion {
 public:
 
     Publicacion();
+    Publicacion(const uintmax_t & id_publicacion, const herramientas::utiles::Fecha & fecha_creacion, const std::string & texto, const uintmax_t & id_pagina);
 	virtual ~Publicacion();
 
     // GETTERS
@@ -24,13 +25,13 @@ public:
 
     // SETTERS
 
-    void setIdPublicacion(unsigned long long int id_publicacion);
+    void setIdPublicacion(const uintmax_t & id_publicacion);
 
-    void setIdPagina(unsigned long long int id_pagina);
+    void setIdPagina(const uintmax_t & id_pagina);
 
-    void setFechaCreacion(herramientas::utiles::Fecha fecha_creacion);
+    void setFechaCreacion(const herramientas::utiles::Fecha & fecha_creacion);
 
-    void setTextoPublicacion(std::string texto_tweet);
+    void setTextoPublicacion(const std::string & texto_publicacion);
 
     // METODOS
 
@@ -46,9 +47,7 @@ private:
 
     // ATRIBUTOS
 
-    unsigned long long int id_publicacion;
-
-    unsigned long long int id_pagina;
+    uintmax_t id_publicacion, id_pagina;
 
     herramientas::utiles::Fecha fecha_creacion;
 

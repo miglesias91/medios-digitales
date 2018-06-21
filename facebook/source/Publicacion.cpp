@@ -13,39 +13,21 @@
 namespace medios::facebook {
 
 Publicacion::Publicacion() {
+}
 
-    //if (NULL == publicacion_json)
-    //{
-    //    return;
-    //}
-
-    //std::string id_pagina_id_publicacion = this->getJson()->getAtributoValorString("id");
-    //std::string fecha_creacion_formato_facebook = this->getJson()->getAtributoValorString("created_time");
-
-    //std::string texto = "";
-
-    //if (this->getJson()->contieneAtributo("message"))
-    //{
-    //    texto = this->getJson()->getAtributoValorString("message");
-    //}
-
-    //std::vector<std::string> ids = herramientas::utiles::FuncionesString::separar(id_pagina_id_publicacion, "_");
-
-    //this->setIdPublicacion(std::stoull(ids[1]));
-    //this->setFechaCreacion(this->parsearFechaEnFormatoFacebook(fecha_creacion_formato_facebook));
-    //this->setTextoPublicacion(texto);
-    //this->setIdPagina(std::stoull(ids[0]));
+Publicacion::Publicacion(const uintmax_t & id_publicacion, const herramientas::utiles::Fecha & fecha_creacion, const std::string & texto_publicacion, const uintmax_t & id_pagina)
+: id_publicacion(id_publicacion), fecha_creacion(fecha_creacion), texto_publicacion(texto_publicacion), id_pagina(id_pagina) {
 }
 
 Publicacion::~Publicacion() {}
 
 // GETTERS
 
-unsigned long long int Publicacion::getIdPublicacion() {
+uintmax_t Publicacion::getIdPublicacion() {
     return this->id_publicacion;
 }
 
-unsigned long long int Publicacion::getIdPagina() {
+uintmax_t Publicacion::getIdPagina() {
     return this->id_pagina;
 }
 
@@ -59,19 +41,19 @@ std::string Publicacion::getTextoPublicacion() {
 
 // SETTERS
 
-void Publicacion::setIdPublicacion(unsigned long long int id_publicacion) {
+void Publicacion::setIdPublicacion(const uintmax_t & id_publicacion) {
     this->id_publicacion = id_publicacion;
 }
 
-void Publicacion::setIdPagina(unsigned long long int id_pagina) {
+void Publicacion::setIdPagina(const uintmax_t & id_pagina) {
     this->id_pagina = id_pagina;
 }
 
-void Publicacion::setFechaCreacion(herramientas::utiles::Fecha fecha_creacion) {
+void Publicacion::setFechaCreacion(const herramientas::utiles::Fecha & fecha_creacion) {
     this->fecha_creacion = fecha_creacion;
 }
 
-void Publicacion::setTextoPublicacion(std::string texto_publicacion) {
+void Publicacion::setTextoPublicacion(const std::string & texto_publicacion) {
     this->texto_publicacion = texto_publicacion;
 }
 

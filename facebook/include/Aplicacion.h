@@ -27,6 +27,8 @@ public:
 
     // METODOS
 
+    static bool parsear(herramientas::utiles::Json * json_publicacion, Publicacion * publicacion);
+
     // se almacena memoria para las publicaciones pero no se libera, entonces deben ser ELIMINADAS luego de ser usadas.
     std::vector<Publicacion*> leer(Pagina * cuenta, unsigned int cantidad_de_publicaciones = 100);
 

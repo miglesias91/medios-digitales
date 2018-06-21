@@ -14,7 +14,7 @@
 #include <noticias/include/la_nacion.h>
 #include <noticias/include/infobae.h>
 
-TEST_CASE("leer_noticia_clarin", "noticias") {
+TEST_CASE("leer_noticia_clarin", "noticias[.]") {
 
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_clarin.html", contenido_html);
