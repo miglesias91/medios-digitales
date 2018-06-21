@@ -38,7 +38,19 @@ TEST_CASE("leer_noticia_la_nacion", "noticias[.]") {
     el_diario_de_mitre.nueva_noticia(historia, "politica");
 }
 
-TEST_CASE("leer_clarin", "noticias[.]") {
+TEST_CASE("leer_noticia_infobae", "noticias") {
+
+    std::string contenido_html = "";
+    herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_infobae.html", contenido_html);
+
+    medios::feed::historia historia("titulo", "https://www.infobae.com/politica/2018/06/20/rindieron-homenaje-a-dante-caputo-en-washington/", herramientas::utiles::Fecha::getFechaActual(), contenido_html);
+
+    medios::noticias::infobae infobae;
+
+    infobae.nueva_noticia(historia, "lo ultimo");
+}
+
+TEST_CASE("leer_clarin", "noticias") {
    
     medios::noticias::lector lector_de_noticias;
 
@@ -48,13 +60,13 @@ TEST_CASE("leer_clarin", "noticias[.]") {
 
 }
 
-TEST_CASE("leer_la_nacion", "noticias[.]") {
+TEST_CASE("leer_la_nacion", "noticias") {
 
     medios::noticias::lector lector_de_noticias;
 
-    medios::noticias::infobae infobae;
+    medios::noticias::la_nacion el_diario_de_mitre;
 
-    lector_de_noticias.leer(&infobae);
+    lector_de_noticias.leer(&el_diario_de_mitre);
 
 }
 
@@ -62,8 +74,8 @@ TEST_CASE("leer_infobae", "noticias") {
 
     medios::noticias::lector lector_de_noticias;
 
-    medios::noticias::infobae infob;
+    medios::noticias::infobae infobae;
 
-    lector_de_noticias.leer(&infob);
+    lector_de_noticias.leer(&infobae);
 
 }

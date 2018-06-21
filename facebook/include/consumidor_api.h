@@ -9,10 +9,10 @@
 
 namespace medios::facebook {
 
-class ConsumidorAPI {
+class consumidor_api {
 public:
-    ConsumidorAPI(std::string clave_publica, std::string clave_privada);
-    virtual ~ConsumidorAPI();
+    consumidor_api(std::string clave_publica, std::string clave_privada);
+    virtual ~consumidor_api();
 
     // GETTERS
 
@@ -22,9 +22,9 @@ public:
 
     // METODOS
 
-    bool obtenerTokenDeAcceso();
+    bool pedir_token();
 
-    herramientas::cpprest::HTTPRespuesta * realizarSolicitud(herramientas::cpprest::HTTPSolicitud * solicitud);
+    herramientas::cpprest::HTTPRespuesta * consumir(herramientas::cpprest::HTTPSolicitud * solicitud);
 
     // CONSULTAS
 

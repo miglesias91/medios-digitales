@@ -18,9 +18,6 @@
     <ClInclude Include="include\Aplicacion.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="include\ConsumidorAPI.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="include\Pagina.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -33,12 +30,12 @@
     <ClInclude Include="include\SolicitudUltimasPublicaciones.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="include\consumidor_api.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Aplicacion.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="source\ConsumidorAPI.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="source\Pagina.cpp">
@@ -51,6 +48,9 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="source\SolicitudUltimasPublicaciones.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="source\consumidor_api.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

@@ -118,6 +118,8 @@ bool portal::eliminar_elemento_xml(std::string & contenido_html, const std::stri
 
     contenido_html.erase(primer_comienzo, pos_ultimo_fin_elemento + tamanio_tag - primer_comienzo);
 
+    this->eliminar_elemento_xml(contenido_html, nombre_elemento, etiqueta_inicial);
+
     return true;
 }
 

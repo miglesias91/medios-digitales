@@ -26,11 +26,11 @@ namespace medios::feed {
                 historia * nueva = new historia();
                 this->parsear_historia(item, nueva);
 
-                cantidad_total_de_historias++;
-            }
+                nueva->html(nueva->contenido());
 
-            while (cantidad_de_historias_descargadas != cantidad_total_de_historias) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(200));
+                historias.push_back(nueva);
+
+                cantidad_total_de_historias++;
             }
 
             return true;
@@ -45,8 +45,13 @@ public:
     infobae();
     virtual ~infobae();
 
+    virtual bool nueva_noticia(const medios::feed::historia & historia, const std::string & seccion);
+
 protected:
     virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string & contenido);
+
+private:
+    bool reconocer_seccion(const std::string & url, std::string * seccion);
 };
 
 };

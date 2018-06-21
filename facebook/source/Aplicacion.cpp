@@ -1,4 +1,4 @@
-#include <facebook/include/Aplicacion.h>
+#include <facebook/include/aplicacion.h>
 
 // twitter
 #include <facebook/include/SolicitudUltimasPublicaciones.h>
@@ -6,9 +6,9 @@
 
 namespace medios::facebook {
 
-Aplicacion::Aplicacion(medios::facebook::ConsumidorAPI * consumidor_api) : consumidor_api(consumidor_api) {}
+aplicacion::aplicacion(medios::facebook::consumidor_api * consumidor_api) : consumidor_api(consumidor_api) {}
 
-Aplicacion::~Aplicacion() {
+aplicacion::~aplicacion() {
 
     if (NULL != this->consumidor_api) {
         delete this->consumidor_api;
@@ -18,12 +18,12 @@ Aplicacion::~Aplicacion() {
 
 // GETTERS
 
-std::string Aplicacion::getID() {
+std::string aplicacion::id() {
 
     return this->consumidor_api->getConsumidorOAuth2().getClavePublica();
 }
 
-std::string Aplicacion::getClavePrivada() {
+std::string aplicacion::clave_privada() {
 
     return this->consumidor_api->getConsumidorOAuth2().getClavePrivada();
 }
@@ -32,11 +32,11 @@ std::string Aplicacion::getClavePrivada() {
 
 // METODOS
 
-std::vector<Publicacion*> Aplicacion::leerUltimasPublicaciones(Pagina * pagina, unsigned int cantidad_de_publicaciones_maximo) {
+std::vector<Publicacion*> aplicacion::leer(Pagina * pagina, unsigned int cantidad_de_publicaciones_maximo) {
 
-    medios::facebook::comunicacion::SolicitudUltimasPublicaciones solicitud_ultimas_publicaciones(pagina, this->getID(), this->getClavePrivada(), cantidad_de_publicaciones_maximo);
+    medios::facebook::comunicacion::SolicitudUltimasPublicaciones solicitud_ultimas_publicaciones(pagina, this->id(), this->clave_privada(), cantidad_de_publicaciones_maximo);
 
-    herramientas::cpprest::HTTPRespuesta * respuetas_con_publicaciones = this->consumidor_api->realizarSolicitud(&solicitud_ultimas_publicaciones);
+    herramientas::cpprest::HTTPRespuesta * respuetas_con_publicaciones = this->consumidor_api->consumir(&solicitud_ultimas_publicaciones);
 
     std::vector<herramientas::utiles::Json*> publicaciones_json = respuetas_con_publicaciones->getJson()->getAtributoArrayJson("data");
 
@@ -55,11 +55,11 @@ std::vector<Publicacion*> Aplicacion::leerUltimasPublicaciones(Pagina * pagina, 
     return publicaciones;
 }
 
-std::vector<Publicacion*> Aplicacion::leerPublicaciones(Pagina * pagina, herramientas::utiles::Fecha desde, herramientas::utiles::Fecha hasta, unsigned int cantidad_de_publicaciones_maximo)
+std::vector<Publicacion*> aplicacion::leer(Pagina * pagina, herramientas::utiles::Fecha desde, herramientas::utiles::Fecha hasta, unsigned int cantidad_de_publicaciones_maximo)
 {
-    medios::facebook::comunicacion::SolicitudPublicaciones solicitud_ultimas_publicaciones(pagina, desde, hasta, this->getID(), this->getClavePrivada(), cantidad_de_publicaciones_maximo);
+    medios::facebook::comunicacion::SolicitudPublicaciones solicitud_ultimas_publicaciones(pagina, desde, hasta, this->id(), this->clave_privada(), cantidad_de_publicaciones_maximo);
 
-    herramientas::cpprest::HTTPRespuesta * respuetas_con_publicaciones = this->consumidor_api->realizarSolicitud(&solicitud_ultimas_publicaciones);
+    herramientas::cpprest::HTTPRespuesta * respuetas_con_publicaciones = this->consumidor_api->consumir(&solicitud_ultimas_publicaciones);
 
     std::vector<herramientas::utiles::Json*> publicaciones_json = respuetas_con_publicaciones->getJson()->getAtributoArrayJson("data");
 

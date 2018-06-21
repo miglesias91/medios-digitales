@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Aplicacion.h" />
-    <ClInclude Include="include\ConsumidorAPI.h" />
+    <ClInclude Include="include\consumidor_api.h" />
     <ClInclude Include="include\Pagina.h" />
     <ClInclude Include="include\Publicacion.h" />
     <ClInclude Include="include\SolicitudPublicaciones.h" />
@@ -136,7 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Aplicacion.cpp" />
-    <ClCompile Include="source\ConsumidorAPI.cpp" />
+    <ClCompile Include="source\consumidor_api.cpp" />
     <ClCompile Include="source\Pagina.cpp" />
     <ClCompile Include="source\Publicacion.cpp" />
     <ClCompile Include="source\SolicitudPublicaciones.cpp" />

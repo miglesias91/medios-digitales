@@ -24,6 +24,7 @@ bool rss::parsear_historia(const pugi::xml_node & xml_historia, historia * histo
     std::string contenido = xml_historia.child_value("content:encoded");
 
     herramientas::utiles::Fecha fecha;
+    herramientas::utiles::Fecha::parsear(string_fecha, "%a, %d %b %Y %H:%M:%S", &fecha);
 
     histo->titulo(titulo);
     histo->fecha(fecha);

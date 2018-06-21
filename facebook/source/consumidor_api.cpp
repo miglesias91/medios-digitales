@@ -1,25 +1,25 @@
-#include <facebook/include/ConsumidorAPI.h>
+#include <facebook/include/consumidor_api.h>
 
 // protocolos
 #include <protocolos/include/OAuth2.h>
 
 namespace medios::facebook {
 
-ConsumidorAPI::ConsumidorAPI(std::string clave_publica, std::string clave_privada) :
+consumidor_api::consumidor_api(std::string clave_publica, std::string clave_privada) :
     cliente_facebook("https://graph.facebook.com"), consumidor_oauth2(clave_publica, clave_privada) {}
 
-ConsumidorAPI::~ConsumidorAPI() {}
+consumidor_api::~consumidor_api() {}
 
-herramientas::protocolos::OAuth2Consumidor ConsumidorAPI::getConsumidorOAuth2() {
+herramientas::protocolos::OAuth2Consumidor consumidor_api::getConsumidorOAuth2() {
     return this->consumidor_oauth2;
 }
 
-bool ConsumidorAPI::obtenerTokenDeAcceso() {
+bool consumidor_api::pedir_token() {
 
     return herramientas::protocolos::OAuth2::solicitarTokenAcceso(&this->consumidor_oauth2, this->cliente_facebook.getURI());
 }
 
-herramientas::cpprest::HTTPRespuesta * ConsumidorAPI::realizarSolicitud(herramientas::cpprest::HTTPSolicitud * solicitud) {
+herramientas::cpprest::HTTPRespuesta * consumidor_api::consumir(herramientas::cpprest::HTTPSolicitud * solicitud) {
     //std::string header_token_acceso = "Bearer " + this->consumidor_oauth2.getTokenAcceso();
 
     //solicitud->agregarEncabezado("Authorization", header_token_acceso);

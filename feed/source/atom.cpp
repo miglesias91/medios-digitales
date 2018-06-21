@@ -23,6 +23,7 @@ bool atom::parsear_historia(const pugi::xml_node & xml_historia, historia * hist
     std::string link = xml_historia.child_value("id");
 
     herramientas::utiles::Fecha fecha;
+    herramientas::utiles::Fecha::parsear(string_fecha, "%Y-%m-%dT%H:%M:%S", &fecha);
 
     histo->titulo(titulo);
     histo->fecha(fecha);
