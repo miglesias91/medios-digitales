@@ -18,10 +18,10 @@ public:
     // GETTERS
 
     // la clave publica del consumidor_api hace las veces de id publico de la app.
-    std::string id();
+    std::string id() const;
 
     // la clave privada del consumidor_api hace las veces de la clave privada de la app.
-    std::string clave_privada();
+    std::string clave_privada() const;
 
     // SETTERS
 
@@ -30,10 +30,13 @@ public:
     static bool parsear(herramientas::utiles::Json * json_publicacion, Publicacion * publicacion);
 
     // se almacena memoria para las publicaciones pero no se libera, entonces deben ser ELIMINADAS luego de ser usadas.
-    std::vector<Publicacion*> leer(Pagina * cuenta, unsigned int cantidad_de_publicaciones = 100);
+    std::vector<Publicacion*> leer(Pagina * cuenta, unsigned int cantidad_de_publicaciones = 100) const;
 
     // se almacena memoria para las publicaciones pero no se libera, entonces deben ser ELIMINADAS luego de ser usadas.
-    std::vector<Publicacion*> leer(Pagina * cuenta, herramientas::utiles::Fecha desde, herramientas::utiles::Fecha hasta, unsigned int cantidad_de_publicaciones = 100);
+    std::vector<Publicacion*> leer(Pagina * cuenta,
+        const herramientas::utiles::Fecha & desde = herramientas::utiles::Fecha(0, 0, 0),
+        const herramientas::utiles::Fecha & hasta = herramientas::utiles::Fecha::getFechaActual(),
+        const uint32_t & cantidad_de_publicaciones = 100);
 
 private:
 

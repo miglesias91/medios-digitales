@@ -10,7 +10,7 @@ namespace medios::twitter::comunicacion {
 
 class SolicitudUltimosTweets : public herramientas::cpprest::HTTPSolicitud {
 public:
-    SolicitudUltimosTweets(medios::twitter::Cuenta * cuenta, unsigned int cantidad_de_tweets);
+    SolicitudUltimosTweets(medios::twitter::Cuenta * cuenta, const uintmax_t & id_desde = 0, const uint32_t & cantidad_de_tweets = 200);
     virtual ~SolicitudUltimosTweets();
 };
 

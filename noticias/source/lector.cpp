@@ -9,7 +9,9 @@ lector::lector() {}
 
 lector::~lector() {}
 
-void lector::leer(portal * portal) {
+void lector::leer(portal * portal,
+    const herramientas::utiles::Fecha & desde,
+    const herramientas::utiles::Fecha & hasta) const {
 
     std::vector<medios::feed::canal*> canales;
     portal->canales(&canales);
@@ -22,7 +24,7 @@ void lector::leer(portal * portal) {
     // y ahora espero a recibir las respuestas.
     std::for_each(canales.begin(), canales.end(), [=](medios::feed::canal * canal) {
         std::vector<medios::feed::historia*> historias_por_canal;
-        canal->historias_ya(historias_por_canal);
+        canal->historias_ya(historias_por_canal, desde, hasta);
 
         // agrego las noticias recibidas.
         std::for_each(historias_por_canal.begin(), historias_por_canal.end(), [=](medios::feed::historia * historia) {

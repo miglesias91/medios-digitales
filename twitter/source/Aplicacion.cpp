@@ -15,9 +15,65 @@ Aplicacion::~Aplicacion() {
     }
 }
 
-std::vector<Tweet*> Aplicacion::leerUltimosTweets(Cuenta * cuenta, unsigned int cantidad_de_tweets) {
+bool Aplicacion::parsear(herramientas::utiles::Json * json_tweet, Tweet * tweet) {
+    
+    if (nullptr == json_tweet || nullptr == tweet) {
+        return false;
+    }
 
-    comunicacion::SolicitudUltimosTweets solicitud_ultimos_tweets(cuenta, cantidad_de_tweets);
+    unsigned long long int id_tweet = json_tweet->getAtributoValorUint("id");
+    std::string fecha_creacion_formato_twitter = json_tweet->getAtributoValorString("created_at");
+    std::string texto = json_tweet->getAtributoValorString("full_text");
+
+    if ("RT" == texto.substr(0, 2)) {
+        // si el texto comienza con "RT" entonces es un retweet.
+
+        Tweet * tweet_retweeteado = new Tweet();
+        herramientas::utiles::Json * json_retweet = json_tweet->getAtributoValorJson("retweeted_status");
+        parsear(json_retweet, tweet_retweeteado);
+        delete json_retweet;
+        tweet->setTweetRetweeteado(tweet_retweeteado);
+        tweet->esRetweet(true);
+
+        texto = tweet_retweeteado->getTextoTweet();
+    }
+
+    herramientas::utiles::Json * user_json = json_tweet->getAtributoValorJson("user");
+    unsigned long long int id_usuario = user_json->getAtributoValorUint("id");
+    delete user_json;
+
+    herramientas::utiles::Json * entidades_json = json_tweet->getAtributoValorJson("entities");
+    std::vector<herramientas::utiles::Json*> hashtags_json = entidades_json->getAtributoArrayJson("hashtags");
+    std::vector<std::string> hashtags;
+    for (std::vector<herramientas::utiles::Json*>::iterator it = hashtags_json.begin(); it != hashtags_json.end(); it++) {
+        std::string hashtag = (*it)->getAtributoValorString("text");
+        hashtags.push_back(hashtag);
+    }
+
+    for (std::vector<herramientas::utiles::Json*>::iterator it = hashtags_json.begin(); it != hashtags_json.end(); it++) {
+        delete *it;
+    }
+
+    delete entidades_json;
+
+    tweet->setIdTweet(id_tweet);
+
+    herramientas::utiles::Fecha fecha_creacion;
+    if (herramientas::utiles::Fecha::parsear(fecha_creacion_formato_twitter, "%a %b %d %H:%M:%S +0000 %Y", &fecha_creacion)) {
+        tweet->setFechaCreacion(fecha_creacion);
+    }
+    else {
+        return false;
+    }
+
+    tweet->setTextoTweet(texto);
+    tweet->setIdUsuario(id_usuario);
+    tweet->setHashtags(hashtags);
+}
+
+std::vector<Tweet*> Aplicacion::leerUltimosTweets(Cuenta * cuenta, const uintmax_t & id_desde, unsigned int cantidad_de_tweets) const {
+
+    comunicacion::SolicitudUltimosTweets solicitud_ultimos_tweets(cuenta, id_desde, cantidad_de_tweets);
 
     herramientas::cpprest::HTTPRespuesta * respuetas_con_tweets = this->consumidor_api->realizarSolicitud(&solicitud_ultimos_tweets);
 
@@ -25,9 +81,10 @@ std::vector<Tweet*> Aplicacion::leerUltimosTweets(Cuenta * cuenta, unsigned int 
 
     std::vector<Tweet*> tweets;
     for (std::vector<herramientas::utiles::Json*>::iterator it = tweets_json.begin(); it != tweets_json.end(); it++) {
-        //Tweet * nuevo_tweet = this->parsear_json(*it);
         Tweet * nuevo_tweet = new Tweet();
+        parsear(*it, nuevo_tweet);
         tweets.push_back(nuevo_tweet);
+        delete *it;
     }
 
     delete respuetas_con_tweets;

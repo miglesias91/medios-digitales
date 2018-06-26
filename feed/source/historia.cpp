@@ -5,7 +5,7 @@
 
 namespace medios::feed {
 
-historia::historia() : titulo_historia(""), link_web(""), string_html(""), contenido_historia("") {}
+historia::historia() : titulo_historia(""), link_web(""), fecha_creacion(0, 0, 0),string_html(""), contenido_historia("") {}
 
 historia::historia(const std::string & titulo, const std::string & link, herramientas::utiles::Fecha fecha,
     const std::string & string_html, const std::string & contenido_historia) :

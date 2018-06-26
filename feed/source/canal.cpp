@@ -10,7 +10,7 @@ canal::canal(const std::string & string_uri, const std::string & seccion_canal) 
 
 canal::~canal() {}
 
-bool canal::historias_ya(std::vector<historia*> & historias) {
+bool canal::historias_ya(std::vector<historia*> & historias, const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta) {
 
     web::http::http_response rta;
     if (this->peticion_activa) {
@@ -21,7 +21,7 @@ bool canal::historias_ya(std::vector<historia*> & historias) {
         rta = this->cliente_canal.request(web::http::methods::GET, this->uri.path()).get();
     }
 
-    return this->parsear(rta.extract_utf8string().get(), historias);
+    return this->parsear(rta.extract_utf8string().get(), historias, desde, hasta);
 }
 
 bool canal::pedir_historias() {
@@ -39,20 +39,21 @@ bool canal::pedir_historias() {
     return true;
 }
 
-bool canal::historias(std::vector<historia*> & historias) {
+bool canal::historias(std::vector<historia*> & historias, const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta) {
 
     if (this->peticion_activa) {
         return false;
     }
 
-    return this->parsear(this->respuesta.extract_utf8string().get(), historias);
+    return this->parsear(this->respuesta.extract_utf8string().get(), historias, desde, hasta);
 }
 
 std::string canal::seccion() const {
     return this->seccion_canal;
 }
 
-bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & historias) {
+bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & historias,
+    const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta) {
     pugi::xml_document xml_feed;
     pugi::xml_parse_result resultado = xml_feed.load_string(contenido_xml.c_str());
 
@@ -63,9 +64,14 @@ bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & 
         historia * nueva = new historia();
         this->parsear_historia(item, nueva);
 
-        this->descargar_y_guardar_historia(nueva, historias, cantidad_de_historias_descargadas);
-
-        cantidad_total_de_historias++;
+        if (desde <= nueva->fecha() && nueva->fecha() <= hasta) {
+            if (this->descargar_y_guardar_historia(nueva, historias, cantidad_de_historias_descargadas)) {
+                cantidad_total_de_historias++;
+            }
+        }
+        else {
+            delete nueva;
+        }
     }
 
     while (cantidad_de_historias_descargadas != cantidad_total_de_historias) {
@@ -75,7 +81,12 @@ bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & 
     return true;
 }
 
-void canal::descargar_y_guardar_historia(historia * nueva, std::vector<historia*> & historias, uint32_t & cantidad_de_historias_descargadas) {
+bool canal::descargar_y_guardar_historia(historia * nueva, std::vector<historia*> & historias, uint32_t & cantidad_de_historias_descargadas) {
+
+    if (false == web::uri::validate(utility::conversions::to_string_t(nueva->link()))) {
+        delete nueva;
+        return false;
+    }
 
     web::uri uri_historia(utility::conversions::to_string_t(nueva->link()));
     web::http::client::http_client cliente_historia(uri_historia.scheme() + utility::conversions::to_string_t("://") + uri_historia.host());
@@ -89,7 +100,7 @@ void canal::descargar_y_guardar_historia(historia * nueva, std::vector<historia*
             std::cout << "cargando historia" << std::endl;
             nueva->html(string_html);
             historias.push_back(nueva);
-
+            
             std::cout << "historias descargadas: " << cantidad_de_historias_descargadas << std::endl;
         }
         catch (const std::exception & e) {
@@ -98,6 +109,8 @@ void canal::descargar_y_guardar_historia(historia * nueva, std::vector<historia*
         }
         cantidad_de_historias_descargadas++;
     });
+
+    return true;
 }
 
 }

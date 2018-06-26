@@ -5,7 +5,7 @@
 // facebook
 #include <facebook/include/Aplicacion.h>
 
-TEST_CASE("descargar_publicaciones", "facebook[.]") {
+TEST_CASE("descargar publicaciones", "facebook") {
     medios::facebook::consumidor_api * consumidor_api_facebook = new medios::facebook::consumidor_api("929798640478438", "f36e906bf6b8445ac3ee53e95ac303a7");
 
     medios::facebook::aplicacion app(consumidor_api_facebook);
@@ -14,10 +14,12 @@ TEST_CASE("descargar_publicaciones", "facebook[.]") {
 
     std::vector<medios::facebook::Publicacion*> publicaciones = app.leer(&tn);
 
+    std::for_each(publicaciones.begin(), publicaciones.end(), [](medios::facebook::Publicacion* publicacion) { delete publicacion; });
+
     REQUIRE(100 == publicaciones.size());
 }
 
-TEST_CASE("parsear_publicaciones", "facebook") {
+TEST_CASE("parsear publicaciones", "facebook") {
     std::ifstream archivo_tweets("publicaciones_de_prueba.txt");
 
     std::stringstream sstream;
@@ -31,12 +33,12 @@ TEST_CASE("parsear_publicaciones", "facebook") {
 
     std::vector<medios::facebook::Publicacion*> publicaciones;
     medios::facebook::Publicacion* nueva_publicacion = NULL;
-    medios::facebook::aplicacion app;
     for (std::vector<herramientas::utiles::Json*>::iterator it = publicaciones_json.begin(); it != publicaciones_json.end(); it++) {
         nueva_publicacion = new medios::facebook::Publicacion();
         medios::facebook::aplicacion::parsear(*it, nueva_publicacion);
 
         publicaciones.push_back(nueva_publicacion);
+        delete *it;
     }
 
     unsigned long long int id_parseado_publicacion_1 = publicaciones[0]->getIdPublicacion();

@@ -57,6 +57,7 @@ bool portal::nueva_noticia(const medios::feed::historia & historia, const std::s
 
     std::string contenido_noticia = "";
     if (false == this->extraer_contenido_de_html(historia.html(), &contenido_noticia)) {
+        delete nueva_noticia;
         return false;
     }
 

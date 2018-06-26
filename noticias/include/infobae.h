@@ -15,7 +15,9 @@ namespace medios::feed {
         virtual ~rss_infobae() {};
 
     protected:
-        virtual bool parsear(const std::string & contenido_xml, std::vector<historia*> & historias) {
+        virtual bool parsear(const std::string & contenido_xml, std::vector<historia*> & historias,
+            const herramientas::utiles::Fecha & desde = herramientas::utiles::Fecha(0, 0, 0),
+            const herramientas::utiles::Fecha & hasta = herramientas::utiles::Fecha::getFechaActual()) {
             pugi::xml_document xml_feed;
             pugi::xml_parse_result resultado = xml_feed.load_string(contenido_xml.c_str());
 
@@ -26,11 +28,14 @@ namespace medios::feed {
                 historia * nueva = new historia();
                 this->parsear_historia(item, nueva);
 
-                nueva->html(nueva->contenido());
-
-                historias.push_back(nueva);
-
-                cantidad_total_de_historias++;
+                if (desde <= nueva->fecha() && nueva->fecha() <= hasta) {
+                    nueva->html(nueva->contenido());
+                    historias.push_back(nueva);
+                    cantidad_total_de_historias++;
+                }
+                else {
+                    delete nueva;
+                }
             }
 
             return true;

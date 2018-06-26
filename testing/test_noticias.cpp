@@ -14,7 +14,7 @@
 #include <noticias/include/la_nacion.h>
 #include <noticias/include/infobae.h>
 
-TEST_CASE("leer_noticia_clarin", "noticias[.]") {
+TEST_CASE("leer_noticia_clarin", "noticias") {
 
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_clarin.html", contenido_html);
@@ -26,7 +26,7 @@ TEST_CASE("leer_noticia_clarin", "noticias[.]") {
     el_gran_diario_argentino.nueva_noticia(historia, "politica");
 }
 
-TEST_CASE("leer_noticia_la_nacion", "noticias[.]") {
+TEST_CASE("leer_noticia_la_nacion", "noticias") {
 
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_la_nacion.html", contenido_html);
@@ -38,7 +38,7 @@ TEST_CASE("leer_noticia_la_nacion", "noticias[.]") {
     el_diario_de_mitre.nueva_noticia(historia, "politica");
 }
 
-TEST_CASE("leer_noticia_infobae", "noticias[.]") {
+TEST_CASE("leer_noticia_infobae", "noticias") {
 
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_infobae.html", contenido_html);
@@ -50,32 +50,47 @@ TEST_CASE("leer_noticia_infobae", "noticias[.]") {
     infobae.nueva_noticia(historia, "lo ultimo");
 }
 
-TEST_CASE("leer_clarin", "noticias[.]") {
+TEST_CASE("leer_clarin", "noticias") {
    
     medios::noticias::lector lector_de_noticias;
 
     medios::noticias::clarin el_gran_diario_argentino;
 
     lector_de_noticias.leer(&el_gran_diario_argentino);
-
 }
 
-TEST_CASE("leer_la_nacion", "noticias[.]") {
+TEST_CASE("leer_la_nacion", "noticias") {
 
     medios::noticias::lector lector_de_noticias;
 
     medios::noticias::la_nacion el_diario_de_mitre;
 
     lector_de_noticias.leer(&el_diario_de_mitre);
-
 }
 
-TEST_CASE("leer_infobae", "noticias[.]") {
+TEST_CASE("leer_infobae", "noticias") {
 
     medios::noticias::lector lector_de_noticias;
 
     medios::noticias::infobae infobae;
 
     lector_de_noticias.leer(&infobae);
+}
 
+TEST_CASE("leer_infobae_fechas", "noticias") {
+
+    medios::noticias::lector lector_de_noticias;
+
+    medios::noticias::infobae infobae;
+
+    // le pido que me traiga noticia a partir de la fecha de mañana, entonces NO DEBERIA tener ninguna noticia.
+    herramientas::utiles::Fecha desde = herramientas::utiles::Fecha::getFechaActual();
+    desde.setDia(desde.getDia() + 1);
+
+    lector_de_noticias.leer(&infobae, desde);
+
+    std::vector<medios::noticias::noticia*> noticias;
+    infobae.noticias(&noticias);
+
+    REQUIRE(0 == noticias.size());
 }

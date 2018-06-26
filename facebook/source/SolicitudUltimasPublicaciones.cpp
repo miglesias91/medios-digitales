@@ -9,13 +9,6 @@ SolicitudUltimasPublicaciones::SolicitudUltimasPublicaciones(medios::facebook::P
     // armo la uri.
     std::string uri = "/v2.12/" + pagina->getNombre() + "/feed?limit=" + std::to_string(cantidad_de_publicaciones_max);
 
-    // si tiene ultima publicacion analizada, reemplazo el valor de since.
-    auto fecha_ultima_publicacion_actualizada = pagina->getFechaUltimaPublicacionAnalizada();
-    if (herramientas::utiles::Fecha(0, 0, 0) != fecha_ultima_publicacion_actualizada)
-    {
-        uri += "&since=" + pagina->getFechaUltimaPublicacionAnalizada().getStringAAAAMMDDHHmmSS("-", "T", ":");
-    }
-
     uri += "&access_token=" + id_app + "%7C" + clave_secreta_app; // '%7C' es la codificacion requerida por las URI para el caracter '|'.
 
     this->setURI(uri);
