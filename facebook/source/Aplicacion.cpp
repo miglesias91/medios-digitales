@@ -66,30 +66,29 @@ bool aplicacion::parsear(herramientas::utiles::Json * json_publicacion, Publicac
     return true;
 }
 
-std::vector<Publicacion*> aplicacion::leer(Pagina * pagina, unsigned int cantidad_de_publicaciones_maximo) const {
+//std::vector<Publicacion*> aplicacion::leer(Pagina * pagina, unsigned int cantidad_de_publicaciones_maximo) const {
+//
+//    medios::facebook::comunicacion::SolicitudUltimasPublicaciones solicitud_ultimas_publicaciones(pagina, this->id(), this->clave_privada(), cantidad_de_publicaciones_maximo);
+//
+//    herramientas::cpprest::HTTPRespuesta * respuetas_con_publicaciones = this->consumidor_api->consumir(&solicitud_ultimas_publicaciones);
+//
+//    std::vector<herramientas::utiles::Json*> publicaciones_json = respuetas_con_publicaciones->getJson()->getAtributoArrayJson("data");
+//
+//    std::vector<Publicacion*> publicaciones;
+//    for (std::vector<herramientas::utiles::Json*>::iterator it = publicaciones_json.begin(); it != publicaciones_json.end(); it++) {
+//        Publicacion * nueva_publicacion = new Publicacion();
+//        parsear(*it, nueva_publicacion);
+//        publicaciones.push_back(nueva_publicacion);
+//
+//        delete *it;
+//    }
+//
+//    delete respuetas_con_publicaciones;
+//
+//    return publicaciones;
+//}
 
-    medios::facebook::comunicacion::SolicitudUltimasPublicaciones solicitud_ultimas_publicaciones(pagina, this->id(), this->clave_privada(), cantidad_de_publicaciones_maximo);
-
-    herramientas::cpprest::HTTPRespuesta * respuetas_con_publicaciones = this->consumidor_api->consumir(&solicitud_ultimas_publicaciones);
-
-    std::vector<herramientas::utiles::Json*> publicaciones_json = respuetas_con_publicaciones->getJson()->getAtributoArrayJson("data");
-
-    std::vector<Publicacion*> publicaciones;
-    for (std::vector<herramientas::utiles::Json*>::iterator it = publicaciones_json.begin(); it != publicaciones_json.end(); it++) {
-        Publicacion * nueva_publicacion = new Publicacion();
-        parsear(*it, nueva_publicacion);
-        publicaciones.push_back(nueva_publicacion);
-
-        delete *it;
-    }
-
-    delete respuetas_con_publicaciones;
-
-    return publicaciones;
-}
-
-std::vector<Publicacion*> aplicacion::leer(Pagina * pagina, const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta, const uint32_t & cantidad_de_publicaciones_maximo)
-{
+std::vector<Publicacion*> aplicacion::leer(Pagina * pagina, const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta, const uint32_t & cantidad_de_publicaciones_maximo) const {
     medios::facebook::comunicacion::SolicitudPublicaciones solicitud_ultimas_publicaciones(pagina, this->id(), this->clave_privada(), desde, hasta, cantidad_de_publicaciones_maximo);
 
     herramientas::cpprest::HTTPRespuesta * respuetas_con_publicaciones = this->consumidor_api->consumir(&solicitud_ultimas_publicaciones);

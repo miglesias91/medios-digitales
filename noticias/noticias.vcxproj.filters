@@ -39,6 +39,9 @@
     <ClInclude Include="include\infobae.h">
       <Filter>Archivos de encabezado\portales</Filter>
     </ClInclude>
+    <ClInclude Include="include\fabrica_portales.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\noticia.cpp">
@@ -58,6 +61,9 @@
     </ClCompile>
     <ClCompile Include="source\infobae.cpp">
       <Filter>Archivos de origen\portales</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fabrica_portales.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

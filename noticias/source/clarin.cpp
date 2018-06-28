@@ -24,15 +24,26 @@ clarin::clarin() : portal() {
 
 clarin::~clarin() {}
 
+std::string clarin::web() {
+    return "clarin.com";
+}
+
+portal * clarin::clon() {
+    portal * nuevo_portal = new clarin();
+    nuevo_portal->nuevas_noticias(this->noticias_portal);
+    return nuevo_portal;
+}
+
 bool clarin::extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) {
 
-    std::string elemento_span_articulo = "";
-    this->extraer_elemento_xml(contenido_html, "span", "<span itemprop=\"articleBody\">", &elemento_span_articulo);
-    this->eliminar_etiqueta_xml(&elemento_span_articulo, "strong");
-    this->eliminar_etiqueta_xml(&elemento_span_articulo, "br");
+    std::string elemento_nota = "";
+    this->extraer_elemento_xml(contenido_html, "div", "<div class=\"body-nota\">", &elemento_nota);
+    this->eliminar_etiqueta_xml(&elemento_nota, "strong");
+    this->eliminar_etiqueta_xml(&elemento_nota, "br");
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "&nbsp;");
 
     std::vector<std::string> elementos_p;
-    this->extraer_elementos_xml(elemento_span_articulo, "p", "<p", &elementos_p);
+    this->extraer_elementos_xml(elemento_nota, "p", "<p", &elementos_p);
 
     if (elementos_p.empty()) {
         return false;

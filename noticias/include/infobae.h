@@ -52,6 +52,10 @@ public:
 
     virtual bool nueva_noticia(const medios::feed::historia & historia, const std::string & seccion);
 
+    virtual std::string web();
+
+    virtual portal * clon();
+
 protected:
     virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido);
 

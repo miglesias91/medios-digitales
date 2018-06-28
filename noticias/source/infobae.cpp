@@ -28,6 +28,16 @@ bool infobae::nueva_noticia(const medios::feed::historia & historia, const std::
     return this->portal::nueva_noticia(historia, seccion_de_url);
 }
 
+std::string infobae::web() {
+    return "infobae.com";
+}
+
+portal * infobae::clon() {
+    portal * nuevo_portal = new infobae();
+    nuevo_portal->nuevas_noticias(this->noticias_portal);
+    return nuevo_portal;
+}
+
 bool infobae::extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) {
 
     *contenido = contenido_html;
@@ -38,6 +48,8 @@ bool infobae::extraer_contenido_de_html(const std::string & contenido_html, std:
     this->eliminar_etiqueta_xml(contenido, "strong");
     this->eliminar_etiqueta_xml(contenido, "em");
     this->eliminar_etiqueta_xml(contenido, "p");
+
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(*contenido, "&nbsp;");
 
     herramientas::utiles::FuncionesString::eliminarEspaciosRedundantes(*contenido);
 

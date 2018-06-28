@@ -32,10 +32,6 @@ void portal::canales(std::vector<medios::feed::canal*> * canales) {
 
 bool portal::noticias(std::vector<noticia*> * noticias, const std::string & seccion) {
 
-    if (0 == this->noticias_portal.count(seccion)) {
-        return false;
-    }
-
     if (seccion.empty()) {
         std::for_each(this->noticias_portal.begin(), this->noticias_portal.end(), [=](std::pair<std::string, std::vector<noticia*>> noticias_de_seccion) {
             std::for_each(noticias_de_seccion.second.begin(), noticias_de_seccion.second.end(), [=](noticia * noticia_de_seccion) {
@@ -44,6 +40,10 @@ bool portal::noticias(std::vector<noticia*> * noticias, const std::string & secc
         });
 
         return true;
+    }
+
+    if (0 == this->noticias_portal.count(seccion)) {
+        return false;
     }
 
     noticias = &this->noticias_portal[seccion];
@@ -66,6 +66,10 @@ bool portal::nueva_noticia(const medios::feed::historia & historia, const std::s
     this->noticias_portal[seccion].push_back(nueva_noticia);
 
     return true;
+}
+
+void portal::nuevas_noticias(const std::unordered_map<std::string, std::vector<noticia*>>& noticias_portal) {
+    this->noticias_portal = noticias_portal;
 }
 
 bool portal::extraer_elemento_xml(const std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial, std::string * elemento_extraido) {

@@ -24,6 +24,16 @@ la_nacion::la_nacion() : portal() {
 
 la_nacion::~la_nacion() {}
 
+std::string la_nacion::web() {
+    return "la_nacion.com";
+}
+
+portal * la_nacion::clon() {
+    portal * nuevo_portal = new la_nacion();
+    nuevo_portal->nuevas_noticias(this->noticias_portal);
+    return nuevo_portal;
+}
+
 bool la_nacion::extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) {
     
     std::string elemento_section_cuerpo = "";
@@ -34,6 +44,8 @@ bool la_nacion::extraer_contenido_de_html(const std::string & contenido_html, st
     this->eliminar_elemento_xml(&elemento_section_cuerpo, "div", "<div class=\"fin-cuerpo\">");
     this->eliminar_etiqueta_xml(&elemento_section_cuerpo, "a");
     this->eliminar_etiqueta_xml(&elemento_section_cuerpo, "!--");
+
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_section_cuerpo, "&nbsp;");
 
     pugi::xml_document xml_nota;
     xml_nota.load_string(elemento_section_cuerpo.c_str());

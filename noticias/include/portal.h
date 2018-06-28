@@ -23,6 +23,12 @@ public:
     virtual bool noticias(std::vector<noticia*> * noticias, const std::string & seccion = "");
 
     virtual bool nueva_noticia(const medios::feed::historia & historia, const std::string & seccion);
+    
+    virtual void nuevas_noticias(const std::unordered_map<std::string, std::vector<noticia*>> & noticias_portal);
+
+    virtual std::string web() = 0;
+
+    virtual portal * clon() = 0;
 
 protected:
     virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) = 0;
