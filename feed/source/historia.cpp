@@ -3,7 +3,8 @@
 // stl
 #include <sstream>
 
-namespace medios::feed {
+namespace medios {
+    namespace feed {
 
 historia::historia() : titulo_historia(""), link_web(""), fecha_creacion(0, 0, 0),string_html(""), contenido_historia("") {}
 
@@ -53,4 +54,5 @@ std::string historia::contenido() const {
     return contenido_historia;
 }
 
+    }
 }

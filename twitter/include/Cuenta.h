@@ -3,7 +3,8 @@
 // stl
 #include <string>
 
-namespace medios::twitter {
+namespace medios {
+    namespace twitter {
 
 class Cuenta {
 public:
@@ -29,4 +30,5 @@ private:
     std::string nombre;
 };
 
+    };
 };

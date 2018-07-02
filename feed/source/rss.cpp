@@ -7,7 +7,8 @@
 // pugixml
 #include <pugixml.hpp>
 
-namespace medios::feed {
+namespace medios {
+    namespace feed {
 
 rss::rss(const std::string & string_uri, const std::string & seccion) : canal(string_uri, seccion) {}
 
@@ -34,4 +35,5 @@ bool rss::parsear_historia(const pugi::xml_node & xml_historia, historia * histo
     return true;
 }
 
+    }
 }

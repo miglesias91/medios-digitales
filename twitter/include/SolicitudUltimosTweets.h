@@ -6,7 +6,9 @@
 // twitter
 #include <twitter/include/Cuenta.h>
 
-namespace medios::twitter::comunicacion {
+namespace medios {
+    namespace twitter {
+        namespace comunicacion {
 
 class SolicitudUltimosTweets : public herramientas::cpprest::HTTPSolicitud {
 public:
@@ -14,4 +16,6 @@ public:
     virtual ~SolicitudUltimosTweets();
 };
 
+        };
+    };
 };

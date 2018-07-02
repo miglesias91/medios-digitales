@@ -7,7 +7,8 @@
 // pugixml
 #include <pugixml.hpp>
 
-namespace medios::feed {
+namespace medios {
+    namespace feed {
 
 atom::atom(const std::string & string_uri, const std::string & seccion) : canal(string_uri, seccion) {}
 
@@ -32,4 +33,5 @@ bool atom::parsear_historia(const pugi::xml_node & xml_historia, historia * hist
     return true;
 }
 
+    }
 }

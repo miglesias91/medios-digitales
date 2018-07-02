@@ -8,7 +8,7 @@
 #include <facebook/include/Pagina.h>
 #include <facebook/include/Publicacion.h>
 
-namespace medios::facebook {
+namespace medios{ namespace facebook {
 
 class aplicacion {
 public:
@@ -43,4 +43,5 @@ private:
     medios::facebook::consumidor_api * consumidor_api;
 };
 
+};
 };

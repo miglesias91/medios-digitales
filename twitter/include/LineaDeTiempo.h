@@ -1,6 +1,7 @@
 #pragma once
 
-namespace medios::twitter {
+namespace medios {
+    namespace twitter {
 
 class LineaDeTiempo {
 public:
@@ -8,4 +9,5 @@ public:
     virtual ~LineaDeTiempo();
 };
 
+    };
 };

@@ -9,7 +9,9 @@
 // twitter
 #include <facebook/include/Pagina.h>
 
-namespace medios::facebook::comunicacion {
+namespace medios {
+    namespace facebook {
+        namespace comunicacion {
 
 class SolicitudUltimasPublicaciones : public herramientas::cpprest::HTTPSolicitud {
 public:
@@ -17,6 +19,8 @@ public:
     virtual ~SolicitudUltimasPublicaciones();
 };
 
+        };
+    };
 };
 
 

@@ -9,7 +9,8 @@
 // feed
 #include <feed/include/rss.h>
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 infobae::infobae() : portal() {
     // TODO: hacer que esta config de canales las levante de un json.
@@ -79,4 +80,5 @@ bool infobae::reconocer_seccion(const std::string & string_url, std::string * se
     return true;
 }
 
+    }
 }

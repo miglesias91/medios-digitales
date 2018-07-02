@@ -3,7 +3,8 @@
 // stl
 #include <algorithm>
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 std::shared_ptr<portal> fabrica_portales::nuevo(const std::string & web_portal) {
     clarin c;
@@ -17,4 +18,5 @@ std::shared_ptr<portal> fabrica_portales::nuevo(const std::string & web_portal) 
     return nullptr;
 }
 
+    }
 }

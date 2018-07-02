@@ -6,7 +6,8 @@
 // utiles
 #include <utiles/include/Fecha.h>
 
-namespace medios::feed {
+namespace medios {
+    namespace feed {
 
 class historia {
 public:
@@ -36,4 +37,5 @@ protected:
     herramientas::utiles::Fecha fecha_creacion;
 };
 
+    };
 };

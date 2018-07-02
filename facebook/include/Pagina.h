@@ -6,7 +6,8 @@
 // herramientas
 #include <utiles/include/Fecha.h>
 
-namespace medios::facebook {
+namespace medios {
+    namespace facebook {
 
 class Pagina {
 public:
@@ -32,6 +33,7 @@ private:
     std::string nombre;
 };
 
+    };
 };
 
 

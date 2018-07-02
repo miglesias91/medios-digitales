@@ -1,8 +1,7 @@
 #include <facebook/include/Pagina.h>
 
-using namespace medios::facebook;
-
-namespace medios::facebook {
+namespace medios {
+    namespace facebook {
 
 Pagina::Pagina(const std::string & nombre) : nombre(nombre) {}
 
@@ -23,4 +22,5 @@ void Pagina::setNombre(std::string nombre) {
 // METODOS
 
 // CONSULTAS
+    }
 }

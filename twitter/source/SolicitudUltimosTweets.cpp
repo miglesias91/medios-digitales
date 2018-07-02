@@ -1,6 +1,8 @@
 #include <twitter/include/SolicitudUltimosTweets.h>
 
-namespace medios::twitter::comunicacion {
+namespace medios {
+    namespace twitter {
+        namespace comunicacion {
 
 SolicitudUltimosTweets::SolicitudUltimosTweets(medios::twitter::Cuenta * cuenta, const uintmax_t & id_desde, const uint32_t & cantidad_de_tweets) {
     // creo y armo la solicitud para el token de acceso
@@ -24,4 +26,6 @@ SolicitudUltimosTweets::SolicitudUltimosTweets(medios::twitter::Cuenta * cuenta,
 
 SolicitudUltimosTweets::~SolicitudUltimosTweets() {}
 
+}
+}
 }

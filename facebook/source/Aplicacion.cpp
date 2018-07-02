@@ -7,7 +7,8 @@
 #include <facebook/include/SolicitudUltimasPublicaciones.h>
 #include <facebook/include/SolicitudPublicaciones.h>
 
-namespace medios::facebook {
+namespace medios {
+    namespace facebook {
 
 aplicacion::aplicacion(medios::facebook::consumidor_api * consumidor_api) : consumidor_api(consumidor_api) {}
 
@@ -109,4 +110,4 @@ std::vector<Publicacion*> aplicacion::leer(Pagina * pagina, const herramientas::
     return publicaciones;
 }
 
-}
+}}

@@ -1,6 +1,8 @@
 #include <facebook/include/SolicitudPublicaciones.h>
 
-namespace medios::facebook::comunicacion {
+namespace medios {
+    namespace facebook {
+        namespace comunicacion {
 
 SolicitudPublicaciones::SolicitudPublicaciones(medios::facebook::Pagina * pagina,
     std::string id_app, std::string clave_secreta_app,
@@ -31,4 +33,6 @@ SolicitudPublicaciones::SolicitudPublicaciones(medios::facebook::Pagina * pagina
 
 SolicitudPublicaciones::~SolicitudPublicaciones() {}
 
+        }
+    }
 }

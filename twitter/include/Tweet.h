@@ -3,7 +3,8 @@
 // herramientas
 #include <utiles/include/Fecha.h>
 
-namespace medios::twitter {
+namespace medios {
+    namespace twitter {
 
 class Tweet {
 public:
@@ -74,4 +75,5 @@ private:
     Tweet * tweet_retweeteado;
 };
 
+};
 };

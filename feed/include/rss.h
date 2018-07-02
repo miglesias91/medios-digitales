@@ -6,7 +6,8 @@
 // feed
 #include <feed/include/canal.h>
 
-namespace medios::feed {
+namespace medios {
+    namespace feed {
 
 class rss : public canal {
 public:
@@ -20,4 +21,5 @@ protected:
 
 };
 
+    };
 };

@@ -3,7 +3,8 @@
 // twitter
 #include <twitter/include/SolicitudUltimosTweets.h>
 
-namespace medios::twitter {
+namespace medios {
+    namespace twitter {
 
 Aplicacion::Aplicacion(ConsumidorAPI * consumidor_api) : consumidor_api(consumidor_api) {}
 
@@ -92,4 +93,5 @@ std::vector<Tweet*> Aplicacion::leerUltimosTweets(Cuenta * cuenta, const uintmax
     return tweets;
 }
 
+}
 }

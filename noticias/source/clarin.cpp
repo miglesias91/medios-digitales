@@ -9,7 +9,7 @@
 // feed
 #include <feed/include/rss.h>
 
-namespace medios::noticias {
+namespace medios { namespace noticias {
 
 clarin::clarin() : portal() {
     // TODO: hacer que esta config de canales las levante de un json.
@@ -54,4 +54,5 @@ bool clarin::extraer_contenido_de_html(const std::string & contenido_html, std::
     return true;
 }
 
+}
 }

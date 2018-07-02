@@ -4,7 +4,8 @@
 #include <utiles/include/IContieneJson.h>
 #include <utiles/include/Fecha.h>
 
-namespace medios::facebook {
+namespace medios {
+    namespace facebook {
 
 class Publicacion {
 public:
@@ -56,4 +57,5 @@ private:
     std::string texto_publicacion;
 };
 
+    };
 };

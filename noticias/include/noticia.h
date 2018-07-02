@@ -3,7 +3,8 @@
 // utiles
 #include <utiles/include/Fecha.h>
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 class noticia {
 public:
@@ -29,4 +30,5 @@ protected:
     herramientas::utiles::Fecha fecha_creacion;
 };
 
+    };
 };

@@ -3,7 +3,8 @@
 // protocolos
 #include <protocolos/include/OAuth2.h>
 
-namespace medios::twitter {
+namespace medios {
+    namespace twitter {
 
 ConsumidorAPI::ConsumidorAPI(std::string clave_publica, std::string clave_privada) :
     cliente_twitter("https://api.twitter.com"), consumidor_oauth2(clave_publica, clave_privada)
@@ -67,4 +68,5 @@ herramientas::cpprest::HTTPRespuesta * ConsumidorAPI::realizarSolicitud(herramie
 
     // CONSULTAS
 
+    }
 }

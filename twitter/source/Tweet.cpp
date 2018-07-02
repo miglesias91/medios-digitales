@@ -9,7 +9,8 @@
 // herramientas
 #include <utiles/include/Conversiones.h>
 
-namespace medios::twitter {
+namespace medios {
+    namespace twitter {
 
 Tweet::Tweet() : tweet_retweeteado(NULL), es_retweet(false) {}
 
@@ -110,4 +111,5 @@ void Tweet::esRetweet(bool es_retweet) {
 
 // METODOS PRIVADOS
 
+}
 }

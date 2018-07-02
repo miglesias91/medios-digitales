@@ -9,7 +9,8 @@
 // noticias
 #include <noticias/include/noticia.h>
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 class portal {
 public:
@@ -46,4 +47,5 @@ protected:
     std::unordered_map<std::string, std::vector<noticia*>> noticias_portal;
 };
 
+    };
 };

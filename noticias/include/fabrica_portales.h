@@ -15,7 +15,8 @@
 #include <noticias/include/clarin.h>
 #include <noticias/include/infobae.h>
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 class fabrica_portales {
 public:
@@ -26,4 +27,5 @@ private:
     static std::unordered_map<std::string, portal*> portales;
 };
 
+    };
 };

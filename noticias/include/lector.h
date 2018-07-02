@@ -3,7 +3,8 @@
 // noticias
 #include <noticias/include/portal.h>
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 class lector {
 public:
@@ -16,4 +17,5 @@ public:
 
 };
 
+    };
 };

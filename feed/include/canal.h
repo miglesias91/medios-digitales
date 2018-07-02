@@ -9,7 +9,8 @@
 // feed
 #include <feed/include/historia.h>
 
-namespace medios::feed {
+namespace medios {
+    namespace feed {
 
 class canal {
 public:
@@ -55,4 +56,5 @@ protected:
     std::string seccion_canal;
 };
 
+    };
 };

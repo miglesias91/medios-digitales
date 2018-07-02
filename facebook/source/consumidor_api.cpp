@@ -3,7 +3,8 @@
 // protocolos
 #include <protocolos/include/OAuth2.h>
 
-namespace medios::facebook {
+namespace medios {
+    namespace facebook {
 
 consumidor_api::consumidor_api(std::string clave_publica, std::string clave_privada) :
     cliente_facebook("https://graph.facebook.com"), consumidor_oauth2(clave_publica, clave_privada) {}
@@ -42,8 +43,6 @@ herramientas::cpprest::HTTPRespuesta * consumidor_api::consumir(herramientas::cp
 
     return rta;
 }
-
-}
 // GETTERS
 
 // SETTERS
@@ -51,3 +50,5 @@ herramientas::cpprest::HTTPRespuesta * consumidor_api::consumir(herramientas::cp
 // METODOS
 
 // CONSULTAS
+    }
+}

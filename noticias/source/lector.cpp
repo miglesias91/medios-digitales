@@ -3,7 +3,8 @@
 // stl
 #include <algorithm>
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 lector::lector() {}
 
@@ -34,4 +35,5 @@ void lector::leer(portal * portal,
     });
 }
 
+    }
 }

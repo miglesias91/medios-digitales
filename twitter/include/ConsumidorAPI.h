@@ -7,7 +7,8 @@
 // protocolos
 #include <protocolos/include/OAuth2Consumidor.h>
 
-namespace medios::twitter {
+namespace medios {
+    namespace twitter {
 
 class ConsumidorAPI {
 public:
@@ -35,4 +36,5 @@ private:
     herramientas::cpprest::HTTPCliente cliente_twitter;
 };
 
+    };
 };

@@ -9,7 +9,8 @@
 // feed
 #include <feed/include/atom.h>
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 la_nacion::la_nacion() : portal() {
     // TODO: hacer que esta config de canales las levante de un json.
@@ -61,4 +62,5 @@ bool la_nacion::extraer_contenido_de_html(const std::string & contenido_html, st
     return true;
 }
 
+    }
 }

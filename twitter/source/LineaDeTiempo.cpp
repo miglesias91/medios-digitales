@@ -1,9 +1,11 @@
 #include <twitter/include/LineaDeTiempo.h>
 
-namespace medios::twitter {
+namespace medios {
+    namespace twitter {
 
 LineaDeTiempo::LineaDeTiempo() {}
 
 LineaDeTiempo::~LineaDeTiempo() {}
 
+    }
 }

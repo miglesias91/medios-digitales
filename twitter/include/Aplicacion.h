@@ -5,7 +5,8 @@
 #include <twitter/include/Cuenta.h>
 #include <twitter/include/Tweet.h>
 
-namespace medios::twitter {
+namespace medios {
+    namespace twitter {
 
 class Aplicacion {
 public:
@@ -28,4 +29,5 @@ private:
     medios::twitter::ConsumidorAPI * consumidor_api;
 };
 
+    };
 };

@@ -6,7 +6,8 @@
 // noticias
 #include <noticias/include/portal.h>
 
-namespace medios::feed {
+namespace medios {
+    namespace feed {
 
     class rss_infobae : public medios::feed::rss {
 
@@ -41,9 +42,11 @@ namespace medios::feed {
             return true;
         }
     };
+    }
 }
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 class infobae : public portal {
 public:
@@ -63,4 +66,5 @@ private:
     bool reconocer_seccion(const std::string & url, std::string * seccion);
 };
 
+    };
 };

@@ -3,7 +3,8 @@
 // noticias
 #include <noticias/include/portal.h>
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 class la_nacion : public portal {
 public:
@@ -18,4 +19,5 @@ protected:
     virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido);
 };
 
+    };
 };

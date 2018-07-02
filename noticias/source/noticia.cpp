@@ -1,6 +1,7 @@
 #include <noticias/include/noticia.h>
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 noticia::noticia() : titulo_noticia(""), contenido_noticia("") {}
 
@@ -41,4 +42,5 @@ herramientas::utiles::Fecha noticia::fecha() {
     return this->fecha_creacion;
 }
 
+    }
 }

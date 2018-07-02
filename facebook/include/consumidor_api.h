@@ -7,7 +7,7 @@
 // protocolos
 #include <protocolos/include/OAuth2Consumidor.h>
 
-namespace medios::facebook {
+namespace medios { namespace facebook {
 
 class consumidor_api {
 public:
@@ -37,4 +37,5 @@ private:
     herramientas::cpprest::HTTPCliente cliente_facebook;
 };
 
+};
 };

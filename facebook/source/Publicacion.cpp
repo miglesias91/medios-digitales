@@ -10,7 +10,8 @@
 #include <utiles/include/Conversiones.h>
 #include <utiles/include/FuncionesString.h>
 
-namespace medios::facebook {
+namespace medios {
+    namespace facebook {
 
 Publicacion::Publicacion() {
 }
@@ -96,4 +97,5 @@ herramientas::utiles::Fecha Publicacion::parsearFechaEnFormatoFacebook(std::stri
     return fecha;
 }
 
+    }
 }

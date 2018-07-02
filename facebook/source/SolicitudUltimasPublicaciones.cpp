@@ -1,6 +1,8 @@
 #include <facebook/include/SolicitudUltimasPublicaciones.h>
 
-namespace medios::facebook::comunicacion {
+namespace medios {
+    namespace facebook {
+        namespace comunicacion {
 
 SolicitudUltimasPublicaciones::SolicitudUltimasPublicaciones(medios::facebook::Pagina * pagina, std::string id_app, std::string clave_secreta_app, unsigned int cantidad_de_publicaciones_max) {
     // creo y armo la solicitud para el token de acceso
@@ -18,4 +20,6 @@ SolicitudUltimasPublicaciones::SolicitudUltimasPublicaciones(medios::facebook::P
 
 SolicitudUltimasPublicaciones::~SolicitudUltimasPublicaciones() {}
 
+        }
+    }
 }

@@ -6,7 +6,8 @@
 // utiles
 #include <utiles/include/FuncionesString.h>
 
-namespace medios::noticias {
+namespace medios {
+    namespace noticias {
 
 portal::portal() {}
 
@@ -178,4 +179,4 @@ bool portal::eliminar_etiqueta_xml(std::string * contenido_html, const std::stri
     return true;
 }
 
-}
+}}

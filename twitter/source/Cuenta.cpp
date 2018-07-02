@@ -1,6 +1,7 @@
 #include <twitter/include/Cuenta.h>
 
-namespace medios::twitter {
+namespace medios {
+    namespace twitter {
 
 Cuenta::Cuenta(std::string nombre) : nombre(nombre) {}
 
@@ -22,4 +23,5 @@ void Cuenta::setNombre(std::string nombre) {
 
 // CONSULTAS
 
+    }
 }

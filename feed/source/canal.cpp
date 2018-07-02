@@ -1,6 +1,7 @@
 #include <feed/include/canal.h>
 
-namespace medios::feed {
+namespace medios {
+    namespace feed {
 
 canal::canal(const std::string & string_uri, const std::string & seccion_canal) :
     peticion_activa(false),
@@ -113,4 +114,4 @@ bool canal::descargar_y_guardar_historia(historia * nueva, std::vector<historia*
     return true;
 }
 
-}
+}}
