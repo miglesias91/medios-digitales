@@ -127,6 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\clarin.h" />
+    <ClInclude Include="include\config.h" />
     <ClInclude Include="include\fabrica_portales.h" />
     <ClInclude Include="include\infobae.h" />
     <ClInclude Include="include\la_nacion.h" />
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\clarin.cpp" />
+    <ClCompile Include="source\config.cpp" />
     <ClCompile Include="source\fabrica_portales.cpp" />
     <ClCompile Include="source\infobae.cpp" />
     <ClCompile Include="source\la_nacion.cpp" />

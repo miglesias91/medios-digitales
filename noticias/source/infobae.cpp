@@ -2,6 +2,8 @@
 
 // utiles
 #include <utiles/include/FuncionesString.h>
+#include <utiles/include/FuncionesSistemaArchivos.h>
+#include <utiles/include/Json.h>
 
 // pugixml
 #include <pugixml.hpp>
@@ -9,14 +11,18 @@
 // feed
 #include <feed/include/rss.h>
 
+// noticias
+#include <noticias/include/config.h>
+
 namespace medios {
     namespace noticias {
 
 infobae::infobae() : portal() {
-    // TODO: hacer que esta config de canales las levante de un json.
-    medios::feed::canal * lo_ultimo = new medios::feed::rss_infobae("https://www.infobae.com/feeds/rss/", "lo ultimo");
+    //medios::feed::canal * lo_ultimo = new medios::feed::rss_infobae(link_feed, "todo");
+    //this->canales_portal[lo_ultimo->seccion()] = lo_ultimo;
 
-    this->canales_portal[lo_ultimo->seccion()] = lo_ultimo;
+    medios::feed::canal * canal = new medios::feed::rss_infobae(config::infobae.canales[0].link, config::infobae.canales[0].categoria);
+    this->canales_portal[canal->seccion()] = canal;
 }
 
 infobae::~infobae() {}

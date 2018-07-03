@@ -23,7 +23,6 @@ public:
     static std::shared_ptr<portal> nuevo(const std::string & web_portal);
 
 private:
-
     static std::unordered_map<std::string, portal*> portales;
 };
 

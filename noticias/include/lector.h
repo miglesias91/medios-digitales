@@ -1,5 +1,9 @@
 #pragma once
 
+// utiles
+#include <utiles/include/Json.h>
+#include <utiles/include/FuncionesSistemaArchivos.h>
+
 // noticias
 #include <noticias/include/portal.h>
 

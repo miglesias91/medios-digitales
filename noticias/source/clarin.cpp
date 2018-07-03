@@ -6,20 +6,33 @@
 // pugixml
 #include <pugixml.hpp>
 
+// utiles
+#include <utiles/include/FuncionesString.h>
+#include <utiles/include/FuncionesSistemaArchivos.h>
+#include <utiles/include/Json.h>
+
 // feed
 #include <feed/include/rss.h>
+
+// noticias
+#include <noticias/include/config.h>
 
 namespace medios { namespace noticias {
 
 clarin::clarin() : portal() {
-    // TODO: hacer que esta config de canales las levante de un json.
-    medios::feed::canal * politica = new medios::feed::rss("https://www.clarin.com/rss/politica/", "politica");
-    medios::feed::canal * economia = new medios::feed::rss("https://www.clarin.com/rss/economia/", "economia");
-    medios::feed::canal * lo_ultimo = new medios::feed::rss("https://www.clarin.com/rss/lo-ultimo/", "lo ultimo");
+    
+    for (config_canal config : config::clarin.canales) {
+        feed::canal * canal = new medios::feed::rss(config.link, config.categoria);
+        this->canales_portal[canal->seccion()] = canal;
+    }
 
-    this->canales_portal[politica->seccion()] = politica;
-    this->canales_portal[economia->seccion()] = economia;
-    this->canales_portal[lo_ultimo->seccion()] = lo_ultimo;
+    //medios::feed::canal * politica = new medios::feed::rss("https://www.clarin.com/rss/politica/", "politica");
+    //medios::feed::canal * economia = new medios::feed::rss("https://www.clarin.com/rss/economia/", "economia");
+    //medios::feed::canal * lo_ultimo = new medios::feed::rss("https://www.clarin.com/rss/lo-ultimo/", "lo ultimo");
+
+    //this->canales_portal[politica->seccion()] = politica;
+    //this->canales_portal[economia->seccion()] = economia;
+    //this->canales_portal[lo_ultimo->seccion()] = lo_ultimo;
 }
 
 clarin::~clarin() {}

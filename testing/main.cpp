@@ -11,7 +11,11 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
 
+// noticias
+#include <noticias/include/config.h>
+
 int main(int argc, char* argv[]) {
+    medios::noticias::config::levantar("config_noticias.json");
 
     int result = Catch::Session().run(argc, argv);
 

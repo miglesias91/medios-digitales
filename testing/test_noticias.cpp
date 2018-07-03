@@ -9,12 +9,26 @@
 #include <feed/include/historia.h>
 
 // noticias
+#include <noticias/include/config.h>
 #include <noticias/include/lector.h>
 #include <noticias/include/clarin.h>
 #include <noticias/include/la_nacion.h>
 #include <noticias/include/infobae.h>
 
-TEST_CASE("leer_noticia_clarin", "noticias") {
+TEST_CASE("levantar_config", "noticias") {
+    medios::noticias::config::levantar("config_noticias.json");
+
+    REQUIRE("politica" == medios::noticias::config::clarin.canales[0].categoria);
+    REQUIRE("https://www.clarin.com/rss/politica/" == medios::noticias::config::clarin.canales[0].link);
+
+    REQUIRE("economia" == medios::noticias::config::la_nacion.canales[1].categoria);
+    REQUIRE("http://contenidos.lanacion.com.ar/herramientas/rss-categoria_id=272" == medios::noticias::config::la_nacion.canales[1].link);
+
+    REQUIRE("todo" == medios::noticias::config::infobae.canales[0].categoria);
+    REQUIRE("https://www.infobae.com/feeds/rss/" == medios::noticias::config::infobae.canales[0].link);
+}
+
+TEST_CASE("leer_noticia_clarin", "noticias[.]") {
 
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_clarin.html", contenido_html);
@@ -26,7 +40,7 @@ TEST_CASE("leer_noticia_clarin", "noticias") {
     el_gran_diario_argentino.nueva_noticia(historia, "politica");
 }
 
-TEST_CASE("leer_noticia_la_nacion", "noticias") {
+TEST_CASE("leer_noticia_la_nacion", "noticias[.]") {
 
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_la_nacion.html", contenido_html);
@@ -38,7 +52,7 @@ TEST_CASE("leer_noticia_la_nacion", "noticias") {
     el_diario_de_mitre.nueva_noticia(historia, "politica");
 }
 
-TEST_CASE("leer_noticia_infobae", "noticias") {
+TEST_CASE("leer_noticia_infobae", "noticias[.]") {
 
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_infobae.html", contenido_html);
@@ -59,7 +73,7 @@ TEST_CASE("leer_clarin", "noticias") {
     lector_de_noticias.leer(&el_gran_diario_argentino);
 }
 
-TEST_CASE("leer_la_nacion", "noticias") {
+TEST_CASE("leer_la_nacion", "noticias[.]") {
 
     medios::noticias::lector lector_de_noticias;
 
@@ -68,7 +82,7 @@ TEST_CASE("leer_la_nacion", "noticias") {
     lector_de_noticias.leer(&el_diario_de_mitre);
 }
 
-TEST_CASE("leer_infobae", "noticias") {
+TEST_CASE("leer_infobae", "noticias[.]") {
 
     medios::noticias::lector lector_de_noticias;
 
@@ -77,7 +91,7 @@ TEST_CASE("leer_infobae", "noticias") {
     lector_de_noticias.leer(&infobae);
 }
 
-TEST_CASE("leer_infobae_fechas", "noticias") {
+TEST_CASE("leer_infobae_fechas", "noticias[.]") {
 
     medios::noticias::lector lector_de_noticias;
 
