@@ -18,9 +18,6 @@ namespace medios {
     namespace noticias {
 
 infobae::infobae() : portal() {
-    //medios::feed::canal * lo_ultimo = new medios::feed::rss_infobae(link_feed, "todo");
-    //this->canales_portal[lo_ultimo->seccion()] = lo_ultimo;
-
     medios::feed::canal * canal = new medios::feed::rss_infobae(config::infobae.canales[0].link, config::infobae.canales[0].categoria);
     this->canales_portal[canal->seccion()] = canal;
 }

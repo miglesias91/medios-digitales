@@ -3,6 +3,7 @@
 // stl
 #include <algorithm>
 #include <execution>
+#include <codecvt>
 
 // pugixml
 #include <pugixml.hpp>
@@ -19,7 +20,13 @@ pugi::xml_object_range<pugi::xml_named_node_iterator> atom::historias_xml(const 
 }
 
 bool atom::parsear_historia(const pugi::xml_node & xml_historia, historia * histo) {
-    std::string titulo = xml_historia.child_value("title");
+    std::string titulo = xml_historia.child("title").text().as_string();
+
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+    std::wstring wide = converter.from_bytes(titulo);
+
+    std::to_wstring();
+
     std::string string_fecha = xml_historia.child_value("updated");
     std::string link = xml_historia.child_value("id");
 

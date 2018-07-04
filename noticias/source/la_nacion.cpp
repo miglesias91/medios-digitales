@@ -16,15 +16,6 @@ namespace medios {
     namespace noticias {
 
 la_nacion::la_nacion() : portal() {
-    // TODO: hacer que esta config de canales las levante de un json.
-    //medios::feed::canal * politica = new medios::feed::atom("http://contenidos.lanacion.com.ar/herramientas/rss-categoria_id=30", "politica");
-    //medios::feed::canal * economia = new medios::feed::atom("http://contenidos.lanacion.com.ar/herramientas/rss-categoria_id=272", "economia");
-    //medios::feed::canal * lo_ultimo = new medios::feed::atom("http://contenidos.lanacion.com.ar/herramientas/rss-origen=2", "lo ultimo");
-
-    //this->canales_portal[politica->seccion()] = politica;
-    //this->canales_portal[economia->seccion()] = economia;
-    //this->canales_portal[lo_ultimo->seccion()] = lo_ultimo;
-
     for (config_canal config : config::la_nacion.canales) {
         feed::canal * canal = new medios::feed::atom(config.link, config.categoria);
         this->canales_portal[canal->seccion()] = canal;

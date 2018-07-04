@@ -6,7 +6,7 @@
 #include <feed/include/rss.h>
 #include <feed/include/atom.h>
 
-TEST_CASE("pedir_historias_ya_rss", "feed[.]") {
+TEST_CASE("pedir_historias_ya_rss", "feed") {
 
     medios::feed::rss clarin_politica("https://www.clarin.com/rss/politica/", "politica");
 
@@ -16,7 +16,7 @@ TEST_CASE("pedir_historias_ya_rss", "feed[.]") {
     std::for_each(historias.begin(), historias.end(), [](medios::feed::historia * historia) { delete historia; });
 }
 
-TEST_CASE("pedir_historias_ya_atom", "feed[.]") {
+TEST_CASE("pedir_historias_ya_atom", "feed") {
 
     medios::feed::atom lanacion_politica("http://contenidos.lanacion.com.ar/herramientas/rss-categoria_id=30", "politica");
 

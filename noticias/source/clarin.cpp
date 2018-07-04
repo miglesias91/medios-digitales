@@ -20,19 +20,10 @@
 namespace medios { namespace noticias {
 
 clarin::clarin() : portal() {
-    
     for (config_canal config : config::clarin.canales) {
         feed::canal * canal = new medios::feed::rss(config.link, config.categoria);
         this->canales_portal[canal->seccion()] = canal;
     }
-
-    //medios::feed::canal * politica = new medios::feed::rss("https://www.clarin.com/rss/politica/", "politica");
-    //medios::feed::canal * economia = new medios::feed::rss("https://www.clarin.com/rss/economia/", "economia");
-    //medios::feed::canal * lo_ultimo = new medios::feed::rss("https://www.clarin.com/rss/lo-ultimo/", "lo ultimo");
-
-    //this->canales_portal[politica->seccion()] = politica;
-    //this->canales_portal[economia->seccion()] = economia;
-    //this->canales_portal[lo_ultimo->seccion()] = lo_ultimo;
 }
 
 clarin::~clarin() {}
