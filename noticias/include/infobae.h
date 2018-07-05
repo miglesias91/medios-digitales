@@ -29,6 +29,10 @@ namespace medios {
                 historia * nueva = new historia();
                 this->parsear_historia(item, nueva);
 
+                herramientas::utiles::Fecha fecha_origi = nueva->fecha();
+                fecha_origi -= std::chrono::hours(3);  // ajusto xq las fechas de infobae estan adelantadas 3 horas.
+                nueva->fecha(fecha_origi);
+
                 if (desde <= nueva->fecha() && nueva->fecha() <= hasta) {
                     nueva->html(nueva->contenido());
                     historias.push_back(nueva);

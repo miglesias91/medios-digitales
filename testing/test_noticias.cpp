@@ -64,7 +64,7 @@ TEST_CASE("leer_noticia_infobae", "noticias[.]") {
     infobae.nueva_noticia(historia, "lo ultimo");
 }
 
-TEST_CASE("leer_clarin", "noticias") {
+TEST_CASE("leer_clarin", "noticias[.]") {
    
     medios::noticias::lector lector_de_noticias;
 
@@ -82,7 +82,7 @@ TEST_CASE("leer_la_nacion", "noticias[.]") {
     lector_de_noticias.leer(&el_diario_de_mitre);
 }
 
-TEST_CASE("leer_infobae", "noticias[.]") {
+TEST_CASE("leer_infobae", "noticias") {
 
     medios::noticias::lector lector_de_noticias;
 

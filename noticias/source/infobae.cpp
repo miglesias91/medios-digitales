@@ -29,9 +29,6 @@ bool infobae::nueva_noticia(const medios::feed::historia & historia, const std::
     std::string seccion_de_url = "";
     this->reconocer_seccion(historia.link(), &seccion_de_url);
 
-    herramientas::utiles::Fecha fecha_origi = historia.fecha();
-    fecha_origi - 3 horas;
-
     return this->portal::nueva_noticia(historia, seccion_de_url);
 }
 
