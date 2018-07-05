@@ -35,14 +35,14 @@ public:
     // devuelve el nombre de la seccion a la que pertenece el canal.
     std::string seccion() const;
 
+    virtual bool parsear(const std::string & contenido_xml, std::vector<historia*> & historias,
+        const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta);
 protected:
-
     virtual pugi::xml_object_range<pugi::xml_named_node_iterator> historias_xml(const pugi::xml_document & xml_feed) = 0;
 
     virtual bool parsear_historia(const pugi::xml_node & entrada, historia * historia) = 0;
 
-    virtual bool parsear(const std::string & contenido_xml, std::vector<historia*> & historias,
-        const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta);
+    virtual bool extraer_respuesta(const web::http::http_response & rta, std::string * contenido_respuesta) = 0;
 
     virtual bool descargar_y_guardar_historia(historia * nueva, std::vector<historia*> & historias, uint32_t & cantidad_de_historias_descargadas);
 

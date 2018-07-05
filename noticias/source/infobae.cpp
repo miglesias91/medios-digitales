@@ -29,6 +29,9 @@ bool infobae::nueva_noticia(const medios::feed::historia & historia, const std::
     std::string seccion_de_url = "";
     this->reconocer_seccion(historia.link(), &seccion_de_url);
 
+    herramientas::utiles::Fecha fecha_origi = historia.fecha();
+    fecha_origi - 3 horas;
+
     return this->portal::nueva_noticia(historia, seccion_de_url);
 }
 
@@ -48,12 +51,17 @@ bool infobae::extraer_contenido_de_html(const std::string & contenido_html, std:
     this->eliminar_elemento_xml(contenido, "div", "<div ");
     this->eliminar_elemento_xml(contenido, "span", "<span ");
     this->eliminar_elemento_xml(contenido, "a", "<a ");
+    this->eliminar_etiqueta_xml(contenido, "em");
     this->eliminar_etiqueta_xml(contenido, "img");
     this->eliminar_etiqueta_xml(contenido, "strong");
     this->eliminar_etiqueta_xml(contenido, "em");
     this->eliminar_etiqueta_xml(contenido, "p");
+    this->eliminar_etiqueta_xml(contenido, "br");
+    this->eliminar_etiqueta_xml(contenido, "caption");
+    this->eliminar_etiqueta_xml(contenido, "iframe");
 
     herramientas::utiles::FuncionesString::eliminarOcurrencias(*contenido, "&nbsp;");
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(*contenido, "<br/>");
 
     herramientas::utiles::FuncionesString::eliminarEspaciosRedundantes(*contenido);
 

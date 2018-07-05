@@ -22,7 +22,8 @@ bool canal::historias_ya(std::vector<historia*> & historias, const herramientas:
         rta = this->cliente_canal.request(web::http::methods::GET, this->uri.path()).get();
     }
 
-    return this->parsear(rta.extract_utf8string().get(), historias, desde, hasta);
+    std::vector<unsigned char> extraccion = rta.extract_vector().get();
+    return this->parsear(std::string(extraccion.begin(), extraccion.end()), historias, desde, hasta);
 }
 
 bool canal::pedir_historias() {
@@ -46,7 +47,8 @@ bool canal::historias(std::vector<historia*> & historias, const herramientas::ut
         return false;
     }
 
-    return this->parsear(this->respuesta.extract_utf8string().get(), historias, desde, hasta);
+    std::vector<unsigned char> extraccion = this->respuesta.extract_vector().get();
+    return this->parsear(std::string(extraccion.begin(), extraccion.end()), historias, desde, hasta);
 }
 
 std::string canal::seccion() const {

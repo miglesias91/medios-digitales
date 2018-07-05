@@ -19,6 +19,7 @@ protected:
 
     virtual bool parsear_historia(const pugi::xml_node & xml_historia, historia * histo);
 
+    virtual bool extraer_respuesta(const web::http::http_response & rta, std::string * contenido_respuesta);
 };
 
     };

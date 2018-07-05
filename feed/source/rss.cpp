@@ -2,7 +2,6 @@
 
 // stl
 #include <algorithm>
-#include <execution>
 
 // pugixml
 #include <pugixml.hpp>
@@ -32,6 +31,17 @@ bool rss::parsear_historia(const pugi::xml_node & xml_historia, historia * histo
     histo->link(link);
     histo->contenido(contenido);
 
+    return true;
+}
+
+bool rss::extraer_respuesta(const web::http::http_response & rta, std::string * contenido_respuesta) {
+    std::vector<unsigned char> extraccion = rta.extract_vector().get();
+
+
+    std::string a(extraccion.begin(), extraccion.end());
+
+
+    *contenido_respuesta = rta.extract_utf8string().get();
     return true;
 }
 

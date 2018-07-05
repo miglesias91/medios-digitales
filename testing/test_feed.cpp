@@ -2,11 +2,25 @@
 // catch2
 #include <catch.hpp>
 
+// utiles
+#include <utiles/include/FuncionesSistemaArchivos.h>
+
 // rss
 #include <feed/include/rss.h>
 #include <feed/include/atom.h>
 
-TEST_CASE("pedir_historias_ya_rss", "feed") {
+TEST_CASE("leer_atom", "feed[.]") {
+
+    medios::feed::atom lanacion_politica("http://contenidos.lanacion.com.ar/herramientas/rss-categoria_id=30", "politica");
+
+    std::string contenido = "";
+    herramientas::utiles::FuncionesSistemaArchivos::leer("feed_la_nacion.txt", contenido);
+
+    std::vector<medios::feed::historia*> historias;
+    lanacion_politica.parsear(contenido, historias, herramientas::utiles::Fecha(0,0,0), herramientas::utiles::Fecha::getFechaActual());
+}
+
+TEST_CASE("pedir_historias_ya_rss", "feed[.]") {
 
     medios::feed::rss clarin_politica("https://www.clarin.com/rss/politica/", "politica");
 
@@ -16,7 +30,7 @@ TEST_CASE("pedir_historias_ya_rss", "feed") {
     std::for_each(historias.begin(), historias.end(), [](medios::feed::historia * historia) { delete historia; });
 }
 
-TEST_CASE("pedir_historias_ya_atom", "feed") {
+TEST_CASE("pedir_historias_ya_atom", "feed[.]") {
 
     medios::feed::atom lanacion_politica("http://contenidos.lanacion.com.ar/herramientas/rss-categoria_id=30", "politica");
 
