@@ -48,7 +48,9 @@ struct config {
         la_nacion.levantar(json_la_nacion);
         infobae.levantar(json_infobae);
 
-        delete json_clarin, json_la_nacion, json_infobae;
+        delete json_clarin;
+        delete json_la_nacion;
+        delete json_infobae;
         return true;
     };
 
