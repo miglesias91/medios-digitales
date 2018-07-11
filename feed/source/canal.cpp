@@ -67,7 +67,7 @@ bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & 
         historia * nueva = new historia();
         this->parsear_historia(item, nueva);
 
-        if (desde <= nueva->fecha() && nueva->fecha() <= hasta) {
+        if (desde < nueva->fecha() && nueva->fecha() < hasta) {
             if (this->descargar_y_guardar_historia(nueva, historias, cantidad_de_historias_descargadas)) {
                 cantidad_total_de_historias++;
             }
@@ -96,15 +96,10 @@ bool canal::descargar_y_guardar_historia(historia * nueva, std::vector<historia*
 
     cliente_historia.request(web::http::methods::GET, uri_historia.path()).then([nueva, &historias, &cantidad_de_historias_descargadas](pplx::task<web::http::http_response> tarea) {
         try {
-            std::cout << "extrayendo html" << std::endl;
-
             std::string string_html = tarea.get().extract_utf8string().get();
 
-            std::cout << "cargando historia" << std::endl;
             nueva->html(string_html);
             historias.push_back(nueva);
-            
-            std::cout << "historias descargadas: " << cantidad_de_historias_descargadas << std::endl;
         }
         catch (const std::exception & e) {
             delete nueva;
