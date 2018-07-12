@@ -18,19 +18,23 @@ namespace medios {
     namespace noticias {
 
 infobae::infobae() : portal() {
-    medios::feed::canal * canal = new medios::feed::rss_infobae(config::infobae.canales[0].link, config::infobae.canales[0].categoria);
+    std::unordered_map<std::string, std::string> subcategorias;
+    for(config_subcategoria config_subcatego : config::infobae.canales[0].subcategorias) {
+        subcategorias[config_subcatego.subcategoria] = config_subcatego.recurso_url;
+    }
+    medios::feed::canal * canal = new medios::feed::rss_infobae(config::infobae.canales[0].link, config::infobae.canales[0].categoria, subcategorias);
     this->canales_portal[canal->seccion()] = canal;
 }
 
 infobae::~infobae() {}
 
-bool infobae::nueva_noticia(const medios::feed::historia & historia, const std::string & seccion) {
-
-    std::string seccion_de_url = "";
-    this->reconocer_seccion(historia.link(), &seccion_de_url);
-
-    return this->portal::nueva_noticia(historia, seccion_de_url);
-}
+//bool infobae::nueva_noticia(const medios::feed::historia & historia, const std::string & seccion) {
+//
+//    std::string recurso_url = "";
+//    this->reconocer_seccion(historia.link(), &recurso_url);
+//
+//    return this->portal::nueva_noticia(historia, recurso_url);
+//}
 
 std::string infobae::web() {
     return "infobae.com";

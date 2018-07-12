@@ -12,15 +12,18 @@ namespace medios {
 class historia {
 public:
     historia();
-    historia(const std::string & titulo, const std::string & link, herramientas::utiles::Fecha fecha, const std::string & contenido_html,
+    historia(const std::string & titulo, const std::string & seccion, const std::string & link, herramientas::utiles::Fecha fecha, const std::string & contenido_html,
         const std::string & contenido_historia = "");
     virtual ~historia();
 
     void titulo(const std::string & titulo);
     std::string titulo() const;
 
-    void link(const std::string &  link);
+    void link(const std::string & link);
     std::string link() const;
+
+    void seccion(const std::string & seccion);
+    std::string seccion() const;
 
     void fecha(herramientas::utiles::Fecha fecha);
     herramientas::utiles::Fecha fecha() const;
@@ -33,7 +36,7 @@ public:
 
 protected:
 
-    std::string titulo_historia, link_web, string_html, contenido_historia;
+    std::string titulo_historia, link_web, seccion_historia, string_html, contenido_historia;
     herramientas::utiles::Fecha fecha_creacion;
 };
 

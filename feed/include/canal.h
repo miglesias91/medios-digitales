@@ -14,7 +14,7 @@ namespace medios {
 
 class canal {
 public:
-    canal(const std::string & uri, const std::string & seccion);
+    canal(const std::string & uri, const std::string & seccion, const std::unordered_map<std::string, std::string> & subcategorias = {});
     virtual ~canal();
 
     // Si HAY una peticion en curso, entonces espera hasta que termine y devuelve la historias.
@@ -54,6 +54,7 @@ protected:
     web::http::http_response respuesta;
 
     std::string seccion_canal;
+    std::unordered_map<std::string, std::string> subcategorias;
 };
 
     };

@@ -8,7 +8,7 @@ namespace medios {
 
 historia::historia() : titulo_historia(""), link_web(""), fecha_creacion(0, 0, 0),string_html(""), contenido_historia("") {}
 
-historia::historia(const std::string & titulo, const std::string & link, herramientas::utiles::Fecha fecha,
+historia::historia(const std::string & titulo, const std::string & seccion, const std::string & link, herramientas::utiles::Fecha fecha,
     const std::string & string_html, const std::string & contenido_historia) :
 titulo_historia(titulo), link_web(link), fecha_creacion(fecha), string_html(string_html), contenido_historia(contenido_historia) {}
 
@@ -28,6 +28,14 @@ void historia::link(const std::string & link) {
 
 std::string historia::link() const {
     return this->link_web;
+}
+
+void historia::seccion(const std::string & seccion) {
+    this->seccion_historia = seccion;
+}
+
+std::string historia::seccion() const {
+    return this->seccion_historia;
 }
 
 void historia::fecha(herramientas::utiles::Fecha fecha) {

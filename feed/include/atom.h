@@ -10,7 +10,7 @@ namespace medios { namespace feed {
 
 class atom : public canal {
 public:
-    atom(const std::string & uri, const std::string & seccion);
+    atom(const std::string & uri, const std::string & seccion, const std::unordered_map<std::string, std::string> & subcategorias = {});
     virtual ~atom();
 
 protected:

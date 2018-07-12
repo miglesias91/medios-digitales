@@ -1,5 +1,8 @@
 #pragma once
 
+// utiles
+#include <utiles/include/FuncionesString.h>
+
 // feed
 #include <feed/include/rss.h>
 
@@ -12,7 +15,7 @@ namespace medios {
     class rss_infobae : public medios::feed::rss {
 
     public:
-        rss_infobae(const std::string & uri, const std::string & seccion) : medios::feed::rss(uri, seccion) {};
+        rss_infobae(const std::string & uri, const std::string & seccion, const std::unordered_map<std::string, std::string> & subcategorias) : medios::feed::rss(uri, seccion, subcategorias) {};
         virtual ~rss_infobae() {};
 
     protected:
@@ -28,6 +31,10 @@ namespace medios {
 
                 historia * nueva = new historia();
                 this->parsear_historia(item, nueva);
+                if (false == this->reconocer_subcategoria(nueva)) {  // si no pertenece a ninguna subcategoria, entonces descarto la noticia.
+                    delete nueva;
+                    continue;
+                }
 
                 herramientas::utiles::Fecha fecha_origi = nueva->fecha();
                 fecha_origi -= std::chrono::hours(3);  // ajusto xq las fechas de infobae estan adelantadas 3 horas.
@@ -45,6 +52,26 @@ namespace medios {
 
             return true;
         }
+
+        virtual bool reconocer_subcategoria(historia * histo) {
+            web::uri url(utility::conversions::to_string_t(histo->link()));
+            std::string path = utility::conversions::to_utf8string(url.path());
+
+            std::vector<std::string> recursos = herramientas::utiles::FuncionesString::separar(path, "/");
+            recursos.erase(recursos.begin());  // elimino el primero porque me queda vacio.
+            recursos.erase(recursos.end() - 4, recursos.end());  // elimino los ultimos recursos.
+
+            std::string string_recursos = herramientas::utiles::FuncionesString::unir(recursos, "/");
+
+            for (std::pair<std::string, std::string> subcategoria_recurso : this->subcategorias) {                
+                if (string_recursos == subcategoria_recurso.second) {
+                    histo->seccion(subcategoria_recurso.first);
+                    return true;
+                }
+            }
+
+            return false;
+        }
     };
     }
 }
@@ -57,7 +84,7 @@ public:
     infobae();
     virtual ~infobae();
 
-    virtual bool nueva_noticia(const medios::feed::historia & historia, const std::string & seccion);
+    // virtual bool nueva_noticia(const medios::feed::historia & historia, const std::string & seccion);
 
     virtual std::string web();
 

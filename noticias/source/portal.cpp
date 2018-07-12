@@ -69,6 +69,10 @@ bool portal::nueva_noticia(const medios::feed::historia & historia, const std::s
     return true;
 }
 
+bool portal::nueva_noticia(const medios::feed::historia & historia) {
+    return this->nueva_noticia(historia, historia.seccion());
+}
+
 void portal::nuevas_noticias(const std::unordered_map<std::string, std::vector<noticia*>>& noticias_portal) {
     this->noticias_portal = noticias_portal;
 }

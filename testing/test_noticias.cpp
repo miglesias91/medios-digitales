@@ -33,11 +33,11 @@ TEST_CASE("leer_noticia_clarin", "noticias[.]") {
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_clarin.html", contenido_html);
 
-    medios::feed::historia historia("titulo", "link", herramientas::utiles::Fecha::getFechaActual(), contenido_html);
+    medios::feed::historia historia("titulo", "politica","link", herramientas::utiles::Fecha::getFechaActual(), contenido_html);
 
     medios::noticias::clarin el_gran_diario_argentino;
 
-    el_gran_diario_argentino.nueva_noticia(historia, "politica");
+    el_gran_diario_argentino.nueva_noticia(historia);
 }
 
 TEST_CASE("leer_noticia_la_nacion", "noticias[.]") {
@@ -45,11 +45,11 @@ TEST_CASE("leer_noticia_la_nacion", "noticias[.]") {
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_la_nacion.html", contenido_html);
 
-    medios::feed::historia historia("titulo", "link", herramientas::utiles::Fecha::getFechaActual(), contenido_html);
+    medios::feed::historia historia("titulo", "politica", "link", herramientas::utiles::Fecha::getFechaActual(), contenido_html);
 
     medios::noticias::la_nacion el_diario_de_mitre;
 
-    el_diario_de_mitre.nueva_noticia(historia, "politica");
+    el_diario_de_mitre.nueva_noticia(historia);
 }
 
 TEST_CASE("leer_noticia_infobae", "noticias[.]") {
@@ -57,11 +57,11 @@ TEST_CASE("leer_noticia_infobae", "noticias[.]") {
     std::string contenido_html = "";
     herramientas::utiles::FuncionesSistemaArchivos::leer("noticia_infobae.html", contenido_html);
 
-    medios::feed::historia historia("titulo", "https://www.infobae.com/politica/2018/06/20/rindieron-homenaje-a-dante-caputo-en-washington/", herramientas::utiles::Fecha::getFechaActual(), contenido_html);
+    medios::feed::historia historia("titulo", "todo", "https://www.infobae.com/politica/2018/06/20/rindieron-homenaje-a-dante-caputo-en-washington/", herramientas::utiles::Fecha::getFechaActual(), contenido_html);
 
     medios::noticias::infobae infobae;
 
-    infobae.nueva_noticia(historia, "lo ultimo");
+    infobae.nueva_noticia(historia);
 }
 
 TEST_CASE("leer_clarin", "noticias[.]") {

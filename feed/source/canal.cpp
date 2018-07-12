@@ -3,10 +3,11 @@
 namespace medios {
     namespace feed {
 
-canal::canal(const std::string & string_uri, const std::string & seccion_canal) :
+canal::canal(const std::string & string_uri, const std::string & seccion_canal, const std::unordered_map<std::string, std::string> & subcategorias) :
     peticion_activa(false),
     uri(utility::conversions::to_string_t(string_uri)),
     seccion_canal(seccion_canal),
+    subcategorias(subcategorias),
     cliente_canal(uri.scheme() + utility::conversions::to_string_t("://") + uri.host()) {}
 
 canal::~canal() {}

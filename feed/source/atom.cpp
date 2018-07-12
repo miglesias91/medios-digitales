@@ -13,7 +13,7 @@
 namespace medios {
     namespace feed {
 
-atom::atom(const std::string & string_uri, const std::string & seccion) : canal(string_uri, seccion) {}
+atom::atom(const std::string & string_uri, const std::string & seccion, const std::unordered_map<std::string, std::string> & subcategorias) : canal(string_uri, seccion, subcategorias) {}
 
 atom::~atom() {}
 
@@ -32,6 +32,7 @@ bool atom::parsear_historia(const pugi::xml_node & xml_historia, historia * hist
     histo->titulo(titulo);
     histo->fecha(fecha);
     histo->link(link);
+    histo->seccion(this->seccion());
 
     return true;
 }

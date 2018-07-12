@@ -9,7 +9,7 @@
 namespace medios {
     namespace feed {
 
-rss::rss(const std::string & string_uri, const std::string & seccion) : canal(string_uri, seccion) {}
+rss::rss(const std::string & string_uri, const std::string & seccion, const std::unordered_map<std::string, std::string> & subcategorias) : canal(string_uri, seccion, subcategorias) {}
 
 rss::~rss() {}
 
@@ -30,6 +30,7 @@ bool rss::parsear_historia(const pugi::xml_node & xml_historia, historia * histo
     histo->fecha(fecha);
     histo->link(link);
     histo->contenido(contenido);
+    histo->seccion(this->seccion());
 
     return true;
 }

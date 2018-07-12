@@ -17,7 +17,11 @@ namespace medios {
 
 la_nacion::la_nacion() : portal() {
     for (config_canal config : config::la_nacion.canales) {
-        feed::canal * canal = new medios::feed::atom(config.link, config.categoria);
+        std::unordered_map<std::string, std::string> subcategorias;
+        for(config_subcategoria config_subcatego : config.subcategorias) {
+            subcategorias[config_subcatego.subcategoria] = config_subcatego.recurso_url;
+        }
+        feed::canal * canal = new medios::feed::atom(config.link, config.categoria, subcategorias);
         this->canales_portal[canal->seccion()] = canal;
     }
 }

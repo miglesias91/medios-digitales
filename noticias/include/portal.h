@@ -24,6 +24,9 @@ public:
     virtual bool noticias(std::vector<noticia*> * noticias, const std::string & seccion = "");
 
     virtual bool nueva_noticia(const medios::feed::historia & historia, const std::string & seccion);
+
+    // si no se indica la 'seccion', entonces SE SUPÖNE que la historia ya tiene la seccion asignada.
+    virtual bool nueva_noticia(const medios::feed::historia & historia);
     
     virtual void nuevas_noticias(const std::unordered_map<std::string, std::vector<noticia*>> & noticias_portal);
 

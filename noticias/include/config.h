@@ -7,13 +7,33 @@
 namespace medios {
     namespace noticias {
 
+struct config_subcategoria {
+    bool levantar(herramientas::utiles::Json* json) {
+        this->subcategoria = json->getAtributoValorString("subcategoria");
+        this->recurso_url = json->getAtributoValorString("recurso_url");
+        return true;
+    };
+    std::string subcategoria, recurso_url;
+};
+
+
 struct config_canal {
     bool levantar(herramientas::utiles::Json* json) {
         this->categoria = json->getAtributoValorString("categoria");
         this->link = json->getAtributoValorString("link");
+
+        std::vector<herramientas::utiles::Json*> json_subcategorias = json->getAtributoArrayJson("subcategorias");
+        for (herramientas::utiles::Json * json_subcategoria : json_subcategorias) {
+            config_subcategoria subcategoria;
+            subcategoria.levantar(json_subcategoria);
+            this->subcategorias.push_back(subcategoria);
+            delete json_subcategoria;
+        }
+
         return true;
     };
     std::string categoria, link;
+    std::vector<config_subcategoria> subcategorias;
 };
 
 struct config_feed {

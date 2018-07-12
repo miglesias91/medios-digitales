@@ -11,7 +11,7 @@ namespace medios {
 
 class rss : public canal {
 public:
-    rss(const std::string & uri, const std::string & seccion);
+    rss(const std::string & uri, const std::string & seccion = "", const std::unordered_map<std::string, std::string> & subcategorias = {});
     virtual ~rss();
 
 protected:
