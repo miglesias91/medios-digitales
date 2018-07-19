@@ -52,6 +52,12 @@ bool portal::noticias(std::vector<noticia*> * noticias, const std::string & secc
     return true;
 }
 
+bool portal::noticias(std::unordered_map<std::string, std::vector<noticia*>>* noticias_por_seccion) const {
+    *noticias_por_seccion = noticias_portal;
+
+    return true;
+}
+
 bool portal::nueva_noticia(const medios::feed::historia & historia, const std::string & seccion) {
 
     noticia * nueva_noticia = new noticia(historia.titulo(), "", seccion, historia.fecha());

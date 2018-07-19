@@ -22,6 +22,7 @@ public:
     virtual void canales(std::vector<medios::feed::canal*> * canales);
 
     virtual bool noticias(std::vector<noticia*> * noticias, const std::string & seccion = "");
+    virtual bool noticias(std::unordered_map<std::string, std::vector<noticia*>> * noticias_por_seccion) const;
 
     virtual bool nueva_noticia(const medios::feed::historia & historia, const std::string & seccion);
 
