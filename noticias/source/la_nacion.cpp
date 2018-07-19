@@ -29,7 +29,7 @@ la_nacion::la_nacion() : portal() {
 la_nacion::~la_nacion() {}
 
 std::string la_nacion::web() {
-    return "la_nacion.com";
+    return config::la_nacion.web;
 }
 
 portal * la_nacion::clon() {

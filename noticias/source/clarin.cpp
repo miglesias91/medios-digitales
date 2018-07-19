@@ -33,7 +33,7 @@ clarin::clarin() : portal() {
 clarin::~clarin() {}
 
 std::string clarin::web() {
-    return "clarin.com";
+    return config::clarin.web;
 }
 
 portal * clarin::clon() {

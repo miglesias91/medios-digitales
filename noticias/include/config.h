@@ -1,5 +1,8 @@
 #pragma once
 
+// stl
+#include <unordered_map>
+
 // utiles
 #include <utiles/include/Json.h>
 #include <utiles/include/FuncionesSistemaArchivos.h>
@@ -38,7 +41,8 @@ struct config_canal {
 
 struct config_feed {
     bool levantar(herramientas::utiles::Json* json) {
-        std::vector<herramientas::utiles::Json*> json_canales = json->getAtributoArrayJson();
+        this->web = json->getAtributoValorString("web");
+        std::vector<herramientas::utiles::Json*> json_canales = json->getAtributoArrayJson("canales");
 
         for (herramientas::utiles::Json * json_canal : json_canales) {
             config_canal canal;
@@ -48,6 +52,7 @@ struct config_feed {
         }
         return true;
     };
+    std::string web;
     std::vector<config_canal> canales;
 };
 
@@ -68,6 +73,10 @@ struct config {
         la_nacion.levantar(json_la_nacion);
         infobae.levantar(json_infobae);
 
+        feeds["clarin"] = clarin;
+        feeds["la nacion"] = la_nacion;
+        feeds["infobae"] = infobae;
+
         delete json_clarin;
         delete json_la_nacion;
         delete json_infobae;
@@ -75,6 +84,7 @@ struct config {
     };
 
     static config_feed clarin, la_nacion, infobae;
+    static std::unordered_map<std::string, config_feed> feeds;
 };
 
     };

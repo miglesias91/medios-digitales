@@ -28,16 +28,8 @@ infobae::infobae() : portal() {
 
 infobae::~infobae() {}
 
-//bool infobae::nueva_noticia(const medios::feed::historia & historia, const std::string & seccion) {
-//
-//    std::string recurso_url = "";
-//    this->reconocer_seccion(historia.link(), &recurso_url);
-//
-//    return this->portal::nueva_noticia(historia, recurso_url);
-//}
-
 std::string infobae::web() {
-    return "infobae.com";
+    return config::infobae.web;
 }
 
 portal * infobae::clon() {
