@@ -72,6 +72,18 @@ bool Aplicacion::parsear(herramientas::utiles::Json * json_tweet, Tweet * tweet)
     tweet->setHashtags(hashtags);
 }
 
+bool Aplicacion::existe(const std::string & nombre_cuenta) {
+    if (nombre_cuenta.size() > 15) {
+        return false;
+    }
+
+    web::http::client::http_client cliente_twitter(web::uri(utility::conversions::to_string_t("https://twitter.com/users/username_available?username=" + nombre_cuenta)));
+
+    web::http::http_response rta = cliente_twitter.request(web::http::methods::GET).get();
+
+    return false == rta.extract_json().get().at(utility::conversions::to_string_t("valid")).as_bool();
+}
+
 std::vector<Tweet*> Aplicacion::leerUltimosTweets(Cuenta * cuenta, const uintmax_t & id_desde, unsigned int cantidad_de_tweets) const {
 
     comunicacion::SolicitudUltimosTweets solicitud_ultimos_tweets(cuenta, id_desde, cantidad_de_tweets);

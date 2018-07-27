@@ -67,6 +67,15 @@ bool aplicacion::parsear(herramientas::utiles::Json * json_publicacion, Publicac
     return true;
 }
 
+bool aplicacion::existe(const std::string & nombre_pagina) {
+    web::http::client::http_client cliente_facebook(web::uri(utility::conversions::to_string_t("https://graph.facebook.com")));
+
+    web::http::http_response rta = cliente_facebook.request(web::http::methods::GET, utility::conversions::to_string_t("/" + nombre_pagina)).get();
+
+    // si el codigo de error = 803, entonces quiere decir que la pagina 'nombre_pagina' no existe.
+    return 803 != rta.extract_json().get().at(utility::conversions::to_string_t("error")).at(utility::conversions::to_string_t("code")).as_integer();
+}
+
 std::vector<Publicacion*> aplicacion::leer(Pagina * pagina, const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta, const uint32_t & cantidad_de_publicaciones_maximo) const {
     medios::facebook::comunicacion::SolicitudPublicaciones solicitud_ultimas_publicaciones(pagina, this->id(), this->clave_privada(), desde, hasta, cantidad_de_publicaciones_maximo);
 

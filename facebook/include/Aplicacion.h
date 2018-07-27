@@ -29,8 +29,7 @@ public:
 
     static bool parsear(herramientas::utiles::Json * json_publicacion, Publicacion * publicacion);
 
-    // se almacena memoria para las publicaciones pero no se libera, entonces deben ser ELIMINADAS luego de ser usadas.
-    //std::vector<Publicacion*> leer(Pagina * pagina, unsigned int cantidad_de_publicaciones = 100) const;
+    static bool existe(const std::string & nombre_pagina);
 
     // se almacena memoria para las publicaciones pero no se libera, entonces deben ser ELIMINADAS luego de ser usadas.
     std::vector<Publicacion*> leer(Pagina * pagina,

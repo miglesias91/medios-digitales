@@ -5,6 +5,12 @@
 // twitter
 #include <twitter/include/Aplicacion.h>
 
+TEST_CASE("existe cuenta", "twitter") {
+    REQUIRE(true == medios::twitter::Aplicacion::existe("mauriciomacri"));
+    REQUIRE(false == medios::twitter::Aplicacion::existe("cuentadetwitterconnombremuylargo"));
+    REQUIRE(false == medios::twitter::Aplicacion::existe("truchixmal"));
+}
+
 TEST_CASE("descargar tweets", "twitter") {
     medios::twitter::ConsumidorAPI * consumidor_api_twitter = new medios::twitter::ConsumidorAPI("aXPpXInb16k0jKIswOYuUS3ly", "MhuDBpN9EtnafrIUHvJEbleJ3WKiFCSBIulwRVNvZTWoXGs2eV");
     consumidor_api_twitter->obtenerTokenDeAcceso();

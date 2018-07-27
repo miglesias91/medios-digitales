@@ -5,6 +5,11 @@
 // facebook
 #include <facebook/include/Aplicacion.h>
 
+TEST_CASE("existe pagina", "facebook") {
+    REQUIRE(true == medios::facebook::aplicacion::existe("mauriciomacri"));
+    REQUIRE(false == medios::facebook::aplicacion::existe("cuentafalsa1234"));
+}
+
 TEST_CASE("descargar publicaciones", "facebook") {
     medios::facebook::consumidor_api * consumidor_api_facebook = new medios::facebook::consumidor_api("929798640478438", "f36e906bf6b8445ac3ee53e95ac303a7");
 
