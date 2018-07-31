@@ -48,6 +48,8 @@ bool clarin::extraer_contenido_de_html(const std::string & contenido_html, std::
     this->extraer_elemento_xml(contenido_html, "div", "<div class=\"body-nota\">", &elemento_nota);
     this->eliminar_etiqueta_xml(&elemento_nota, "strong");
     this->eliminar_etiqueta_xml(&elemento_nota, "br");
+    this->eliminar_etiqueta_xml(&elemento_nota, "a");
+    this->eliminar_etiqueta_xml(&elemento_nota, "em");
     herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "&nbsp;");
 
     std::vector<std::string> elementos_p;
