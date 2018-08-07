@@ -132,12 +132,14 @@
     <ClInclude Include="include\atom.h" />
     <ClInclude Include="include\rss.h" />
     <ClInclude Include="include\historia.h" />
+    <ClInclude Include="include\urlset.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\canal.cpp" />
     <ClCompile Include="source\atom.cpp" />
     <ClCompile Include="source\rss.cpp" />
     <ClCompile Include="source\historia.cpp" />
+    <ClCompile Include="source\urlset.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

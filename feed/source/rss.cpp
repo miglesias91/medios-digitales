@@ -36,10 +36,10 @@ bool rss::parsear_historia(const pugi::xml_node & xml_historia, historia * histo
 }
 
 bool rss::extraer_respuesta(const web::http::http_response & rta, std::string * contenido_respuesta) {
-    std::vector<unsigned char> extraccion = rta.extract_vector().get();
+    //std::vector<unsigned char> extraccion = rta.extract_vector().get();
 
 
-    std::string a(extraccion.begin(), extraccion.end());
+    //std::string a(extraccion.begin(), extraccion.end());
 
 
     *contenido_respuesta = rta.extract_utf8string().get();

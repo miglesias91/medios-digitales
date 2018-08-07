@@ -68,7 +68,7 @@ bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & 
         historia * nueva = new historia();
         this->parsear_historia(item, nueva);
 
-        if (desde < nueva->fecha() && nueva->fecha() < hasta) {
+        if (desde <= nueva->fecha() && nueva->fecha() <= hasta) {
             if (this->descargar_y_guardar_historia(nueva, historias, cantidad_de_historias_descargadas)) {
                 cantidad_total_de_historias++;
             }

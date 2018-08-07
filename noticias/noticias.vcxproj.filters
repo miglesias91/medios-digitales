@@ -45,6 +45,12 @@
     <ClInclude Include="include\config.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="include\pagina12.h">
+      <Filter>Archivos de encabezado\portales</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eldestape.h">
+      <Filter>Archivos de encabezado\portales</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\noticia.cpp">
@@ -70,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="source\config.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="source\pagina12.cpp">
+      <Filter>Archivos de origen\portales</Filter>
+    </ClCompile>
+    <ClCompile Include="source\eldestape.cpp">
+      <Filter>Archivos de origen\portales</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

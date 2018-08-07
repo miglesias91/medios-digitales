@@ -5,12 +5,12 @@
 // facebook
 #include <facebook/include/Aplicacion.h>
 
-TEST_CASE("existe pagina", "facebook") {
+TEST_CASE("existe pagina", "facebook[.]") {
     REQUIRE(true == medios::facebook::aplicacion::existe("mauriciomacri"));
     REQUIRE(false == medios::facebook::aplicacion::existe("cuentafalsa1234"));
 }
 
-TEST_CASE("descargar publicaciones", "facebook") {
+TEST_CASE("descargar publicaciones", "facebook[.]") {
     medios::facebook::consumidor_api * consumidor_api_facebook = new medios::facebook::consumidor_api("929798640478438", "f36e906bf6b8445ac3ee53e95ac303a7");
 
     medios::facebook::aplicacion app(consumidor_api_facebook);
@@ -24,7 +24,7 @@ TEST_CASE("descargar publicaciones", "facebook") {
     REQUIRE(100 == publicaciones.size());
 }
 
-TEST_CASE("parsear publicaciones", "facebook") {
+TEST_CASE("parsear publicaciones", "facebook[.]") {
     std::ifstream archivo_tweets("publicaciones_de_prueba.txt");
 
     std::stringstream sstream;

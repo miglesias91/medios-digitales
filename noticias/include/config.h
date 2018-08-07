@@ -63,27 +63,35 @@ struct config {
 
         herramientas::utiles::Json json(config);
 
-        herramientas::utiles::Json * json_clarin, *json_la_nacion, *json_infobae;
+        herramientas::utiles::Json * json_clarin, *json_la_nacion, *json_infobae, *json_pagina12, *json_eldestape;
 
         json_clarin = json.getAtributoValorJson("clarin");
         json_la_nacion = json.getAtributoValorJson("la nacion");
         json_infobae = json.getAtributoValorJson("infobae");
+        json_pagina12 = json.getAtributoValorJson("pagina12");
+        json_eldestape = json.getAtributoValorJson("eldestape");
 
         clarin.levantar(json_clarin);
         la_nacion.levantar(json_la_nacion);
         infobae.levantar(json_infobae);
+        pagina12.levantar(json_pagina12);
+        eldestape.levantar(json_eldestape);
 
         feeds["clarin"] = clarin;
         feeds["la nacion"] = la_nacion;
         feeds["infobae"] = infobae;
+        feeds["pagina12"] = pagina12;
+        feeds["eldestape"] = eldestape;
 
         delete json_clarin;
         delete json_la_nacion;
         delete json_infobae;
+        delete json_pagina12;
+        delete json_eldestape;
         return true;
     };
 
-    static config_feed clarin, la_nacion, infobae;
+    static config_feed clarin, la_nacion, infobae, pagina12, eldestape;
     static std::unordered_map<std::string, config_feed> feeds;
 };
 

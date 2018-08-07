@@ -14,6 +14,8 @@
 #include <noticias/include/clarin.h>
 #include <noticias/include/la_nacion.h>
 #include <noticias/include/infobae.h>
+#include <noticias/include/pagina12.h>
+#include <noticias/include/eldestape.h>
 
 TEST_CASE("levantar_config", "noticias") {
     medios::noticias::config::levantar("config_noticias.json");
@@ -82,7 +84,7 @@ TEST_CASE("leer_la_nacion", "noticias[.]") {
     lector_de_noticias.leer(&el_diario_de_mitre);
 }
 
-TEST_CASE("leer_infobae", "noticias") {
+TEST_CASE("leer_infobae", "noticias[.]") {
 
     medios::noticias::lector lector_de_noticias;
 
@@ -107,4 +109,13 @@ TEST_CASE("leer_infobae_fechas", "noticias[.]") {
     infobae.noticias(&noticias);
 
     REQUIRE(0 == noticias.size());
+}
+
+TEST_CASE("leer_pagina12", "noticias") {
+
+    medios::noticias::lector lector_de_noticias;
+
+    medios::noticias::pagina12 pagina;
+
+    lector_de_noticias.leer(&pagina);
 }

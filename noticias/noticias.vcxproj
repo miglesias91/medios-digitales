@@ -128,21 +128,25 @@
   <ItemGroup>
     <ClInclude Include="include\clarin.h" />
     <ClInclude Include="include\config.h" />
+    <ClInclude Include="include\eldestape.h" />
     <ClInclude Include="include\fabrica_portales.h" />
     <ClInclude Include="include\infobae.h" />
     <ClInclude Include="include\la_nacion.h" />
     <ClInclude Include="include\lector.h" />
     <ClInclude Include="include\noticia.h" />
+    <ClInclude Include="include\pagina12.h" />
     <ClInclude Include="include\portal.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\clarin.cpp" />
     <ClCompile Include="source\config.cpp" />
+    <ClCompile Include="source\eldestape.cpp" />
     <ClCompile Include="source\fabrica_portales.cpp" />
     <ClCompile Include="source\infobae.cpp" />
     <ClCompile Include="source\la_nacion.cpp" />
     <ClCompile Include="source\lector.cpp" />
     <ClCompile Include="source\noticia.cpp" />
+    <ClCompile Include="source\pagina12.cpp" />
     <ClCompile Include="source\portal.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -33,6 +33,9 @@
     <ClInclude Include="include\atom.h">
       <Filter>Archivos de encabezado\canales</Filter>
     </ClInclude>
+    <ClInclude Include="include\urlset.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\canal.cpp">
@@ -46,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="source\rss.cpp">
       <Filter>Archivos de origen\canales</Filter>
+    </ClCompile>
+    <ClCompile Include="source\urlset.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

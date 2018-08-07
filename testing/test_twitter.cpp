@@ -5,13 +5,13 @@
 // twitter
 #include <twitter/include/Aplicacion.h>
 
-TEST_CASE("existe cuenta", "twitter") {
+TEST_CASE("existe cuenta", "twitter[.]") {
     REQUIRE(true == medios::twitter::Aplicacion::existe("mauriciomacri"));
     REQUIRE(false == medios::twitter::Aplicacion::existe("cuentadetwitterconnombremuylargo"));
     REQUIRE(false == medios::twitter::Aplicacion::existe("truchixmal"));
 }
 
-TEST_CASE("descargar tweets", "twitter") {
+TEST_CASE("descargar tweets", "twitter[.]") {
     medios::twitter::ConsumidorAPI * consumidor_api_twitter = new medios::twitter::ConsumidorAPI("aXPpXInb16k0jKIswOYuUS3ly", "MhuDBpN9EtnafrIUHvJEbleJ3WKiFCSBIulwRVNvZTWoXGs2eV");
     consumidor_api_twitter->obtenerTokenDeAcceso();
 
@@ -26,7 +26,7 @@ TEST_CASE("descargar tweets", "twitter") {
     std::for_each(tweets.begin(), tweets.end(), [](medios::twitter::Tweet* tweet) { delete tweet; });
 }
 
-TEST_CASE("parsear tweets", "twitter") {
+TEST_CASE("parsear tweets", "twitter[.]") {
     std::ifstream archivo_tweets("tweets_de_prueba.txt");
 
     std::stringstream sstream;
@@ -72,7 +72,7 @@ TEST_CASE("parsear tweets", "twitter") {
     REQUIRE(tamanio_vector_hashtags_correcto_tweet_1 == tamanio_vector_hashtags_parseado_tweet_1);
 }
 
-TEST_CASE("parsear retweets", "twitter") {
+TEST_CASE("parsear retweets", "twitter[.]") {
     std::ifstream archivo_tweets("retweets_de_prueba.txt");
 
     std::stringstream sstream;
