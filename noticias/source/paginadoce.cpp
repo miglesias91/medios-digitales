@@ -1,4 +1,4 @@
-#include <noticias/include/pagina12.h>
+#include <noticias/include/paginadoce.h>
 
 // utiles
 #include <utiles/include/FuncionesString.h>
@@ -19,30 +19,30 @@
 
 namespace medios { namespace noticias {
 
-pagina12::pagina12() : portal() {
-    for (config_canal config : config::pagina12.canales) {
+paginadoce::paginadoce() : portal() {
+    for (config_canal config : config::paginadoce.canales) {
         std::unordered_map<std::string, std::string> subcategorias;
         for(config_subcategoria config_subcatego : config.subcategorias) {
             subcategorias[config_subcatego.subcategoria] = config_subcatego.recurso_url;
         }
-        feed::canal * canal = new medios::feed::urlset(config.link, config.categoria, subcategorias);
+        feed::canal * canal = new medios::feed::urlset_paginadoce(config.link, config.categoria, subcategorias);
         this->canales_portal[canal->seccion()] = canal;
     }
 }
 
-pagina12::~pagina12() {}
+paginadoce::~paginadoce() {}
 
-std::string pagina12::web() {
-    return config::pagina12.web;
+std::string paginadoce::web() {
+    return config::paginadoce.web;
 }
 
-portal * pagina12::clon() {
-    portal * nuevo_portal = new pagina12();
+portal * paginadoce::clon() {
+    portal * nuevo_portal = new paginadoce();
     nuevo_portal->nuevas_noticias(this->noticias_portal);
     return nuevo_portal;
 }
 
-bool pagina12::extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) {
+bool paginadoce::extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) {
 
     std::string elemento_nota = "";
     this->extraer_elemento_xml(contenido_html, "div", "<div class=\"article-text\">", &elemento_nota);
@@ -64,7 +64,7 @@ bool pagina12::extraer_contenido_de_html(const std::string & contenido_html, std
     return true;
 }
 
-bool pagina12::nueva_noticia(const medios::feed::historia & historia, const std::string & seccion) {
+bool paginadoce::nueva_noticia(const medios::feed::historia & historia, const std::string & seccion) {
 
     noticia * nueva_noticia = new noticia(historia.titulo(), "", seccion, historia.fecha());
 
@@ -81,8 +81,15 @@ bool pagina12::nueva_noticia(const medios::feed::historia & historia, const std:
     return true;
 }
 
-bool pagina12::extraer_datos_de_historia(const std::string & contenido_html, noticia * noti) {
-    return false;
+bool paginadoce::extraer_datos_de_historia(const std::string & contenido_html, noticia * noti) {
+
+    std::string titulo;
+    this->extraer_elemento_xml(contenido_html, "div", "<div class=\"article-title\">", &titulo);
+    titulo.erase(titulo.begin(), titulo.begin() + std::string("<div class=\"article-title\">").size());
+    titulo.erase(titulo.end() - std::string("</div>").size() + 1, titulo.end() );
+
+    noti->titulo(titulo);
+    return true;
 }
 
 }

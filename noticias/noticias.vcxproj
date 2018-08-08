@@ -134,7 +134,7 @@
     <ClInclude Include="include\la_nacion.h" />
     <ClInclude Include="include\lector.h" />
     <ClInclude Include="include\noticia.h" />
-    <ClInclude Include="include\pagina12.h" />
+    <ClInclude Include="include\paginadoce.h" />
     <ClInclude Include="include\portal.h" />
   </ItemGroup>
   <ItemGroup>
@@ -146,7 +146,7 @@
     <ClCompile Include="source\la_nacion.cpp" />
     <ClCompile Include="source\lector.cpp" />
     <ClCompile Include="source\noticia.cpp" />
-    <ClCompile Include="source\pagina12.cpp" />
+    <ClCompile Include="source\paginadoce.cpp" />
     <ClCompile Include="source\portal.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

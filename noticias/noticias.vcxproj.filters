@@ -45,10 +45,10 @@
     <ClInclude Include="include\config.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="include\pagina12.h">
+    <ClInclude Include="include\eldestape.h">
       <Filter>Archivos de encabezado\portales</Filter>
     </ClInclude>
-    <ClInclude Include="include\eldestape.h">
+    <ClInclude Include="include\paginadoce.h">
       <Filter>Archivos de encabezado\portales</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,10 +77,10 @@
     <ClCompile Include="source\config.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="source\pagina12.cpp">
+    <ClCompile Include="source\eldestape.cpp">
       <Filter>Archivos de origen\portales</Filter>
     </ClCompile>
-    <ClCompile Include="source\eldestape.cpp">
+    <ClCompile Include="source\paginadoce.cpp">
       <Filter>Archivos de origen\portales</Filter>
     </ClCompile>
   </ItemGroup>

@@ -66,7 +66,7 @@
             }
         ]
     },
-    "pagina12" :
+    "paginadoce" :
     {
         "web" : "pagina12.com",
         "canales" : 
@@ -76,10 +76,10 @@
                 "link" : "https://www.pagina12.com.ar/breakingnews.xml",
                 "subcategorias" :
                 [
-                    { "subcategoria" : "economia", "recurso_url" : "economia" },
-                    { "subcategoria" : "el pais", "recurso_url" : "pais" },
-                    { "subcategoria" : "sociedad", "recurso_url" : "sociedad" },
-                    { "subcategoria" : "el mundo", "recurso_url" : "mundo" }
+                    { "subcategoria" : "economia", "recurso_url" : "Economia" },
+                    { "subcategoria" : "el pais", "recurso_url" : "El pais" },
+                    { "subcategoria" : "sociedad", "recurso_url" : "Sociedad" },
+                    { "subcategoria" : "el mundo", "recurso_url" : "El mundo" }
                 ]
             }
         ]

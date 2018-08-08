@@ -66,7 +66,10 @@ bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & 
     for (pugi::xml_node item : this->historias_xml(xml_feed)) {
 
         historia * nueva = new historia();
-        this->parsear_historia(item, nueva);
+        if (false == this->parsear_historia(item, nueva)) {
+            delete nueva;
+            continue;
+        }
 
         if (desde <= nueva->fecha() && nueva->fecha() <= hasta) {
             if (this->descargar_y_guardar_historia(nueva, historias, cantidad_de_historias_descargadas)) {

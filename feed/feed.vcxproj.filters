@@ -34,7 +34,7 @@
       <Filter>Archivos de encabezado\canales</Filter>
     </ClInclude>
     <ClInclude Include="include\urlset.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\canales</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -51,7 +51,7 @@
       <Filter>Archivos de origen\canales</Filter>
     </ClCompile>
     <ClCompile Include="source\urlset.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\canales</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

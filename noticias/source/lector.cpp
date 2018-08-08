@@ -29,7 +29,7 @@ void lector::leer(portal * portal,
 
         // agrego las noticias recibidas.
         std::for_each(historias_por_canal.begin(), historias_por_canal.end(), [=](medios::feed::historia * historia) {
-            //portal->nueva_noticia(*historia, canal->seccion());
+
             portal->nueva_noticia(*historia);
             delete historia;
         });
