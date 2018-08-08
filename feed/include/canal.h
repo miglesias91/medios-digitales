@@ -34,6 +34,9 @@ public:
 
     // devuelve el nombre de la seccion a la que pertenece el canal.
     std::string seccion() const;
+    // devuelvo los nombres y recursos de las subcategorias.
+    std::unordered_map<std::string, std::string> subcategorias() const;
+
 
     virtual bool parsear(const std::string & contenido_xml, std::vector<historia*> & historias,
         const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta);
@@ -44,7 +47,7 @@ protected:
 
     virtual bool extraer_respuesta(const web::http::http_response & rta, std::string * contenido_respuesta) = 0;
 
-    virtual bool descargar_y_guardar_historia(historia * nueva, std::vector<historia*> & historias, uint32_t & cantidad_de_historias_descargadas);
+    virtual bool descargar_y_guardar_historia(historia * nueva, std::vector<historia*> & historias, uint32_t & cantidad_de_historias_descargadas, uint32_t & cantidad_de_historias_fallidas);
 
     web::uri uri;
     web::http::client::http_client cliente_canal;
@@ -54,7 +57,7 @@ protected:
     web::http::http_response respuesta;
 
     std::string seccion_canal;
-    std::unordered_map<std::string, std::string> subcategorias;
+    std::unordered_map<std::string, std::string> descripciones_subcategorias;
 };
 
     };

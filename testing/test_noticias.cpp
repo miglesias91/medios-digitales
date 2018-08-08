@@ -30,6 +30,21 @@ TEST_CASE("levantar_config", "noticias[.]") {
     REQUIRE("https://www.infobae.com/feeds/rss/" == medios::noticias::config::infobae.canales[0].link);
 }
 
+TEST_CASE("extraer_elemento", "noticias") {
+    std::string elemento_html_vacio = "0123456789<div class=\"category-wrapper\"></div>0123456789";
+    std::string elemento_html_con_contenido = "0123456789<div class=\"category-wrapper\">0123546789</div>0123456789";
+
+    medios::noticias::clarin clarinete;
+
+    std::string elemento = "";
+    clarinete.extraer_elemento_xml(elemento_html_con_contenido, "div", "<div class=\"category-wrapper\">", &elemento);
+
+    std::string elemento_vacio = "";
+    clarinete.extraer_elemento_xml(elemento_html_vacio, "div", "<div class=\"category-wrapper\">", &elemento_vacio);
+
+
+}
+
 TEST_CASE("leer_noticia_clarin", "noticias[.]") {
 
     std::string contenido_html = "";

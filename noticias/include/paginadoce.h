@@ -45,19 +45,29 @@ namespace medios {
             virtual bool reconocer_subcategoria(const std::string & string_keywords, historia * histo) {
                 std::string string_keywords_depurado = string_keywords;
                 herramientas::utiles::FuncionesString::eliminarOcurrencias(string_keywords_depurado, " ");
-                herramientas::utiles::FuncionesString::reemplazarOcurrencias(string_keywords_depurado, u8"á", "a");
-                herramientas::utiles::FuncionesString::reemplazarOcurrencias(string_keywords_depurado, u8"é", "e");
-                herramientas::utiles::FuncionesString::reemplazarOcurrencias(string_keywords_depurado, u8"í", "i");
-                herramientas::utiles::FuncionesString::reemplazarOcurrencias(string_keywords_depurado, u8"ó", "o");
-                herramientas::utiles::FuncionesString::reemplazarOcurrencias(string_keywords_depurado, u8"ú", "u");
 
                 std::vector<std::string> keywords = herramientas::utiles::FuncionesString::separar(string_keywords_depurado, ",");
 
                 std::string seccion = keywords[1];
-                for (std::pair<std::string, std::string> subcategoria_recurso : this->subcategorias) {
-                    std::string subcategoria_sin_tilde = subcategoria_recurso.second;
-                    herramientas::utiles::FuncionesString::eliminarOcurrencias(subcategoria_sin_tilde, " ");
-                    if (seccion == subcategoria_sin_tilde) {
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"á", "a");
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"é", "e");
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"í", "i");
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"ó", "o");
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"ú", "u");
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"Á", "A");
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"É", "E");
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"Í", "I");
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"Ó", "O");
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"Ú", "U");
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"ý", "y");
+                herramientas::utiles::FuncionesString::reemplazarOcurrencias(seccion, u8"Ý", "Y");
+
+                herramientas::utiles::FuncionesString::todoMinuscula(seccion);
+                for (std::pair<std::string, std::string> subcategoria_recurso : this->subcategorias()) {
+                    std::string subcategoria_depurada = subcategoria_recurso.second;
+                    herramientas::utiles::FuncionesString::eliminarOcurrencias(subcategoria_depurada, " ");
+                    herramientas::utiles::FuncionesString::todoMinuscula(subcategoria_depurada);
+                    if (seccion == subcategoria_depurada) {
                         histo->seccion(subcategoria_recurso.first);
                         return true;
                     }
@@ -80,8 +90,9 @@ public:
 
     virtual portal * clon();
 
-protected:
     virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) override;
+
+protected:
     virtual bool nueva_noticia(const medios::feed::historia & historia, const std::string & seccion) override;
 
 private:

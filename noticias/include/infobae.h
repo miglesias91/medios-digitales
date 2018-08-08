@@ -63,7 +63,7 @@ namespace medios {
 
             std::string string_recursos = herramientas::utiles::FuncionesString::unir(recursos, "/");
 
-            for (std::pair<std::string, std::string> subcategoria_recurso : this->subcategorias) {                
+            for (std::pair<std::string, std::string> subcategoria_recurso : this->subcategorias()) {
                 if (string_recursos == subcategoria_recurso.second) {
                     histo->seccion(subcategoria_recurso.first);
                     return true;
@@ -90,8 +90,8 @@ public:
 
     virtual portal * clon();
 
-protected:
     virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido);
+protected:
 
 private:
     bool reconocer_seccion(const std::string & url, std::string * seccion);

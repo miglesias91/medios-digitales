@@ -94,10 +94,10 @@
                 "link" : "https://www.eldestapeweb.com/sitemap-news.xml",
                 "subcategorias" :
                 [
-                    { "subcategoria" : "economia", "recurso_url" : "economia" },
-                    { "subcategoria" : "politica", "recurso_url" : "politica" },
-                    { "subcategoria" : "sociedad", "recurso_url" : "sociedad" },
-                    { "subcategoria" : "mundo", "recurso_url" : "mundo" }
+                    { "subcategoria" : "economia", "recurso_url" : "Economia" },
+                    { "subcategoria" : "politica", "recurso_url" : "Politica" },
+                    { "subcategoria" : "sociedad", "recurso_url" : "Sociedad" },
+                    { "subcategoria" : "internacionales", "recurso_url" : "Internacionales" }
                 ]
             }
         ]

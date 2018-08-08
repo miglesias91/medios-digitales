@@ -1,5 +1,7 @@
 #include <feed/include/canal.h>
 
+// cpprest
+
 namespace medios {
     namespace feed {
 
@@ -7,7 +9,7 @@ canal::canal(const std::string & string_uri, const std::string & seccion_canal, 
     peticion_activa(false),
     uri(utility::conversions::to_string_t(string_uri)),
     seccion_canal(seccion_canal),
-    subcategorias(subcategorias),
+    descripciones_subcategorias(subcategorias),
     cliente_canal(uri.scheme() + utility::conversions::to_string_t("://") + uri.host()) {}
 
 canal::~canal() {}
@@ -56,6 +58,10 @@ std::string canal::seccion() const {
     return this->seccion_canal;
 }
 
+std::unordered_map<std::string, std::string> canal::subcategorias() const {
+    return this->descripciones_subcategorias;
+}
+
 bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & historias,
     const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta) {
     pugi::xml_document xml_feed;
@@ -63,6 +69,7 @@ bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & 
 
     uint32_t cantidad_total_de_historias = 0;
     uint32_t cantidad_de_historias_descargadas = 0;
+    uint32_t cantidad_de_historias_fallidas = 0;
     for (pugi::xml_node item : this->historias_xml(xml_feed)) {
 
         historia * nueva = new historia();
@@ -72,23 +79,32 @@ bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & 
         }
 
         if (desde <= nueva->fecha() && nueva->fecha() <= hasta) {
-            if (this->descargar_y_guardar_historia(nueva, historias, cantidad_de_historias_descargadas)) {
+            if (this->descargar_y_guardar_historia(nueva, historias, cantidad_de_historias_descargadas, cantidad_de_historias_fallidas)) {
                 cantidad_total_de_historias++;
             }
         }
         else {
             delete nueva;
         }
+
+        // ESTE CODIGO ES DE PRUEBA; DSP TIENE QUE VOLAR
+        if (cantidad_total_de_historias >= (cantidad_de_historias_descargadas + cantidad_de_historias_fallidas + 25)) {  // si hay en espera mas de 25 descargas, entonces
+            while ((cantidad_de_historias_descargadas + cantidad_de_historias_fallidas) != cantidad_total_de_historias) {  // espero a que se hayan procesado las 20 descargas.
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            }
+        }
+
+        //if (cantidad_total_de_historias >= 100) break;
     }
 
-    while (cantidad_de_historias_descargadas != cantidad_total_de_historias) {
+    while ((cantidad_de_historias_descargadas + cantidad_de_historias_fallidas) != cantidad_total_de_historias) {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
 
     return true;
 }
 
-bool canal::descargar_y_guardar_historia(historia * nueva, std::vector<historia*> & historias, uint32_t & cantidad_de_historias_descargadas) {
+bool canal::descargar_y_guardar_historia(historia * nueva, std::vector<historia*> & historias, uint32_t & cantidad_de_historias_descargadas, uint32_t & cantidad_de_historias_fallidas) {
 
     if (false == web::uri::validate(utility::conversions::to_string_t(nueva->link()))) {
         delete nueva;
@@ -98,18 +114,19 @@ bool canal::descargar_y_guardar_historia(historia * nueva, std::vector<historia*
     web::uri uri_historia(utility::conversions::to_string_t(nueva->link()));
     web::http::client::http_client cliente_historia(uri_historia.scheme() + utility::conversions::to_string_t("://") + uri_historia.host());
 
-    cliente_historia.request(web::http::methods::GET, uri_historia.path()).then([nueva, &historias, &cantidad_de_historias_descargadas](pplx::task<web::http::http_response> tarea) {
+    cliente_historia.request(web::http::methods::GET, uri_historia.path()).then([nueva, &historias, &cantidad_de_historias_descargadas, &cantidad_de_historias_fallidas](pplx::task<web::http::http_response> tarea) {
         try {
             std::string string_html = tarea.get().extract_utf8string().get();
 
             nueva->html(string_html);
             historias.push_back(nueva);
+            cantidad_de_historias_descargadas++;
         }
         catch (const std::exception & e) {
             delete nueva;
             std::cout << "error: " << e.what() << std::endl;
+            cantidad_de_historias_fallidas++;
         }
-        cantidad_de_historias_descargadas++;
     });
 
     return true;

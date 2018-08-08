@@ -91,6 +91,7 @@ bool portal::extraer_elemento_xml(const std::string & contenido_html, const std:
     }
 
     size_t tamanio_tag = std::string("</" + nombre_elemento).size();
+    size_t tamanio_tag_cierre = std::string("</>" + nombre_elemento).size();
 
     size_t pos_ultimo_comienzo_elemento = contenido_html.find("<" + nombre_elemento, primer_comienzo + tamanio_tag);
     size_t pos_ultimo_fin_elemento = contenido_html.find("</" + nombre_elemento, primer_comienzo);
@@ -105,7 +106,7 @@ bool portal::extraer_elemento_xml(const std::string & contenido_html, const std:
         return false;
     }
 
-    *elemento_extraido = contenido_html.substr(primer_comienzo, pos_ultimo_fin_elemento + tamanio_tag - primer_comienzo);
+    *elemento_extraido = contenido_html.substr(primer_comienzo, pos_ultimo_fin_elemento + tamanio_tag_cierre - primer_comienzo);
 
     return true;
 }
@@ -114,19 +115,22 @@ bool portal::extraer_elementos_xml(const std::string & contenido_html, const std
     std::string tag_abrierto = "<" + nombre_elemento;
     std::string tag_cerrado = "</" + nombre_elemento;
 
-    size_t comienzo_parrafo = contenido_html.find(tag_abrierto);
-    size_t fin_parrafo = contenido_html.find(tag_cerrado);
+    size_t comienzo_elemento = contenido_html.find(tag_abrierto);
+    size_t fin_elemento = contenido_html.find(tag_cerrado);
     size_t tamanio_tag_p = tag_cerrado.size();
 
-    while (contenido_html.size() > fin_parrafo) {
-        std::string parrafo = contenido_html.substr(comienzo_parrafo + tamanio_tag_p, fin_parrafo - comienzo_parrafo - tamanio_tag_p);
+    while (contenido_html.size() > fin_elemento) {
+        //std::string parrafo = contenido_html.substr(comienzo_parrafo + tamanio_tag_p, fin_parrafo - comienzo_parrafo - tamanio_tag_p);
+        std::string elemento = contenido_html.substr(comienzo_elemento, fin_elemento - comienzo_elemento);
 
-        if (false == parrafo.empty()) {
-            elementos_extraidos->push_back(parrafo);
+        this->eliminar_etiqueta_xml(&elemento, nombre_elemento);
+
+        if (false == elemento.empty()) {
+            elementos_extraidos->push_back(elemento);
         }
 
-        comienzo_parrafo = contenido_html.find(tag_abrierto, fin_parrafo + tamanio_tag_p);
-        fin_parrafo = contenido_html.find(tag_cerrado, fin_parrafo + tamanio_tag_p);
+        comienzo_elemento = contenido_html.find(tag_abrierto, fin_elemento + tamanio_tag_p);
+        fin_elemento = contenido_html.find(tag_cerrado, fin_elemento + tamanio_tag_p);
     }
 
     return elementos_extraidos->size();

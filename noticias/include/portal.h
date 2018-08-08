@@ -35,7 +35,6 @@ public:
 
     virtual portal * clon() = 0;
 
-protected:
     virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) = 0;
 
     virtual bool extraer_elemento_xml(const std::string & contenido_html, const std::string & nombre_elemento, const std::string & etiqueta_inicial, std::string * elemento_extraido);
@@ -46,6 +45,7 @@ protected:
 
     virtual bool eliminar_etiqueta_xml(std::string * contenido_html, const std::string & etiqueta);
 
+protected:
     std::unordered_map<std::string, medios::feed::canal*> canales_portal;
 
     std::unordered_map<std::string, std::vector<noticia*>> noticias_portal;

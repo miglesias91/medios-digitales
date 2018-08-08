@@ -86,7 +86,7 @@ bool paginadoce::extraer_datos_de_historia(const std::string & contenido_html, n
     std::string titulo;
     this->extraer_elemento_xml(contenido_html, "div", "<div class=\"article-title\">", &titulo);
     titulo.erase(titulo.begin(), titulo.begin() + std::string("<div class=\"article-title\">").size());
-    titulo.erase(titulo.end() - std::string("</div>").size() + 1, titulo.end() );
+    titulo.erase(titulo.end() - std::string("</div>").size(), titulo.end() );
 
     noti->titulo(titulo);
     return true;

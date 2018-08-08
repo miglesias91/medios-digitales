@@ -14,6 +14,8 @@
 #include <noticias/include/la_nacion.h>
 #include <noticias/include/clarin.h>
 #include <noticias/include/infobae.h>
+#include <noticias/include/paginadoce.h>
+#include <noticias/include/eldestape.h>
 
 namespace medios {
     namespace noticias {
