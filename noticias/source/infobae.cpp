@@ -44,6 +44,7 @@ bool infobae::extraer_contenido_de_html(const std::string & contenido_html, std:
     this->eliminar_elemento_xml(contenido, "div", "<div ");
     this->eliminar_elemento_xml(contenido, "span", "<span ");
     this->eliminar_elemento_xml(contenido, "a", "<a ");
+    this->eliminar_elemento_xml(contenido, "blockquote", "<blockquote ");
     this->eliminar_etiqueta_xml(contenido, "em");
     this->eliminar_etiqueta_xml(contenido, "img");
     this->eliminar_etiqueta_xml(contenido, "strong");

@@ -99,7 +99,7 @@ TEST_CASE("leer_la_nacion", "noticias[.]") {
     lector_de_noticias.leer(&el_diario_de_mitre);
 }
 
-TEST_CASE("leer_infobae", "noticias[.]") {
+TEST_CASE("leer_infobae", "noticias") {
 
     medios::noticias::lector lector_de_noticias;
 
@@ -135,7 +135,7 @@ TEST_CASE("leer_pagina12", "noticias[.]") {
     lector_de_noticias.leer(&pagina);
 }
 
-TEST_CASE("leer_eldestape", "noticias") {
+TEST_CASE("leer_eldestape", "noticias[.]") {
 
     medios::noticias::lector lector_de_noticias;
 

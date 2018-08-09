@@ -46,10 +46,12 @@ bool eldestape::extraer_contenido_de_html(const std::string & contenido_html, st
 
     std::string elemento_nota = "";
     this->extraer_elemento_xml(contenido_html, "section", "<section class=\"note-body clearfix\"", &elemento_nota);
+    this->eliminar_elemento_xml(&elemento_nota, "time", "<time ");
     this->eliminar_etiqueta_xml(&elemento_nota, "strong");
     this->eliminar_etiqueta_xml(&elemento_nota, "br");
     this->eliminar_etiqueta_xml(&elemento_nota, "a");
     this->eliminar_etiqueta_xml(&elemento_nota, "em");
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "pic.twitter.com/");
     herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "&nbsp;");
     herramientas::utiles::FuncionesString::reemplazarOcurrencias(elemento_nota, "&aacute;", "a");
     herramientas::utiles::FuncionesString::reemplazarOcurrencias(elemento_nota, "&eacute;", "e");
@@ -66,6 +68,8 @@ bool eldestape::extraer_contenido_de_html(const std::string & contenido_html, st
     herramientas::utiles::FuncionesString::reemplazarOcurrencias(elemento_nota, "&ntilde;", "n");
     herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "&ldquo;");
     herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "&rdquo;");
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "&uuml;");
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "<br/>");
 
     std::vector<std::string> elementos_p;
     this->extraer_elementos_xml(elemento_nota, "p", "<p", &elementos_p);

@@ -94,7 +94,7 @@ bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & 
             }
         }
 
-        //if (cantidad_total_de_historias >= 100) break;
+        //if (cantidad_total_de_historias >= 40) break;
     }
 
     while ((cantidad_de_historias_descargadas + cantidad_de_historias_fallidas) != cantidad_total_de_historias) {
