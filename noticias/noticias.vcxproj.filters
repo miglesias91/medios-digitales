@@ -51,6 +51,9 @@
     <ClInclude Include="include\paginadoce.h">
       <Filter>Archivos de encabezado\portales</Filter>
     </ClInclude>
+    <ClInclude Include="include\casarosada.h">
+      <Filter>Archivos de encabezado\portales</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\noticia.cpp">
@@ -81,6 +84,9 @@
       <Filter>Archivos de origen\portales</Filter>
     </ClCompile>
     <ClCompile Include="source\paginadoce.cpp">
+      <Filter>Archivos de origen\portales</Filter>
+    </ClCompile>
+    <ClCompile Include="source\casarosada.cpp">
       <Filter>Archivos de origen\portales</Filter>
     </ClCompile>
   </ItemGroup>

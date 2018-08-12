@@ -62,5 +62,13 @@ std::string historia::contenido() const {
     return contenido_historia;
 }
 
+void historia::descripcion(const std::string & descripcion_historia) {
+    this->descripcion_historia = descripcion_historia;
+}
+
+std::string historia::descripcion() const {
+    return this->descripcion_historia;
+}
+
     }
 }

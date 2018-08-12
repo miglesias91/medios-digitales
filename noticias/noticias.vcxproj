@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\casarosada.h" />
     <ClInclude Include="include\clarin.h" />
     <ClInclude Include="include\config.h" />
     <ClInclude Include="include\eldestape.h" />
@@ -138,6 +139,7 @@
     <ClInclude Include="include\portal.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\casarosada.cpp" />
     <ClCompile Include="source\clarin.cpp" />
     <ClCompile Include="source\config.cpp" />
     <ClCompile Include="source\eldestape.cpp" />

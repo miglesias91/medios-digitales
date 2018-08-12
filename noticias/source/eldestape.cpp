@@ -66,6 +66,7 @@ bool eldestape::extraer_contenido_de_html(const std::string & contenido_html, st
     herramientas::utiles::FuncionesString::reemplazarOcurrencias(elemento_nota, "&yacute;", "y");
     herramientas::utiles::FuncionesString::reemplazarOcurrencias(elemento_nota, "&Yacute;", "Y");
     herramientas::utiles::FuncionesString::reemplazarOcurrencias(elemento_nota, "&ntilde;", "n");
+    herramientas::utiles::FuncionesString::reemplazarOcurrencias(elemento_nota, "&iquest;", "?");
     herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "&ldquo;");
     herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "&rdquo;");
     herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "&uuml;");

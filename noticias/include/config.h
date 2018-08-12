@@ -63,35 +63,39 @@ struct config {
 
         herramientas::utiles::Json json(config);
 
-        herramientas::utiles::Json * json_clarin, *json_la_nacion, *json_infobae, *json_paginadoce, *json_eldestape;
+        herramientas::utiles::Json * json_clarin, *json_la_nacion, *json_infobae, *json_paginadoce, *json_eldestape, *json_casarosada;
 
         json_clarin = json.getAtributoValorJson("clarin");
         json_la_nacion = json.getAtributoValorJson("la nacion");
         json_infobae = json.getAtributoValorJson("infobae");
         json_paginadoce = json.getAtributoValorJson("paginadoce");
         json_eldestape = json.getAtributoValorJson("eldestape");
+        json_casarosada = json.getAtributoValorJson("casarosada");
 
         clarin.levantar(json_clarin);
         la_nacion.levantar(json_la_nacion);
         infobae.levantar(json_infobae);
         paginadoce.levantar(json_paginadoce);
         eldestape.levantar(json_eldestape);
+        casarosada.levantar(json_casarosada);
 
         feeds["clarin"] = clarin;
         feeds["la nacion"] = la_nacion;
         feeds["infobae"] = infobae;
         feeds["paginadoce"] = paginadoce;
         feeds["eldestape"] = eldestape;
+        feeds["casarosada"] = casarosada;
 
         delete json_clarin;
         delete json_la_nacion;
         delete json_infobae;
         delete json_paginadoce;
         delete json_eldestape;
+        delete json_casarosada;
         return true;
     };
 
-    static config_feed clarin, la_nacion, infobae, paginadoce, eldestape;
+    static config_feed clarin, la_nacion, infobae, paginadoce, eldestape, casarosada;
     static std::unordered_map<std::string, config_feed> feeds;
 };
 

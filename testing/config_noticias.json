@@ -101,5 +101,23 @@
                 ]
             }
         ]
+    },
+    "casarosada" :
+    {
+    	"web" : "casarosada.com",
+        "canales" : 
+        [
+            {
+                "categoria" : "discursos macri",
+                "link" : "https://www.casarosada.gob.ar/informacion/discursos?format=feed",
+                "subcategorias" :
+                [
+                    { "subcategoria" : "economia", "recurso_url" : "Economia" },
+                    { "subcategoria" : "politica", "recurso_url" : "Politica" },
+                    { "subcategoria" : "sociedad", "recurso_url" : "Sociedad" },
+                    { "subcategoria" : "internacionales", "recurso_url" : "Internacionales" }
+                ]
+            }
+        ]
     }
 }

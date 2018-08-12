@@ -34,9 +34,12 @@ public:
     void contenido(const std::string &  contenido_historia);
     std::string contenido() const;
 
+    void descripcion(const std::string &  descripcion_historia);
+    std::string descripcion() const;
+
 protected:
 
-    std::string titulo_historia, link_web, seccion_historia, string_html, contenido_historia;
+    std::string titulo_historia, link_web, seccion_historia, string_html, contenido_historia, descripcion_historia;
     herramientas::utiles::Fecha fecha_creacion;
 };
 

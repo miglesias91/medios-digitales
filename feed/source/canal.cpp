@@ -87,7 +87,6 @@ bool canal::parsear(const std::string & contenido_xml, std::vector<historia*> & 
             delete nueva;
         }
 
-        // ESTE CODIGO ES DE PRUEBA; DSP TIENE QUE VOLAR
         if (cantidad_total_de_historias >= (cantidad_de_historias_descargadas + cantidad_de_historias_fallidas + 25)) {  // si hay en espera mas de 25 descargas, entonces
             while ((cantidad_de_historias_descargadas + cantidad_de_historias_fallidas) != cantidad_total_de_historias) {  // espero a que se hayan procesado las 20 descargas.
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));

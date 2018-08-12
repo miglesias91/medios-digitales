@@ -51,6 +51,7 @@ bool paginadoce::extraer_contenido_de_html(const std::string & contenido_html, s
     this->eliminar_etiqueta_xml(&elemento_nota, "a");
     this->eliminar_etiqueta_xml(&elemento_nota, "em");
     herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "&nbsp;");
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(elemento_nota, "&quot;");
 
     std::vector<std::string> elementos_p;
     this->extraer_elementos_xml(elemento_nota, "p", "<p", &elementos_p);
