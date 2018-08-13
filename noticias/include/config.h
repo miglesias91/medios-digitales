@@ -1,6 +1,7 @@
 #pragma once
 
 // stl
+#include <algorithm>
 #include <unordered_map>
 
 // utiles
@@ -65,33 +66,48 @@ struct config {
 
         herramientas::utiles::Json * json_clarin, *json_la_nacion, *json_infobae, *json_paginadoce, *json_eldestape, *json_casarosada;
 
-        json_clarin = json.getAtributoValorJson("clarin");
-        json_la_nacion = json.getAtributoValorJson("la nacion");
-        json_infobae = json.getAtributoValorJson("infobae");
-        json_paginadoce = json.getAtributoValorJson("paginadoce");
-        json_eldestape = json.getAtributoValorJson("eldestape");
-        json_casarosada = json.getAtributoValorJson("casarosada");
+        if (json.contieneAtributo("clarin")) {
+            json_clarin = json.getAtributoValorJson("clarin");
+            clarin.levantar(json_clarin);
+            feeds["clarin"] = clarin;
+            delete json_clarin;
+        }
 
-        clarin.levantar(json_clarin);
-        la_nacion.levantar(json_la_nacion);
-        infobae.levantar(json_infobae);
-        paginadoce.levantar(json_paginadoce);
-        eldestape.levantar(json_eldestape);
-        casarosada.levantar(json_casarosada);
+        if (json.contieneAtributo("la nacion")) {
+            json_la_nacion = json.getAtributoValorJson("la nacion");
+            la_nacion.levantar(json_la_nacion);
+            feeds["la nacion"] = la_nacion;
+            delete json_la_nacion;
+        }
 
-        feeds["clarin"] = clarin;
-        feeds["la nacion"] = la_nacion;
-        feeds["infobae"] = infobae;
-        feeds["paginadoce"] = paginadoce;
-        feeds["eldestape"] = eldestape;
-        feeds["casarosada"] = casarosada;
+        if (json.contieneAtributo("infobae")) {
+            json_infobae = json.getAtributoValorJson("infobae");
+            infobae.levantar(json_infobae);
+            feeds["infobae"] = infobae;
+            delete json_infobae;
+        }
 
-        delete json_clarin;
-        delete json_la_nacion;
-        delete json_infobae;
-        delete json_paginadoce;
-        delete json_eldestape;
-        delete json_casarosada;
+        if (json.contieneAtributo("paginadoce")) {
+            json_paginadoce = json.getAtributoValorJson("paginadoce");
+            paginadoce.levantar(json_paginadoce);
+            feeds["paginadoce"] = paginadoce;
+            delete json_paginadoce;
+        }
+
+        if (json.contieneAtributo("eldestape")) {
+            json_eldestape = json.getAtributoValorJson("eldestape");
+            eldestape.levantar(json_eldestape);
+            feeds["eldestape"] = eldestape;
+            delete json_eldestape;
+        }
+
+        if (json.contieneAtributo("casarosada")) {
+            json_casarosada = json.getAtributoValorJson("casarosada");
+            casarosada.levantar(json_casarosada);
+            feeds["casarosada"] = casarosada;
+            delete json_casarosada;
+        }
+
         return true;
     };
 

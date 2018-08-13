@@ -12,12 +12,14 @@ std::shared_ptr<portal> fabrica_portales::nuevo(const std::string & web_portal) 
     la_nacion lana;
     paginadoce pagina;
     eldestape eldestapeweb;
+    casarosada casa_rosada;
 
     if (web_portal == c.web()) { return std::make_shared<clarin>(); }
     if (web_portal == inf.web()) { return std::make_shared<infobae>(); }
     if (web_portal == lana.web()) { return std::make_shared<la_nacion>(); }
     if (web_portal == pagina.web()) { return std::make_shared<paginadoce>(); }
     if (web_portal == eldestapeweb.web()) { return std::make_shared<eldestape>(); }
+    if (web_portal == casa_rosada.web()) { return std::make_shared<casarosada>(); }
 
     return nullptr;
 }

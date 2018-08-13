@@ -16,6 +16,7 @@
 #include <noticias/include/infobae.h>
 #include <noticias/include/paginadoce.h>
 #include <noticias/include/eldestape.h>
+#include <noticias/include/casarosada.h>
 
 namespace medios {
     namespace noticias {
