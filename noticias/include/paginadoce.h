@@ -91,8 +91,7 @@ public:
     virtual portal * clon();
 
     virtual bool extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) override;
-
-protected:
+    
     virtual bool nueva_noticia(const medios::feed::historia & historia, const std::string & seccion) override;
 
 private:

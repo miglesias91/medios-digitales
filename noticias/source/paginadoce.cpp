@@ -56,6 +56,10 @@ bool paginadoce::extraer_contenido_de_html(const std::string & contenido_html, s
     std::vector<std::string> elementos_p;
     this->extraer_elementos_xml(elemento_nota, "p", "<p", &elementos_p);
 
+    std::for_each(elementos_p.begin(), elementos_p.end(), [=](std::string &p) {
+        this->eliminar_etiqueta_xml(&p, "span");
+    });
+
     if (elementos_p.empty()) {
         return false;
     }

@@ -115,22 +115,31 @@ bool portal::extraer_elementos_xml(const std::string & contenido_html, const std
     std::string tag_abrierto = "<" + nombre_elemento;
     std::string tag_cerrado = "</" + nombre_elemento;
 
-    size_t comienzo_elemento = contenido_html.find(tag_abrierto);
-    size_t fin_elemento = contenido_html.find(tag_cerrado);
-    size_t tamanio_tag_p = tag_cerrado.size();
+    std::string contenido = contenido_html;
 
-    while (contenido_html.size() > fin_elemento) {
-        //std::string parrafo = contenido_html.substr(comienzo_parrafo + tamanio_tag_p, fin_parrafo - comienzo_parrafo - tamanio_tag_p);
-        std::string elemento = contenido_html.substr(comienzo_elemento, fin_elemento - comienzo_elemento);
+    herramientas::utiles::FuncionesString::eliminarOcurrencias(contenido, "<" + nombre_elemento + ">" + "</" + nombre_elemento + ">");
 
-        this->eliminar_etiqueta_xml(&elemento, nombre_elemento);
+    try {
+        size_t comienzo_elemento = contenido.find(tag_abrierto);
+        size_t fin_elemento = contenido.find(tag_cerrado);
+        size_t tamanio_tag_p = tag_cerrado.size();
 
-        if (false == elemento.empty()) {
-            elementos_extraidos->push_back(elemento);
+        while (contenido.size() > fin_elemento) {
+            //std::string parrafo = contenido_html.substr(comienzo_parrafo + tamanio_tag_p, fin_parrafo - comienzo_parrafo - tamanio_tag_p);
+            std::string elemento = contenido.substr(comienzo_elemento, fin_elemento - comienzo_elemento);
+
+            this->eliminar_etiqueta_xml(&elemento, nombre_elemento);
+
+            if (false == elemento.empty()) {
+                elementos_extraidos->push_back(elemento);
+            }
+
+            comienzo_elemento = contenido.find(tag_abrierto, fin_elemento + tamanio_tag_p);
+            fin_elemento = contenido.find(tag_cerrado, fin_elemento + tamanio_tag_p);
         }
-
-        comienzo_elemento = contenido_html.find(tag_abrierto, fin_elemento + tamanio_tag_p);
-        fin_elemento = contenido_html.find(tag_cerrado, fin_elemento + tamanio_tag_p);
+    }
+    catch (std::exception &e) {
+        return false;
     }
 
     return elementos_extraidos->size();
