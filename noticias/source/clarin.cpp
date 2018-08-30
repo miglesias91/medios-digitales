@@ -45,7 +45,7 @@ portal * clarin::clon() {
 bool clarin::extraer_contenido_de_html(const std::string & contenido_html, std::string * contenido) {
 
     std::string elemento_nota = "";
-    this->extraer_elemento_xml(contenido_html, "div", "<div class=\"body-nota\">", &elemento_nota);
+    this->extraer_elemento_xml(contenido_html, "div", "<div class=\"body-nota", &elemento_nota);
     this->eliminar_etiqueta_xml(&elemento_nota, "strong");
     this->eliminar_etiqueta_xml(&elemento_nota, "br");
     this->eliminar_etiqueta_xml(&elemento_nota, "a");

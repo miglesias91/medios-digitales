@@ -30,7 +30,7 @@ TEST_CASE("levantar_config", "noticias[.]") {
     REQUIRE("https://www.infobae.com/feeds/rss/" == medios::noticias::config::infobae.canales[0].link);
 }
 
-TEST_CASE("extraer_elemento", "noticias") {
+TEST_CASE("extraer_elemento", "noticias[.]") {
     std::string elemento_html_vacio = "0123456789<div class=\"category-wrapper\"></div>0123456789";
     std::string elemento_html_con_contenido = "0123456789<div class=\"category-wrapper\">0123546789</div>0123456789";
 
@@ -93,7 +93,7 @@ TEST_CASE("leer_noticia_extrania_paginadoce", "noticias[.]") {
     pagina.nueva_noticia(historia, "");
 }
 
-TEST_CASE("leer_clarin", "noticias[.]") {
+TEST_CASE("leer_clarin", "noticias") {
    
     medios::noticias::lector lector_de_noticias;
 
@@ -138,7 +138,7 @@ TEST_CASE("leer_infobae_fechas", "noticias[.]") {
     REQUIRE(0 == noticias.size());
 }
 
-TEST_CASE("leer_pagina12", "noticias") {
+TEST_CASE("leer_pagina12", "noticias[.]") {
 
     medios::noticias::lector lector_de_noticias;
 
