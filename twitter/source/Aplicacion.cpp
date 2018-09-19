@@ -88,7 +88,7 @@ std::vector<Tweet*> Aplicacion::leerUltimosTweets(Cuenta * cuenta, const uintmax
 
     comunicacion::SolicitudUltimosTweets solicitud_ultimos_tweets(cuenta, id_desde, cantidad_de_tweets);
 
-    herramientas::cpprest::HTTPRespuesta * respuetas_con_tweets = this->consumidor_api->realizarSolicitud(&solicitud_ultimos_tweets);
+    herramientas::cpprest::respuesta * respuetas_con_tweets = this->consumidor_api->realizarSolicitud(&solicitud_ultimos_tweets);
 
     std::vector<herramientas::utiles::Json*> tweets_json = respuetas_con_tweets->getJson()->getAtributoArrayJson();
 

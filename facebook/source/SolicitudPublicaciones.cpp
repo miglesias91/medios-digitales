@@ -9,7 +9,7 @@ SolicitudPublicaciones::SolicitudPublicaciones(medios::facebook::Pagina * pagina
     const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta,
     unsigned int cantidad_de_publicaciones_max) {
     // creo y armo la solicitud para el token de acceso
-    this->setSolicitud(new web::http::http_request());
+    //this->setSolicitud(new web::http::http_request());
 
     // armo la uri.
     std::string uri = "/v2.12/" + pagina->getNombre() + "/feed?limit=" + std::to_string(cantidad_de_publicaciones_max);
@@ -26,9 +26,9 @@ SolicitudPublicaciones::SolicitudPublicaciones(medios::facebook::Pagina * pagina
 
     uri += "&access_token=" + id_app + "%7C" + clave_secreta_app; // '%7C' es la codificacion requerida por las URI para el caracter '|'.
 
-    this->setURI(uri);
+    this->uri(uri);
 
-    this->setGET();
+    //this->setGET();
 }
 
 SolicitudPublicaciones::~SolicitudPublicaciones() {}

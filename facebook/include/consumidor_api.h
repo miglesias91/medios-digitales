@@ -1,8 +1,8 @@
 #pragma once
 
 // casablanca wrapper
-#include <casablanca_wrapper/include/HTTPCliente.h>
-#include <casablanca_wrapper/include/HTTPSolicitud.h>
+#include <casablanca_wrapper/include/cliente.h>
+#include <casablanca_wrapper/include/solicitud.h>
 
 // protocolos
 #include <protocolos/include/OAuth2Consumidor.h>
@@ -24,7 +24,7 @@ public:
 
     bool pedir_token();
 
-    herramientas::cpprest::HTTPRespuesta * consumir(herramientas::cpprest::HTTPSolicitud * solicitud);
+    herramientas::cpprest::respuesta * consumir(herramientas::cpprest::solicitud * solicitud);
 
     // CONSULTAS
 
@@ -34,7 +34,7 @@ private:
 
     herramientas::protocolos::OAuth2Consumidor consumidor_oauth2;
 
-    herramientas::cpprest::HTTPCliente cliente_facebook;
+    herramientas::cpprest::cliente cliente_facebook;
 };
 
 };

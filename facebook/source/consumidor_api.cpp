@@ -17,29 +17,29 @@ herramientas::protocolos::OAuth2Consumidor consumidor_api::getConsumidorOAuth2()
 
 bool consumidor_api::pedir_token() {
 
-    return herramientas::protocolos::OAuth2::solicitarTokenAcceso(&this->consumidor_oauth2, this->cliente_facebook.getURI());
+    return herramientas::protocolos::OAuth2::solicitarTokenAcceso(&this->consumidor_oauth2, this->cliente_facebook.uri());
 }
 
-herramientas::cpprest::HTTPRespuesta * consumidor_api::consumir(herramientas::cpprest::HTTPSolicitud * solicitud) {
+herramientas::cpprest::respuesta * consumidor_api::consumir(herramientas::cpprest::solicitud * solicitud) {
     //std::string header_token_acceso = "Bearer " + this->consumidor_oauth2.getTokenAcceso();
 
     //solicitud->agregarEncabezado("Authorization", header_token_acceso);
 
     std::string string_encabezados = "";
 
-    std::vector<std::string> encabezados = solicitud->getEncabezados();
+    std::vector<std::string> encabezados = solicitud->encabezados();
     for (std::vector<std::string>::iterator it = encabezados.begin(); it != encabezados.end(); it++)
     {
         string_encabezados += "," + *it;
     }
 
-    std::string log_solicitud = solicitud->getURI() + " - " + string_encabezados + " - " + solicitud->getMetodo() + " - " + solicitud->getCuerpo();
+    std::string log_solicitud = solicitud->uri() + " - " + string_encabezados + " - " + solicitud->nombre_metodo() + " - " + solicitud->cuerpo();
 
 #if defined(DEBUG) || defined(_DEBUG)
     log_solicitud = utility::conversions::to_utf8string(solicitud->getSolicitud()->to_string());
 #endif // DEBUG || _DEBUG
 
-    herramientas::cpprest::HTTPRespuesta * rta = this->cliente_facebook.solicitar(solicitud);
+    herramientas::cpprest::respuesta * rta = this->cliente_facebook.solicitar(solicitud);
 
     return rta;
 }

@@ -79,7 +79,7 @@ bool aplicacion::existe(const std::string & nombre_pagina) {
 std::vector<Publicacion*> aplicacion::leer(Pagina * pagina, const herramientas::utiles::Fecha & desde, const herramientas::utiles::Fecha & hasta, const uint32_t & cantidad_de_publicaciones_maximo) const {
     medios::facebook::comunicacion::SolicitudPublicaciones solicitud_ultimas_publicaciones(pagina, this->id(), this->clave_privada(), desde, hasta, cantidad_de_publicaciones_maximo);
 
-    herramientas::cpprest::HTTPRespuesta * respuetas_con_publicaciones = this->consumidor_api->consumir(&solicitud_ultimas_publicaciones);
+    herramientas::cpprest::respuesta * respuetas_con_publicaciones = this->consumidor_api->consumir(&solicitud_ultimas_publicaciones);
 
     std::vector<herramientas::utiles::Json*> publicaciones_json = respuetas_con_publicaciones->getJson()->getAtributoArrayJson("data");
 
